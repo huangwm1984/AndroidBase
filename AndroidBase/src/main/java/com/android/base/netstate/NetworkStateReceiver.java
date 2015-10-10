@@ -47,7 +47,6 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.e("35hwm","111111111111111111111111111111111111");
 		receiver = NetworkStateReceiver.this;
 		if (intent.getAction().equalsIgnoreCase(ANDROID_NET_CHANGE_ACTION)) {
 			// TALogger.i(NetworkStateReceiver.this, "网络状态改变.");
