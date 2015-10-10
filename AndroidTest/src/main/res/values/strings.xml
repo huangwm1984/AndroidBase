@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">AndroidTest</string>
     <string name="action_settings">Settings</string>
+    <string-array name="test_list">
+        <item>OkHttp</item>
+        <item>ToolBar</item>
+        <item>ToolBar + DrawLayout</item>
+        <item>FragmentTabHost</item>
+        <item>Indicator</item>
+        <item>BannerView</item>
+        <item>PullToRefresh ListView LoadMore</item>
+        <item>主流布局8</item>
+        <item>主流布局9</item>
+        <item>主流布局10</item>
+        <item>主流布局11</item>
+        <item>主流布局12</item>
+        <item>主流布局13</item>
+    </string-array>
 </resources>
