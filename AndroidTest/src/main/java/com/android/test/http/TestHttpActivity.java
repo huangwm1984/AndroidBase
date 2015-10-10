@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.base.BaseActivity;
+import com.android.base.common.assist.Toastor;
+import com.android.base.netstate.NetWorkUtil;
 import com.android.test.R;
 
 import butterknife.Bind;
@@ -63,6 +65,18 @@ public class TestHttpActivity extends BaseActivity {
     @Override
     public void onActivityDestroyed(Activity activity) {
 
+    }
+
+    @Override
+    public void onConnect(NetWorkUtil.netType type) {
+        super.onConnect(type);
+        Toastor.showToast(mApplicationContext, "网络已经连接");
+    }
+
+    @Override
+    public void onDisConnect() {
+        super.onDisConnect();
+        Toastor.showToast(mApplicationContext, "网络已经断开");
     }
 
     @Override
