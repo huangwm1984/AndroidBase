@@ -31,7 +31,7 @@ public class TestHttpActivity extends BaseActivity {
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         TestHttpReq.request1(mHandler);
-        //TestHttpReq.request2(mHandler);
+        TestHttpReq.request2(mHandler);
     }
 
     @Override
@@ -69,16 +69,16 @@ public class TestHttpActivity extends BaseActivity {
         super.handleMessage(msg);
         switch (msg.what) {
             case TestHttpReq.REQUEST_GET_FAIL://失败
-                mTv1.setText((String) msg.obj);
+                mTv1.setText("获取失败");
                 break;
             case TestHttpReq.REQUEST_GET_SUCCESS://成功
                 mTv1.setText((String) msg.obj);
                 break;
             case TestHttpReq.REQUEST_POST_FAIL://失败
-                mTv1.setText((String) msg.obj);
+                mTv2.setText("获取失败");
                 break;
             case TestHttpReq.REQUEST_POST_SUCCESS://成功
-                mTv1.setText((String) msg.obj);
+                mTv2.setText((String) msg.obj);
                 break;
             default:
                 break;

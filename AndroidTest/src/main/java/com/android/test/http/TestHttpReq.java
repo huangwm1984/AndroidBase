@@ -45,14 +45,14 @@ public class TestHttpReq {
         map.put("os_type", "1");
         map.put("province", "10");
 
-        OkHttpClientManager.postAsyn(reqUrl2, map, new OkHttpClientManager.ResultCallback() {
+        OkHttpClientManager.postAsyn(reqUrl2, map, new OkHttpClientManager.ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
                 HandlerUtil.sendMessage(handler, REQUEST_POST_FAIL);
             }
 
             @Override
-            public void onResponse(Object response) {
+            public void onResponse(String response) {
                 HandlerUtil.sendMessage(handler, REQUEST_POST_SUCCESS, response);
             }
         });
