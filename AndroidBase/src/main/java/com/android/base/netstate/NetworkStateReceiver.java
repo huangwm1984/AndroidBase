@@ -4,7 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 
+import com.android.base.common.Log;
 import com.android.base.netstate.NetWorkUtil.netType;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
  * @Title NetworkStateReceiver
  * @Package com.android.base.netstate
  * @Description 是一个检测网络状态改变的，需要配置 <receiver
- *              android:name="com.ta.util.netstate.NetworkStateReceiver" >
+ *              android:name="com.android.base.netstate.NetworkStateReceiver" >
  *              <intent-filter> <action
  *              android:name="android.net.conn.CONNECTIVITY_CHANGE" /> <action
  *              android:name="android.gzcpc.conn.CONNECTIVITY_CHANGE" />
@@ -33,7 +35,7 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 	private static Boolean networkAvailable = false;
 	private static netType netType;
 	private static ArrayList<NetChangeObserver> netChangeObserverArrayList = new ArrayList<NetChangeObserver>();
-	private final static String ANDROID_NET_CHANGE_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
+	private final static String ANDROID_NET_CHANGE_ACTION = ConnectivityManager.CONNECTIVITY_ACTION;//"android.net.conn.CONNECTIVITY_CHANGE";
 	private static BroadcastReceiver receiver;
 
 	private static BroadcastReceiver getReceiver() {
@@ -45,6 +47,7 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		Log.e("35hwm","111111111111111111111111111111111111");
 		receiver = NetworkStateReceiver.this;
 		if (intent.getAction().equalsIgnoreCase(ANDROID_NET_CHANGE_ACTION)) {
 			// TALogger.i(NetworkStateReceiver.this, "网络状态改变.");

@@ -3,20 +3,16 @@ package com.android.base.common.assist;
 import android.content.Context;
 import android.widget.Toast;
 
-/**
- * @author MaTianyu
- * @date 2014-07-31
- */
 public class Toastor {
 
-    private Toast   mToast;
-    private Context context;
+    private static Toast   mToast;
+    /*private Context context;
 
     public Toastor(Context context) {
         this.context = context.getApplicationContext();
-    }
+    }*/
 
-    public Toast getSingletonToast(int resId) {
+    public static Toast getSingletonToast(Context context, int resId) {
         if (mToast == null) {
             mToast = Toast.makeText(context, resId, Toast.LENGTH_SHORT);
         }else{
@@ -25,7 +21,7 @@ public class Toastor {
         return mToast;
     }
 
-    public Toast getSingletonToast(String text) {
+    public static Toast getSingletonToast(Context context, String text) {
         if (mToast == null) {
             mToast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         }else{
@@ -34,7 +30,7 @@ public class Toastor {
         return mToast;
     }
 
-    public Toast getSingleLongToast(int resId) {
+    public static Toast getSingleLongToast(Context context, int resId) {
         if (mToast == null) {
             mToast = Toast.makeText(context, resId, Toast.LENGTH_LONG);
         }else{
@@ -43,7 +39,7 @@ public class Toastor {
         return mToast;
     }
 
-    public Toast getSingleLongToast(String text) {
+    public static Toast getSingleLongToast(Context context, String text) {
         if (mToast == null) {
             mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         }else{
@@ -52,54 +48,54 @@ public class Toastor {
         return mToast;
     }
 
-    public Toast getToast(int resId) {
+    public static Toast getToast(Context context, int resId) {
         return Toast.makeText(context, resId, Toast.LENGTH_SHORT);
     }
 
-    public Toast getToast(String text) {
+    public static Toast getToast(Context context, String text) {
         return Toast.makeText(context, text, Toast.LENGTH_SHORT);
     }
 
-    public Toast getLongToast(int resId) {
+    public static Toast getLongToast(Context context, int resId) {
         return Toast.makeText(context, resId, Toast.LENGTH_LONG);
     }
 
-    public Toast getLongToast(String text) {
+    public static Toast getLongToast(Context context, String text) {
         return Toast.makeText(context, text, Toast.LENGTH_LONG);
     }
 
-    public void showSingletonToast(int resId) {
-        getSingletonToast(resId).show();
+    public static void showSingletonToast(Context context, int resId) {
+        getSingletonToast(context, resId).show();
     }
 
 
-    public void showSingletonToast(String text) {
-        getSingletonToast(text).show();
+    public static void showSingletonToast(Context context, String text) {
+        getSingletonToast(context, text).show();
     }
 
-    public void showSingleLongToast(int resId) {
-        getSingleLongToast(resId).show();
+    public static void showSingleLongToast(Context context, int resId) {
+        getSingleLongToast(context, resId).show();
     }
 
 
-    public void showSingleLongToast(String text) {
-        getSingleLongToast(text).show();
+    public static void showSingleLongToast(Context context, String text) {
+        getSingleLongToast(context, text).show();
     }
 
-    public void showToast(int resId) {
-        getToast(resId).show();
+    public static void showToast(Context context, int resId) {
+        getToast(context, resId).show();
     }
 
-    public void showToast(String text) {
-        getToast(text).show();
+    public static void showToast(Context context, String text) {
+        getToast(context, text).show();
     }
 
-    public void showLongToast(int resId) {
-        getLongToast(resId).show();
+    public static void showLongToast(Context context, int resId) {
+        getLongToast(context, resId).show();
     }
 
-    public void showLongToast(String text) {
-        getLongToast(text).show();
+    public static void showLongToast(Context context, String text) {
+        getLongToast(context, text).show();
     }
 
 }

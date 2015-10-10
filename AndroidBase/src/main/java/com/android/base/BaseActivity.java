@@ -42,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         mApplicationContext = getApplicationContext();
         mContext = this;
         mHandler = new MyHandler(this);
+        NetworkStateReceiver.registerNetworkStateReceiver(this);
         onActivityCreated(this, savedInstanceState);
     }
 
@@ -54,14 +55,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     @Override
     protected void onResume() {
         super.onResume();
-        NetworkStateReceiver.registerNetworkStateReceiver(this);
         onActivityResumed(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
         onActivityPaused(this);
     }
 
@@ -83,6 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
             mHandler.removeCallbacksAndMessages(null);
         }
         super.onDestroy();
+        NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
         AppManager.getAppManager().finishActivity();
         onActivityDestroyed(this);
     }
