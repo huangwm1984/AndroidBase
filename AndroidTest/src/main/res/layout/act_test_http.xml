@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"/>
 
-        <ImageView
-            android:id="@+id/iv"
+        <TextView
+            android:id="@+id/tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"/>

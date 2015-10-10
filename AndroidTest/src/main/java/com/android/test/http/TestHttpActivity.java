@@ -20,8 +20,8 @@ public class TestHttpActivity extends BaseActivity {
     TextView mTv1;
     @Bind(R.id.tv2)
     TextView mTv2;
-    @Bind(R.id.iv)
-    ImageView mIv;
+    @Bind(R.id.tv3)
+    TextView mTv3;
 
     @Override
     protected int getMainContentViewId() {
@@ -32,6 +32,7 @@ public class TestHttpActivity extends BaseActivity {
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         TestHttpReq.request1(mHandler);
         TestHttpReq.request2(mHandler);
+        TestHttpReq.request3(mHandler);
     }
 
     @Override
@@ -79,6 +80,13 @@ public class TestHttpActivity extends BaseActivity {
                 break;
             case TestHttpReq.REQUEST_POST_SUCCESS://成功
                 mTv2.setText((String) msg.obj);
+                break;
+            case TestHttpReq.REQUEST_POST_FAIL_FOR_BEAN://失败
+                mTv3.setText("获取失败");
+                break;
+            case TestHttpReq.REQUEST_POST_SUCCESS_FOR_BEAN://成功
+                TestBean mTestBean = (TestBean) msg.obj;
+                mTv3.setText(mTestBean.getAdvs().get(0).getV6_android_img_url());
                 break;
             default:
                 break;
