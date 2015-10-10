@@ -10,6 +10,7 @@ import com.android.base.BaseActivity;
 import com.android.base.common.assist.Toastor;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.test.R;
+import com.apkfuns.logutils.LogUtils;
 
 import butterknife.Bind;
 
@@ -101,6 +102,7 @@ public class TestHttpActivity extends BaseActivity {
             case TestHttpReq.REQUEST_POST_SUCCESS_FOR_BEAN://成功
                 TestBean mTestBean = (TestBean) msg.obj;
                 mTv3.setText(mTestBean.getAdvs().get(0).getV6_android_img_url());
+                LogUtils.e(mTestBean.getAdvs());
                 break;
             default:
                 break;

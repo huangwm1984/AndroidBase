@@ -8,6 +8,7 @@ import com.android.base.http.OkHttpClientManager;
 import com.android.base.netstate.NetChangeObserver;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
+import com.apkfuns.logutils.LogUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -28,6 +29,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initLeakCanary();
+        initLogUtils();
         initOkHttp();
         registerNetWorkStateListener();// 注册网络状态监测器
     }
@@ -47,6 +49,14 @@ public class BaseApplication extends Application {
     public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
         return application.refWatcher;
+    }
+
+    private void initLogUtils() {
+        // 配置日志是否输出(默认true)
+        LogUtils.configAllowLog = true;
+
+        // 配置日志前缀
+        LogUtils.configTagPrefix = "abc-";
     }
 
     /**
