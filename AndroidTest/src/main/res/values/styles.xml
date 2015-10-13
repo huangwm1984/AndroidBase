@@ -14,4 +14,23 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+
+    <style name="AppTheme.Custom.Toolbar2" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- customize the color palette -->
+        <!-- colorPrimary 对应ActionBar的颜色 -->
+        <item name="colorPrimary">@color/material_blue_500</item>
+        <!-- colorPrimaryDark对应状态栏的颜色 -->
+        <item name="colorPrimaryDark">@color/material_blue_700</item>
+        <item name="colorAccent">@color/material_green_A200</item>
+        <!-- 箭头 -->
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+    <!-- 左边的箭头指示-->
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <!-- 旋转效果 -->
+        <item name="spinBars">true</item>
+        <!-- 设定 navigation icon 的颜色 -->
+        <item name="color">@android:color/white</item>
+    </style>
+
 </resources>

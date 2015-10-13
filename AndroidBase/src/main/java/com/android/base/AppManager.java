@@ -11,23 +11,18 @@ import java.util.Stack;
 public class AppManager {
 
     private static Stack<Activity> activityStack;
-    private static AppManager mInstance;
+    private static AppManager instance;
 
-    private AppManager() {
-    }
+    private AppManager() {}
 
     /**
      * 单一实例
      */
     public static AppManager getAppManager() {
-        if (mInstance == null) {
-            synchronized (AppManager.class) {
-                if (mInstance == null) {
-                    mInstance = new AppManager();
-                }
-            }
+        if (instance == null) {
+            instance = new AppManager();
         }
-        return mInstance;
+        return instance;
     }
 
     /**
@@ -98,11 +93,12 @@ public class AppManager {
      * @author kymjs
      */
     public static Activity getActivity(Class<?> cls) {
-        if (activityStack != null) for (Activity activity : activityStack) {
-            if (activity.getClass().equals(cls)) {
-                return activity;
+        if (activityStack != null)
+            for (Activity activity : activityStack) {
+                if (activity.getClass().equals(cls)) {
+                    return activity;
+                }
             }
-        }
         return null;
     }
 

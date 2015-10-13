@@ -5,6 +5,7 @@ import android.os.Handler;
 import com.android.base.common.Log;
 import com.android.base.common.utils.HandlerUtil;
 import com.android.base.http.OkHttpClientManager;
+import com.android.test.AppConfig;
 import com.squareup.okhttp.Request;
 
 import java.util.HashMap;
@@ -15,13 +16,6 @@ import java.util.Map;
  */
 public class TestHttpReq {
 
-    public static final int REQUEST_GET_FAIL = 1001;
-    public static final int REQUEST_GET_SUCCESS = 1002;
-    public static final int REQUEST_POST_FAIL = 1003;
-    public static final int REQUEST_POST_SUCCESS = 1004;
-    public static final int REQUEST_POST_FAIL_FOR_BEAN = 1005;
-    public static final int REQUEST_POST_SUCCESS_FOR_BEAN = 1006;
-
     public static final String reqUrl1 = "https://api.douban.com/v2/user/googolmo";
     public static final String reqUrl2 = "http://ixiada.153.cn:50081/exter.shtml?baseLine=400&serviceType=1007";
 
@@ -30,12 +24,12 @@ public class TestHttpReq {
 
             @Override
             public void onError(Request request, Exception e) {
-                HandlerUtil.sendMessage(handler, REQUEST_GET_FAIL);
+                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_FAIL);
             }
 
             @Override
             public void onResponse(String response) {
-                HandlerUtil.sendMessage(handler, REQUEST_GET_SUCCESS, response.toString());
+                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_SUCCESS, response.toString());
             }
         });
     }
@@ -51,12 +45,12 @@ public class TestHttpReq {
         OkHttpClientManager.postAsyn(reqUrl2, map, new OkHttpClientManager.ResultCallback<String>() {
             @Override
             public void onError(Request request, Exception e) {
-                HandlerUtil.sendMessage(handler, REQUEST_POST_FAIL);
+                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_FAIL);
             }
 
             @Override
             public void onResponse(String response) {
-                HandlerUtil.sendMessage(handler, REQUEST_POST_SUCCESS, response);
+                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS, response);
             }
         });
     }
@@ -72,12 +66,12 @@ public class TestHttpReq {
         OkHttpClientManager.postAsyn(reqUrl2, map, new OkHttpClientManager.ResultCallback<TestBean>() {
             @Override
             public void onError(Request request, Exception e) {
-                HandlerUtil.sendMessage(handler, REQUEST_POST_FAIL_FOR_BEAN);
+                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_FAIL_FOR_BEAN);
             }
 
             @Override
             public void onResponse(TestBean response) {
-                HandlerUtil.sendMessage(handler, REQUEST_POST_SUCCESS_FOR_BEAN, response);
+                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS_FOR_BEAN, response);
             }
         });
     }

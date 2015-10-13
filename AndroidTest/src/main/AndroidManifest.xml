@@ -31,6 +31,12 @@
             android:screenOrientation="portrait" >
         </activity>
 
+        <activity
+            android:name=".view.main.ui1.FragmentTabHostActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Custom.Toolbar2" >
+        </activity>
+
     </application>
 
 </manifest>

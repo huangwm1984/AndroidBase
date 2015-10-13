@@ -3,6 +3,7 @@ package com.android.test;
 import android.content.Intent;
 
 import com.android.test.http.TestHttpActivity;
+import com.android.test.view.main.ui1.FragmentTabHostActivity;
 
 public class MainActivity extends TestBaseActivity {
 
@@ -36,7 +37,7 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(TestHttpActivity.class, false);
                 break;
             case 1:
-
+                gotoActivity(FragmentTabHostActivity.class, false);
                 break;
             case 2:
 

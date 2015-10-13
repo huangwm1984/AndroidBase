@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.android.base.BaseActivity;
 import com.android.base.common.assist.Toastor;
 import com.android.base.netstate.NetWorkUtil;
+import com.android.test.AppConfig;
 import com.android.test.R;
 import com.apkfuns.logutils.LogUtils;
 
@@ -84,22 +85,22 @@ public class TestHttpActivity extends BaseActivity {
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
         switch (msg.what) {
-            case TestHttpReq.REQUEST_GET_FAIL://失败
+            case AppConfig.REQUEST_GET_FAIL://失败
                 mTv1.setText("获取失败");
                 break;
-            case TestHttpReq.REQUEST_GET_SUCCESS://成功
+            case AppConfig.REQUEST_GET_SUCCESS://成功
                 mTv1.setText((String) msg.obj);
                 break;
-            case TestHttpReq.REQUEST_POST_FAIL://失败
+            case AppConfig.REQUEST_POST_FAIL://失败
                 mTv2.setText("获取失败");
                 break;
-            case TestHttpReq.REQUEST_POST_SUCCESS://成功
+            case AppConfig.REQUEST_POST_SUCCESS://成功
                 mTv2.setText((String) msg.obj);
                 break;
-            case TestHttpReq.REQUEST_POST_FAIL_FOR_BEAN://失败
+            case AppConfig.REQUEST_POST_FAIL_FOR_BEAN://失败
                 mTv3.setText("获取失败");
                 break;
-            case TestHttpReq.REQUEST_POST_SUCCESS_FOR_BEAN://成功
+            case AppConfig.REQUEST_POST_SUCCESS_FOR_BEAN://成功
                 TestBean mTestBean = (TestBean) msg.obj;
                 mTv3.setText(mTestBean.getAdvs().get(0).getV6_android_img_url());
                 LogUtils.e(mTestBean.getAdvs());

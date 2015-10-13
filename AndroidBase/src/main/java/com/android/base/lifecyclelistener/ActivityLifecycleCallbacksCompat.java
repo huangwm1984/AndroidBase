@@ -27,10 +27,9 @@ package com.android.base.lifecyclelistener;
 import android.app.Activity;
 import android.os.Bundle;
 
-/**
- * Equivalent of {@link android.app.Application.ActivityLifecycleCallbacks} to be used with
- */
+
 public interface ActivityLifecycleCallbacksCompat {
+
     void onActivityCreated(Activity activity, Bundle savedInstanceState);
 
     void onActivityStarted(Activity activity);

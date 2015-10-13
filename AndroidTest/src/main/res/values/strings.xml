@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">AndroidTest</string>
     <string name="action_settings">Settings</string>
+
     <string-array name="test_list">
         <item>OkHttp</item>
-        <item>ToolBar</item>
-        <item>ToolBar + DrawLayout</item>
         <item>FragmentTabHost</item>
+        <item>ToolBar + DrawLayout</item>
         <item>Indicator</item>
         <item>BannerView</item>
         <item>PullToRefresh ListView LoadMore</item>
@@ -16,4 +16,13 @@
         <item>主流布局12</item>
         <item>主流布局13</item>
     </string-array>
+
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+
+    <string name="main_tab_name_news">综合</string>
+    <string name="main_tab_name_tweet">动弹</string>
+    <string name="main_tab_name_quick">快速</string>
+    <string name="main_tab_name_my">我</string>
+    <string name="main_tab_name_explore">发现</string>
 </resources>
