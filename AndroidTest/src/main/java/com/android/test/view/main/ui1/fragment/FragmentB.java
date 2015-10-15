@@ -23,7 +23,7 @@ public class FragmentB extends BaseFragment {
 
     @Override
     protected int getMainContentViewId() {
-        return R.layout.frg_test;
+        return R.layout.frag_test;
     }
 
     @Override

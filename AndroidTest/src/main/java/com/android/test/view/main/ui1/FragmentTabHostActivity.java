@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.android.base.BaseActivity;
 import com.android.test.R;
 import com.android.test.view.main.ui1.fragment.NavigationDrawerFragment;
+import com.apkfuns.logutils.LogUtils;
 
 import butterknife.Bind;
 
@@ -110,7 +111,6 @@ public class FragmentTabHostActivity extends BaseActivity implements FragmentTab
                 }
             });
             mTabHost.addTab(tab, mainTab.getClz(), null);
-
             /*if (mainTab.equals(MainTab.ME)) {
                 View cn = indicator.findViewById(R.id.tab_mes);
                 mBvNotice = new BadgeView(MainActivity.this, cn);
