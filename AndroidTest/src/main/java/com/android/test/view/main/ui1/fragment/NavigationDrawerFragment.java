@@ -24,7 +24,7 @@ import butterknife.Bind;
 public class NavigationDrawerFragment extends BaseFragment {
 
 
-    @Bind(R.id.lv)
+    @Bind(R.id.listview)
     ListView mMenu;
 
     private QuickAdapter<MenuBean> mAdapter;
@@ -54,6 +54,13 @@ public class NavigationDrawerFragment extends BaseFragment {
     @Override
     public void onFragmentViewCreated(Fragment fragment, View view, Bundle savedInstanceState) {
 
+        initMenu();
+        initAdapter();
+
+    }
+
+
+    private void initMenu() {
         mMenus = new ArrayList<MenuBean>();
 
         MenuBean quest_menu = new MenuBean();
@@ -76,6 +83,10 @@ public class NavigationDrawerFragment extends BaseFragment {
         mMenus.add(opensoft_menu);
         mMenus.add(blog_menu);
         mMenus.add(gitapp_menu);
+    }
+
+
+    private void initAdapter() {
 
         mAdapter = new QuickAdapter<MenuBean>(getActivity(), R.layout.item_left_menu, mMenus) {
             @Override
@@ -87,7 +98,6 @@ public class NavigationDrawerFragment extends BaseFragment {
         };
 
         mMenu.setAdapter(mAdapter);
-
     }
 
     @Override
