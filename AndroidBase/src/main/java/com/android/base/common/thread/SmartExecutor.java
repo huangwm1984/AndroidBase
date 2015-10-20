@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class SmartExecutor implements Executor {
     private static final String TAG = SmartExecutor.class.getSimpleName();
-    private static final int CPU_CORE = Utils.getCoresNumbers();
+    private static final int CPU_CORE = 3;//Utils.getCoresNumbers();
     private static final int DEFAULT_CACHE_SENCOND = 5;
     private static ThreadPoolExecutor threadPool;
     private int coreSize = CPU_CORE;
