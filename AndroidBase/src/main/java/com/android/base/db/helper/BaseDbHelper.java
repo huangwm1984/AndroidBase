@@ -15,10 +15,12 @@ import java.sql.SQLException;
  */
 public abstract class BaseDbHelper extends OrmLiteSqliteOpenHelper {
 
+    public Context mContext;
+
     //Helper单例
     public BaseDbHelper(Context context, String dbName, int dbVersion) {
         super(context, dbName, null, dbVersion);
-
+        mContext = context.getApplicationContext();
     }
 
     @Override

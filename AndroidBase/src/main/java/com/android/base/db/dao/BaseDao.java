@@ -24,7 +24,7 @@ import java.util.Map;
  * 数据库CRUD操作的Dao，子类继承实现抽象方法，也提供一个简单的泛型实现类
  */
 public abstract class BaseDao<T, Integer> {
-    protected BaseDbHelper mDatabaseHelper;
+    //protected BaseDbHelper mDatabaseHelper;
 
     //helper
     protected Context mContext;
@@ -38,9 +38,9 @@ public abstract class BaseDao<T, Integer> {
         mContext = context.getApplicationContext();
         //避免产生内存泄露，使用getApplicationContext()
         //mDatabaseHelper = DatabaseHelper.getInstance(mContext);
-        if(mDatabaseHelper == null){
-            mDatabaseHelper = OpenHelperManager.getHelper(mContext, BaseDbHelper.class);
-        }
+        //if(mDatabaseHelper == null){
+        //    mDatabaseHelper = OpenHelperManager.getHelper(mContext, BaseDbHelper.class);
+        //}
         //获得单例helper
     }
 
