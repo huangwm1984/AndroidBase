@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -36,6 +38,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Custom.Toolbar2" >
         </activity>
+
+        <activity
+            android:name=".download.DownLoadActivity"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".download.DLService" />
 
     </application>
 

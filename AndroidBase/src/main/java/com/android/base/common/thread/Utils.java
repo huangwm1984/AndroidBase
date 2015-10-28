@@ -51,7 +51,7 @@ public class Utils {
         if (CPU_CORES < 1) {
             CPU_CORES = 1;
         }
-        LogUtils.i(TAG, "CPU cores: " + CPU_CORES);
+        LogUtils.i("CPU cores: " + CPU_CORES);
         return CPU_CORES;
     }
 }

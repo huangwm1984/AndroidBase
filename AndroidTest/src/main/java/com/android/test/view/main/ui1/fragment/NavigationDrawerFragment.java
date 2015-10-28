@@ -65,19 +65,19 @@ public class NavigationDrawerFragment extends BaseFragment {
 
         MenuBean quest_menu = new MenuBean();
         quest_menu.menuName = "技术问答";
-        quest_menu.resourceId = R.mipmap.drawer_menu_icon_quest_nor;
+        quest_menu.resourceId = R.drawable.drawer_menu_icon_quest_nor;
 
         MenuBean opensoft_menu = new MenuBean();
         opensoft_menu.menuName = "开源软件";
-        opensoft_menu.resourceId = R.mipmap.drawer_menu_icon_opensoft_nor;
+        opensoft_menu.resourceId = R.drawable.drawer_menu_icon_opensoft_nor;
 
         MenuBean blog_menu = new MenuBean();
         blog_menu.menuName = "博客区";
-        blog_menu.resourceId = R.mipmap.drawer_menu_icon_blog_nor;
+        blog_menu.resourceId = R.drawable.drawer_menu_icon_blog_nor;
 
         MenuBean gitapp_menu = new MenuBean();
         gitapp_menu.menuName = "Git客户端";
-        gitapp_menu.resourceId = R.mipmap.drawer_menu_icon_gitapp_nor;
+        gitapp_menu.resourceId = R.drawable.drawer_menu_icon_gitapp_nor;
 
         mMenus.add(quest_menu);
         mMenus.add(opensoft_menu);

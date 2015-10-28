@@ -56,7 +56,7 @@ public class BaseApplication extends Application {
         LogUtils.configAllowLog = true;
 
         // 配置日志前缀
-        LogUtils.configTagPrefix = "abc-";
+        LogUtils.configTagPrefix = "hwm-";
     }
 
     /**

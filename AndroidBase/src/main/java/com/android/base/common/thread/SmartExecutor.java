@@ -36,6 +36,7 @@ public class SmartExecutor implements Executor {
     private LinkedList<WrappedRunnable> waitingList = new LinkedList<WrappedRunnable>();
     private SchedulePolicy schedulePolicy = SchedulePolicy.FirstInFistRun;
     private OverloadPolicy overloadPolicy = OverloadPolicy.DiscardOldTaskInQueue;
+    private boolean isDebug = false;
 
 
     public SmartExecutor() {
@@ -49,9 +50,10 @@ public class SmartExecutor implements Executor {
     }
 
     protected synchronized void initThreadPool() {
-        //if (HttpLog.isPrint) {
-            LogUtils.v(TAG, "SmartExecutor core-queue size: " + coreSize + " - " + queueSize + "  running-wait task: " + runningList.size() + " - " + waitingList.size());
-        //}
+        if (isDebug) {
+        LogUtils.v("SmartExecutor core-queue size: " + coreSize + " - " + queueSize
+                    + "  running-wait task: " + runningList.size() + " - " + waitingList.size());
+        }
         if (threadPool == null) {
             threadPool = createDefaultThreadPool();
         }
@@ -182,21 +184,20 @@ public class SmartExecutor implements Executor {
 
         boolean callerRun = false;
         synchronized (lock) {
-            //if (HttpLog.isPrint) {
-            //    HttpLog.v(TAG, "SmartExecutor core-queue size: " + coreSize + " - " + queueSize
-            //                   + "  running-wait task: " + runningList.size() + " - " + waitingList.size());
-            //}
+            if (isDebug) {
+                LogUtils.v("SmartExecutor core-queue size: " + coreSize + " - " + queueSize + "  running-wait task: " + runningList.size() + " - " + waitingList.size());
+            }
             if (runningList.size() < coreSize) {
                 runningList.add(scheduler);
                 threadPool.execute(scheduler);
-                //HttpLog.v(TAG, "SmartExecutor task execute");
+                LogUtils.v("SmartExecutor task execute");
             } else if (waitingList.size() < queueSize) {
                 waitingList.addLast(scheduler);
-                //HttpLog.v(TAG, "SmartExecutor task waiting");
+                LogUtils.v("SmartExecutor task waiting");
             } else {
-                //if (HttpLog.isPrint) {
-                //    HttpLog.w(TAG, "SmartExecutor overload , policy is: " + overloadPolicy);
-                //}
+                if (isDebug) {
+                    LogUtils.w(TAG, "SmartExecutor overload , policy is: " + overloadPolicy);
+                }
                 switch (overloadPolicy) {
                     case DiscardNewTaskInQueue:
                         waitingList.pollLast();
@@ -220,9 +221,9 @@ public class SmartExecutor implements Executor {
             //printThreadPoolInfo();
         }
         if (callerRun) {
-            //if (HttpLog.isPrint) {
-                LogUtils.i(TAG, "SmartExecutor task running in caller thread");
-            //}
+            if (isDebug) {
+                LogUtils.i("SmartExecutor task running in caller thread");
+            }
             command.run();
         }
     }
@@ -230,14 +231,13 @@ public class SmartExecutor implements Executor {
     private void scheduleNext(WrappedRunnable scheduler) {
         synchronized (lock) {
             boolean suc = runningList.remove(scheduler);
-            //if (HttpLog.isPrint) {
-            //    HttpLog.v(TAG, "Thread " + Thread.currentThread().getName()
-            //                   + " is completed. remove prior: " + suc + ", try schedule next..");
-            //}
+            if (isDebug) {
+                LogUtils.v("Thread " + Thread.currentThread().getName()
+                               + " is completed. remove prior: " + suc + ", try schedule next..");
+            }
             if (!suc) {
                 runningList.clear();
-                LogUtils.e(TAG,
-                        "SmartExecutor scheduler remove failed, so clear all(running list) to avoid unpreditable error : " + scheduler);
+                LogUtils.e("SmartExecutor scheduler remove failed, so clear all(running list) to avoid unpreditable error : " + scheduler);
             }
             if (waitingList.size() > 0) {
                 WrappedRunnable waitingRun;
@@ -255,32 +255,31 @@ public class SmartExecutor implements Executor {
                 if (waitingRun != null) {
                     runningList.add(waitingRun);
                     threadPool.execute(waitingRun);
-                    LogUtils.v(TAG, "Thread " + Thread.currentThread().getName() + " execute next task..");
+                    LogUtils.v("Thread " + Thread.currentThread().getName() + " execute next task..");
                 } else {
-                    LogUtils.e(TAG,
-                            "SmartExecutor get a NULL task from waiting queue: " + Thread.currentThread().getName());
+                    LogUtils.e("SmartExecutor get a NULL task from waiting queue: " + Thread.currentThread().getName());
                 }
             } else {
-                //if (HttpLog.isPrint) {
-                    LogUtils.v(TAG, "SmartExecutor: all tasks is completed. current thread: " +
+                if (isDebug) {
+                    LogUtils.v("SmartExecutor: all tasks is completed. current thread: " +
                             Thread.currentThread().getName());
                     //printThreadPoolInfo();
-                //}
+                }
             }
         }
     }
 
     public void printThreadPoolInfo() {
-        //if (HttpLog.isPrint) {
-        LogUtils.i(TAG, "___________________________");
-        LogUtils.i(TAG, "state (shutdown - terminating - terminated): " + threadPool.isShutdown()
-                    + " - " + threadPool.isTerminating() + " - " + threadPool.isTerminated());
-        LogUtils.i(TAG, "pool size (core - max): " + threadPool.getCorePoolSize()
-                    + " - " + threadPool.getMaximumPoolSize());
-        LogUtils.i(TAG, "task (active - complete - total): " + threadPool.getActiveCount()
-                    + " - " + threadPool.getCompletedTaskCount() + " - " + threadPool.getTaskCount());
-        LogUtils.i(TAG, "waitingList size : " + threadPool.getQueue().size() + " , " + threadPool.getQueue());
-        //}
+        if (isDebug) {
+            LogUtils.i("___________________________");
+            LogUtils.i("state (shutdown - terminating - terminated): " + threadPool.isShutdown()
+                        + " - " + threadPool.isTerminating() + " - " + threadPool.isTerminated());
+            LogUtils.i("pool size (core - max): " + threadPool.getCorePoolSize()
+                        + " - " + threadPool.getMaximumPoolSize());
+            LogUtils.i("task (active - complete - total): " + threadPool.getActiveCount()
+                        + " - " + threadPool.getCompletedTaskCount() + " - " + threadPool.getTaskCount());
+            LogUtils.i("waitingList size : " + threadPool.getQueue().size() + " , " + threadPool.getQueue());
+        }
     }
 
     public int getCoreSize() {
@@ -307,10 +306,10 @@ public class SmartExecutor implements Executor {
             throw new NullPointerException("coreSize can not <= 0 !");
         }
         this.coreSize = coreSize;
-        //if (HttpLog.isPrint) {
-        LogUtils.v(TAG, "SmartExecutor core-queue size: " + coreSize + " - " + queueSize
+        if (isDebug) {
+            LogUtils.v("SmartExecutor core-queue size: " + coreSize + " - " + queueSize
                     + "  running-wait task: " + runningList.size() + " - " + waitingList.size());
-        //}
+        }
         return this;
     }
 
@@ -331,10 +330,9 @@ public class SmartExecutor implements Executor {
         }
 
         this.queueSize = queueSize;
-        //if (HttpLog.isPrint) {
-        LogUtils.v(TAG, "SmartExecutor core-queue size: " + coreSize + " - " + queueSize
-                    + "  running-wait task: " + runningList.size() + " - " + waitingList.size());
-        //}
+        if (isDebug) {
+            LogUtils.v("SmartExecutor core-queue size: " + coreSize + " - " + queueSize + "  running-wait task: " + runningList.size() + " - " + waitingList.size());
+        }
         return this;
     }
 
