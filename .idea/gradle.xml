@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$/AndroidBase" />
             <option value="$PROJECT_DIR$/AndroidTest" />
             <option value="$PROJECT_DIR$/AndroidWidget" />
-            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
       </GradleProjectSettings>

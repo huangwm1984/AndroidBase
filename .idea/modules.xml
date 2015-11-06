@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidTest/AndroidTest.iml" filepath="$PROJECT_DIR$/AndroidTest/AndroidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndroidWidget/AndroidWidget.iml" filepath="$PROJECT_DIR$/AndroidWidget/AndroidWidget.iml" />
       <module fileurl="file://$PROJECT_DIR$/HuangwmWorkSpace.iml" filepath="$PROJECT_DIR$/HuangwmWorkSpace.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
