@@ -8,15 +8,15 @@
 
 4.图片异步加载类库：Android-Universal-Image-Loader
 
-5.快速绑定控件：butterknife
+5.快速绑定控件：Butterknife
 
-6.文件缓存：disklrucache
+6.文件缓存：Disklrucache
 
-7.内存泄漏监测：leakcanary
+7.内存泄漏监测：Leakcanary
 
-8.事件总线：androideventbus
+8.事件总线：AndroidEventbus
 
-9.Json解析工具：fastjson
+9.Json解析工具：FastJson
 
 10.收集的各种便捷开发的工具类
 
