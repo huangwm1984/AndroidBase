@@ -13,6 +13,7 @@ import com.android.base.common.Log;
 import com.android.base.lifecyclelistener.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
+import com.android.base.uiblock.UIBlockManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
@@ -27,9 +28,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     public Context mApplicationContext;
 
-    public Activity mContext;
-
     public MyHandler mHandler;
+
+    public UIBlockManager mUIBlockManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         }
         ButterKnife.bind(this);
         mApplicationContext = getApplicationContext();
-        mContext = this;
         mHandler = new MyHandler(this);
         NetworkStateReceiver.registerNetworkStateReceiver(this);
         onActivityCreated(this, savedInstanceState);
@@ -84,9 +84,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         super.onDestroy();
         NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
         AppManager.getAppManager().finishActivity();
+        if(mUIBlockManager!= null) mUIBlockManager.onDestroy();
         onActivityDestroyed(this);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(mUIBlockManager!= null) mUIBlockManager.onActivityResult(requestCode, resultCode, data);
+    }
 
     private static class MyHandler extends Handler {
 
@@ -176,6 +182,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         if (finish) {
             finish();
         }
+    }
+
+    /**
+     * 获取UI解耦块管理
+     * @return
+     */
+    public UIBlockManager getUIBlockManager() {
+        mUIBlockManager = new UIBlockManager(this);
+        return mUIBlockManager;
     }
 
 
