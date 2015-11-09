@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1.fragment.adapter;
+package com.android.test.view.tabhost.fragment.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,13 +1,13 @@
-package com.android.test.view.main.ui1.fragment.adapter;
+package com.android.test.view.tabhost.fragment.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.android.test.view.main.ui1.fragment.childfragment.FragmentA_1;
-import com.android.test.view.main.ui1.fragment.childfragment.FragmentA_2;
-import com.android.test.view.main.ui1.fragment.childfragment.FragmentA_3;
-import com.android.test.view.main.ui1.fragment.childfragment.FragmentA_4;
+import com.android.test.view.tabhost.fragment.childfragment.FragmentA_1;
+import com.android.test.view.tabhost.fragment.childfragment.FragmentA_2;
+import com.android.test.view.tabhost.fragment.childfragment.FragmentA_3;
+import com.android.test.view.tabhost.fragment.childfragment.FragmentA_4;
 
 /**
  * Created by Administrator on 2015/10/15 0015.

@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1.fragment;
+package com.android.test.view.tabhost.fragment;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.android.base.BaseFragment;
 import com.android.base.widget.PagerSlidingTabStrip;
 import com.android.test.R;
-import com.android.test.view.main.ui1.fragment.adapter.MyPagerAdapter;
+import com.android.test.view.tabhost.fragment.adapter.MyPagerAdapter;
 
 import butterknife.Bind;
 

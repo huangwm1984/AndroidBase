@@ -15,4 +15,6 @@ public class AppConfig {
     public static final int REQUEST_POST_SUCCESS = 1004;
     public static final int REQUEST_POST_FAIL_FOR_BEAN = 1005;
     public static final int REQUEST_POST_SUCCESS_FOR_BEAN = 1006;
+    public static final int REQUEST_GET_FAIL_FOR_BEAN = 1007;
+    public static final int REQUEST_GET_SUCCESS_FOR_BEAN = 1008;
 }

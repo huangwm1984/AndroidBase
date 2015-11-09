@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1.fragment.childfragment;
+package com.android.test.view.tabhost.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,18 +19,21 @@ import java.util.List;
 import butterknife.Bind;
 
 /**
- * Created by Administrator on 2015/10/15 0015.
+ * Created by Administrator on 2015/10/12 0012.
  */
-public class FragmentA_1 extends BaseFragment{
+public class NavigationDrawerFragment extends BaseFragment {
+
 
     @Bind(R.id.listview)
-    ListView mListView;
-    private QuickAdapter<String> mAdapter;
-    private List<String> mDatas = new ArrayList<String>();
+    ListView mMenu;
+
+    private QuickAdapter<MenuBean> mAdapter;
+
+    private List<MenuBean> mMenus;
 
     @Override
     protected int getMainContentViewId() {
-        return R.layout.frag_test_tab_a;
+        return R.layout.frag_left_menu;
     }
 
     @Override
@@ -50,28 +53,51 @@ public class FragmentA_1 extends BaseFragment{
 
     @Override
     public void onFragmentViewCreated(Fragment fragment, View view, Bundle savedInstanceState) {
-        initData();
-        setListView();
+
+        initMenu();
+        initAdapter();
+
     }
 
 
-    private void initData() {
-        for (int i = 0; i < 50; i++){
-            mDatas.add("测试"+" -> " + i);
-        }
+    private void initMenu() {
+        mMenus = new ArrayList<MenuBean>();
+
+        MenuBean quest_menu = new MenuBean();
+        quest_menu.menuName = "技术问答";
+        quest_menu.resourceId = R.drawable.drawer_menu_icon_quest_nor;
+
+        MenuBean opensoft_menu = new MenuBean();
+        opensoft_menu.menuName = "开源软件";
+        opensoft_menu.resourceId = R.drawable.drawer_menu_icon_opensoft_nor;
+
+        MenuBean blog_menu = new MenuBean();
+        blog_menu.menuName = "博客区";
+        blog_menu.resourceId = R.drawable.drawer_menu_icon_blog_nor;
+
+        MenuBean gitapp_menu = new MenuBean();
+        gitapp_menu.menuName = "Git客户端";
+        gitapp_menu.resourceId = R.drawable.drawer_menu_icon_gitapp_nor;
+
+        mMenus.add(quest_menu);
+        mMenus.add(opensoft_menu);
+        mMenus.add(blog_menu);
+        mMenus.add(gitapp_menu);
     }
 
 
-    private void setListView() {
+    private void initAdapter() {
 
-        mAdapter = new QuickAdapter<String>(getActivity(), R.layout.item_left_menu, mDatas) {
+        mAdapter = new QuickAdapter<MenuBean>(getActivity(), R.layout.item_left_menu, mMenus) {
             @Override
-            protected void convert(BaseAdapterHelper helper, String item) {
-                helper.setText(R.id.id_item_title, item);
+            protected void convert(BaseAdapterHelper helper, MenuBean item) {
+                helper.setImageResource(R.id.id_item_icon, item.resourceId);
+                helper.setText(R.id.id_item_title, item.menuName);
             }
+
         };
 
-        mListView.setAdapter(mAdapter);
+        mMenu.setAdapter(mAdapter);
     }
 
     @Override
@@ -113,4 +139,11 @@ public class FragmentA_1 extends BaseFragment{
     public void onFragmentSaveInstanceState(Fragment fragment, Bundle outState) {
 
     }
+
+
+    public class MenuBean{
+        public int resourceId;
+        public String menuName;
+    }
+
 }

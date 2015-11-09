@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1.fragment.childfragment;
+package com.android.test.view.tabhost.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import com.android.test.R;
 import butterknife.Bind;
 
 /**
- * Created by Administrator on 2015/10/15 0015.
+ * Created by Administrator on 2015/8/3 0003.
  */
-public class FragmentA_4 extends BaseFragment{
+public class FragmentD extends BaseFragment {
 
     @Bind(R.id.tv)
     TextView mTv;
@@ -43,7 +43,7 @@ public class FragmentA_4 extends BaseFragment{
 
     @Override
     public void onFragmentViewCreated(Fragment fragment, View view, Bundle savedInstanceState) {
-        mTv.setText("我是子Fragment第四页");
+        mTv.setText("我是第四页");
     }
 
     @Override

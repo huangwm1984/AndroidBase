@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1.fragment;
+package com.android.test.view.tabhost.fragment.childfragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,24 +6,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import com.android.base.BaseFragment;
+import com.android.base.quickadapter.BaseAdapterHelper;
+import com.android.base.quickadapter.QuickAdapter;
 import com.android.test.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 
 /**
- * Created by Administrator on 2015/8/3 0003.
+ * Created by Administrator on 2015/10/15 0015.
  */
-public class FragmentD extends BaseFragment {
+public class FragmentA_1 extends BaseFragment{
 
-    @Bind(R.id.tv)
-    TextView mTv;
+    @Bind(R.id.listview)
+    ListView mListView;
+    private QuickAdapter<String> mAdapter;
+    private List<String> mDatas = new ArrayList<String>();
 
     @Override
     protected int getMainContentViewId() {
-        return R.layout.frag_test;
+        return R.layout.frag_test_tab_a;
     }
 
     @Override
@@ -43,7 +50,28 @@ public class FragmentD extends BaseFragment {
 
     @Override
     public void onFragmentViewCreated(Fragment fragment, View view, Bundle savedInstanceState) {
-        mTv.setText("我是第四页");
+        initData();
+        setListView();
+    }
+
+
+    private void initData() {
+        for (int i = 0; i < 50; i++){
+            mDatas.add("测试"+" -> " + i);
+        }
+    }
+
+
+    private void setListView() {
+
+        mAdapter = new QuickAdapter<String>(getActivity(), R.layout.item_left_menu, mDatas) {
+            @Override
+            protected void convert(BaseAdapterHelper helper, String item) {
+                helper.setText(R.id.id_item_title, item);
+            }
+        };
+
+        mListView.setAdapter(mAdapter);
     }
 
     @Override

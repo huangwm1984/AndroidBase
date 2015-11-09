@@ -26,6 +26,8 @@ public class TestHttpActivity extends BaseActivity {
     TextView mTv2;
     @Bind(R.id.tv3)
     TextView mTv3;
+    @Bind(R.id.tv4)
+    TextView mTv4;
 
     @Override
     protected int getMainContentViewId() {
@@ -37,6 +39,7 @@ public class TestHttpActivity extends BaseActivity {
         TestHttpReq.request1(mHandler);
         TestHttpReq.request2(mHandler);
         TestHttpReq.request3(mHandler);
+        TestHttpReq.request4(mHandler);
     }
 
     @Override
@@ -101,9 +104,15 @@ public class TestHttpActivity extends BaseActivity {
                 mTv3.setText("获取失败");
                 break;
             case AppConfig.REQUEST_POST_SUCCESS_FOR_BEAN://成功
-                TestBean mTestBean = (TestBean) msg.obj;
-                mTv3.setText(mTestBean.getAdvs().get(0).getV6_android_img_url());
-                LogUtils.e(mTestBean.getAdvs());
+                TestBean mTestBeanPost = (TestBean) msg.obj;
+                mTv3.setText(mTestBeanPost.getGeye().getPuName());
+                break;
+            case AppConfig.REQUEST_GET_FAIL_FOR_BEAN://失败
+                mTv4.setText("获取失败");
+                break;
+            case AppConfig.REQUEST_GET_SUCCESS_FOR_BEAN://成功
+                TestBean mTestBeanGet = (TestBean) msg.obj;
+                mTv4.setText(mTestBeanGet.getGeye().getRtspAddr());
                 break;
             default:
                 break;

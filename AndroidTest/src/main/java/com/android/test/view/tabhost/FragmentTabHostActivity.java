@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1;
+package com.android.test.view.tabhost;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.android.base.BaseActivity;
 import com.android.test.R;
-import com.android.test.view.main.ui1.fragment.NavigationDrawerFragment;
+import com.android.test.view.tabhost.fragment.NavigationDrawerFragment;
 import com.apkfuns.logutils.LogUtils;
 
 import butterknife.Bind;
@@ -107,7 +107,7 @@ public class FragmentTabHostActivity extends BaseActivity implements FragmentTab
 
                 @Override
                 public View createTabContent(String tag) {
-                    return new View(mContext);
+                    return new View(FragmentTabHostActivity.this);
                 }
             });
             mTabHost.addTab(tab, mainTab.getClz(), null);

@@ -1,10 +1,10 @@
-package com.android.test.view.main.ui1;
+package com.android.test.view.tabhost;
 
 import com.android.test.R;
-import com.android.test.view.main.ui1.fragment.FragmentA;
-import com.android.test.view.main.ui1.fragment.FragmentB;
-import com.android.test.view.main.ui1.fragment.FragmentC;
-import com.android.test.view.main.ui1.fragment.FragmentD;
+import com.android.test.view.tabhost.fragment.FragmentA;
+import com.android.test.view.tabhost.fragment.FragmentB;
+import com.android.test.view.tabhost.fragment.FragmentC;
+import com.android.test.view.tabhost.fragment.FragmentD;
 
 /**
  * Created by Administrator on 2015/10/13 0013.

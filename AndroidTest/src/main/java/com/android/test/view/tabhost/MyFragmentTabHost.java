@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1;
+package com.android.test.view.tabhost;
 
 import android.content.Context;
 import android.support.v4.app.FragmentTabHost;

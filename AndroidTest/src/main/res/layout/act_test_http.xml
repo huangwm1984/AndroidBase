@@ -29,6 +29,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"/>
 
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"/>
+
     </LinearLayout>
 
 </ScrollView>

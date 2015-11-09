@@ -1,4 +1,4 @@
-package com.android.test.view.main.ui1.fragment;
+package com.android.test.view.tabhost.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
