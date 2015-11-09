@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".view.main.ui1.FragmentTabHostActivity"
+            android:name=".view.tabhost.FragmentTabHostActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Custom.Toolbar2" >
         </activity>
@@ -44,6 +44,16 @@
             android:screenOrientation="portrait" />
 
         <service android:name=".download.DLService" />
+
+        <activity
+            android:name=".view.recyclerview.RecyclerViewTabActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.recyclerview.normal.NormalActivity"
+            android:screenOrientation="portrait" />
+
+
 
     </application>
 

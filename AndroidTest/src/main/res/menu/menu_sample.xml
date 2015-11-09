@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_linearlayout_vertical"
+        android:title="@string/menu_linearlayout_vertical"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_linearlayout_horizontal"
+        android:title="@string/menu_linearlayout_horizontal"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_gridlayout"
+        android:title="@string/menu_gridlayout"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_staggeredgridlayout"
+        android:title="@string/menu_staggeredgridlayout"
+        app:showAsAction="never"/>
+
+</menu>

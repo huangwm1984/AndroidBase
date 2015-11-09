@@ -6,6 +6,21 @@
         <item>OkHttp</item>
         <item>FragmentTabHost</item>
         <item>MultiThreadDownload</item>
+        <item>RecyclerView</item>
+        <item>BannerView</item>
+        <item>PullToRefresh ListView LoadMore</item>
+        <item>主流布局8</item>
+        <item>主流布局9</item>
+        <item>主流布局10</item>
+        <item>主流布局11</item>
+        <item>主流布局12</item>
+        <item>主流布局13</item>
+    </string-array>
+
+    <string-array name="recyclerview_list">
+        <item>Normal RecyclerView</item>
+        <item>PullLoadMoreRecyclerView</item>
+        <item>MultiThreadDownload</item>
         <item>Indicator</item>
         <item>BannerView</item>
         <item>PullToRefresh ListView LoadMore</item>
@@ -25,4 +40,9 @@
     <string name="main_tab_name_quick">快速</string>
     <string name="main_tab_name_my">我</string>
     <string name="main_tab_name_explore">发现</string>
+
+    <string name="menu_linearlayout_vertical">LinearLayoutManager_vertical</string>
+    <string name="menu_linearlayout_horizontal">LinearLayoutManager_horizontal</string>
+    <string name="menu_gridlayout">GridLayoutManager</string>
+    <string name="menu_staggeredgridlayout">StaggeredGridLayoutManager</string>
 </resources>
