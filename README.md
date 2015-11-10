@@ -20,8 +20,10 @@
 
 10.收集的各种便捷开发的工具类
 
-11.集成ListView、GridView、RecyclerView快速开发适配器
+11.ListView、GridView、RecyclerView快速开发适配器
 
-12.集成Activity的解耦UI块
+12.Activity解耦UIBlock块
+
+13.Android 6.0 Permission 封装
 
 最后感谢github上大神的开源框架和开源精神 (●'◡'●)ﾉ♥
