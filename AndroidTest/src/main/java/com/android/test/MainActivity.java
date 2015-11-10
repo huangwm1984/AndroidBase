@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.android.test.download.DownLoadActivity;
 import com.android.test.http.TestHttpActivity;
+import com.android.test.permission.PermissionActivity;
 import com.android.test.view.tabhost.FragmentTabHostActivity;
 import com.android.test.view.recyclerview.RecyclerViewTabActivity;
 
@@ -48,7 +49,7 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(RecyclerViewTabActivity.class, false);
                 break;
             case 4:
-
+                gotoActivity(PermissionActivity.class, false);
                 break;
             case 5:
 

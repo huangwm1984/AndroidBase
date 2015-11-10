@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="back">退出</string>
+    <string name="show_camera">启动照相机</string>
+    <string name="show_contacts">添加联系人</string>
+
+    <string name="permission_camera_rationale">照相机权限是访问照相机所需要权限</string>
+    <string name="permission_contacts_rationale">联系人权限是访问联系人所需要权限</string>
+    <string name="permission_important_rationale">照相机权限和联系人权限是访问所需要权限</string>
+
+</resources>

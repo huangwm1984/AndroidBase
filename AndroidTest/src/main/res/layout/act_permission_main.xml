@@ -8,11 +8,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/show_camera"
         android:id="@+id/button_camera" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/show_contacts"
         android:id="@+id/button_contacts" />
 
     <FrameLayout

@@ -54,6 +54,10 @@
             android:screenOrientation="portrait" />
 
 
+        <activity
+            android:name=".permission.PermissionActivity"
+            android:screenOrientation="portrait" />
+
 
     </application>
 
