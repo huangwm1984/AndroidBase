@@ -95,8 +95,8 @@
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
-    <orderEntry type="library" exported="" name="fastjson-1.2.7" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.1.0" level="project" />
+    <orderEntry type="library" exported="" name="fastjson-1.2.7" level="project" />
     <orderEntry type="module" module-name="AndroidBase" exported="" />
     <orderEntry type="module" module-name="AndroidWidget" exported="" />
   </component>
