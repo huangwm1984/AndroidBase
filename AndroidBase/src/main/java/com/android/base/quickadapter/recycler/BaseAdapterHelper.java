@@ -23,11 +23,11 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 
-public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
+public class BaseAdapterHelper extends RecyclerView.ViewHolder {
 
     private SparseArray<View> views;
 
-    public RecyclerViewBaseAdapterHelper(View itemView) {
+    public BaseAdapterHelper(View itemView) {
         super(itemView);
         this.views = new SparseArray<View>();
     }
@@ -61,7 +61,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param value  The text to put in the text view.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setText(int viewId, String value) {
+    public BaseAdapterHelper setText(int viewId, String value) {
         TextView view = retrieveView(viewId);
         view.setText(value);
         return this;
@@ -74,7 +74,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param imageResId The image resource id.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setImageResource(int viewId, int imageResId) {
+    public BaseAdapterHelper setImageResource(int viewId, int imageResId) {
         ImageView view = retrieveView(viewId);
         view.setImageResource(imageResId);
         return this;
@@ -87,7 +87,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param color  A color, not a resource id.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setBackgroundColor(int viewId, int color) {
+    public BaseAdapterHelper setBackgroundColor(int viewId, int color) {
         View view = retrieveView(viewId);
         view.setBackgroundColor(color);
         return this;
@@ -100,7 +100,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param backgroundRes A resource to use as a background.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setBackgroundRes(int viewId, int backgroundRes) {
+    public BaseAdapterHelper setBackgroundRes(int viewId, int backgroundRes) {
         View view = retrieveView(viewId);
         view.setBackgroundResource(backgroundRes);
         return this;
@@ -113,7 +113,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param textColor The text color (not a resource id).
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setTextColor(int viewId, int textColor) {
+    public BaseAdapterHelper setTextColor(int viewId, int textColor) {
         TextView view = retrieveView(viewId);
         view.setTextColor(textColor);
         return this;
@@ -126,7 +126,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param textColorRes The text color resource id.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setTextColorRes(int viewId, int textColorRes) {
+    public BaseAdapterHelper setTextColorRes(int viewId, int textColorRes) {
         TextView view = retrieveView(viewId);
         view.setTextColor(view.getResources().getColor(textColorRes));
         return this;
@@ -139,7 +139,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param drawable The image drawable.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setImageDrawable(int viewId, Drawable drawable) {
+    public BaseAdapterHelper setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = retrieveView(viewId);
         view.setImageDrawable(drawable);
         return this;
@@ -148,7 +148,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
     /**
      * Add an action to set the image of an image view. Can be called multiple times.
      */
-    public RecyclerViewBaseAdapterHelper setImageBitmap(int viewId, Bitmap bitmap) {
+    public BaseAdapterHelper setImageBitmap(int viewId, Bitmap bitmap) {
         ImageView view = retrieveView(viewId);
         view.setImageBitmap(bitmap);
         return this;
@@ -168,7 +168,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      *            The image URL.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setImageUrl(int viewId, String imageUrl, DisplayImageOptions options)
+    public BaseAdapterHelper setImageUrl(int viewId, String imageUrl, DisplayImageOptions options)
     {
         ImageView view = retrieveView(viewId);
         ImageLoader.getInstance().displayImage(imageUrl, view, options);
@@ -179,7 +179,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * Add an action to set the alpha of a view. Can be called multiple times.
      * Alpha between 0-1.
      */
-    public RecyclerViewBaseAdapterHelper setAlpha(int viewId, float value) {
+    public BaseAdapterHelper setAlpha(int viewId, float value) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             retrieveView(viewId).setAlpha(value);
         } else {
@@ -199,7 +199,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param visible True for VISIBLE, false for GONE.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setVisible(int viewId, boolean visible) {
+    public BaseAdapterHelper setVisible(int viewId, boolean visible) {
         View view = retrieveView(viewId);
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
         return this;
@@ -211,7 +211,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param viewId The id of the TextView to linkify.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper linkify(int viewId) {
+    public BaseAdapterHelper linkify(int viewId) {
         TextView view = retrieveView(viewId);
         Linkify.addLinks(view, Linkify.ALL);
         return this;
@@ -220,7 +220,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
     /**
      * Apply the typeface to the given viewId, and enable subpixel rendering.
      */
-    public RecyclerViewBaseAdapterHelper setTypeface(int viewId, Typeface typeface) {
+    public BaseAdapterHelper setTypeface(int viewId, Typeface typeface) {
         TextView view = retrieveView(viewId);
         view.setTypeface(typeface);
         view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
@@ -230,7 +230,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
     /**
      * Apply the typeface to all the given viewIds, and enable subpixel rendering.
      */
-    public RecyclerViewBaseAdapterHelper setTypeface(Typeface typeface, int... viewIds) {
+    public BaseAdapterHelper setTypeface(Typeface typeface, int... viewIds) {
         for (int viewId : viewIds) {
             TextView view = retrieveView(viewId);
             view.setTypeface(typeface);
@@ -246,7 +246,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param progress The progress.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setProgress(int viewId, int progress) {
+    public BaseAdapterHelper setProgress(int viewId, int progress) {
         ProgressBar view = retrieveView(viewId);
         view.setProgress(progress);
         return this;
@@ -260,7 +260,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param max      The max value of a ProgressBar.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setProgress(int viewId, int progress, int max) {
+    public BaseAdapterHelper setProgress(int viewId, int progress, int max) {
         ProgressBar view = retrieveView(viewId);
         view.setMax(max);
         view.setProgress(progress);
@@ -274,7 +274,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param max    The max value of a ProgressBar.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setMax(int viewId, int max) {
+    public BaseAdapterHelper setMax(int viewId, int max) {
         ProgressBar view = retrieveView(viewId);
         view.setMax(max);
         return this;
@@ -287,7 +287,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param rating The rating.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setRating(int viewId, float rating) {
+    public BaseAdapterHelper setRating(int viewId, float rating) {
         RatingBar view = retrieveView(viewId);
         view.setRating(rating);
         return this;
@@ -301,7 +301,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param max    The range of the RatingBar to 0...max.
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setRating(int viewId, float rating, int max) {
+    public BaseAdapterHelper setRating(int viewId, float rating, int max) {
         RatingBar view = retrieveView(viewId);
         view.setMax(max);
         view.setRating(rating);
@@ -315,7 +315,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param listener The on click listener;
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setOnClickListener(int viewId, View.OnClickListener listener) {
+    public BaseAdapterHelper setOnClickListener(int viewId, View.OnClickListener listener) {
         View view = retrieveView(viewId);
         view.setOnClickListener(listener);
         return this;
@@ -328,7 +328,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param listener The on touch listener;
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setOnTouchListener(int viewId, View.OnTouchListener listener) {
+    public BaseAdapterHelper setOnTouchListener(int viewId, View.OnTouchListener listener) {
         View view = retrieveView(viewId);
         view.setOnTouchListener(listener);
         return this;
@@ -341,7 +341,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param listener The on long click listener;
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
+    public BaseAdapterHelper setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
         View view = retrieveView(viewId);
         view.setOnLongClickListener(listener);
         return this;
@@ -354,7 +354,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param tag    The tag;
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setTag(int viewId, Object tag) {
+    public BaseAdapterHelper setTag(int viewId, Object tag) {
         View view = retrieveView(viewId);
         view.setTag(tag);
         return this;
@@ -368,7 +368,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param tag    The tag;
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setTag(int viewId, int key, Object tag) {
+    public BaseAdapterHelper setTag(int viewId, int key, Object tag) {
         View view = retrieveView(viewId);
         view.setTag(key, tag);
         return this;
@@ -381,7 +381,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param checked The checked status;
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setChecked(int viewId, boolean checked) {
+    public BaseAdapterHelper setChecked(int viewId, boolean checked) {
         Checkable view = (Checkable) retrieveView(viewId);
         view.setChecked(checked);
         return this;
@@ -394,7 +394,7 @@ public class RecyclerViewBaseAdapterHelper extends RecyclerView.ViewHolder {
      * @param adapter The adapter;
      * @return The BaseAdapterHelper for chaining.
      */
-    public RecyclerViewBaseAdapterHelper setAdapter(int viewId, Adapter adapter) {
+    public BaseAdapterHelper setAdapter(int viewId, Adapter adapter) {
         AdapterView view = retrieveView(viewId);
         view.setAdapter(adapter);
         return this;

@@ -1,6 +1,6 @@
 package com.android.base.quickadapter.recycler;
 
-public interface RecyclerViewMultiItemTypeSupport<T> {
+public interface MultiItemTypeSupport<T> {
 
     int getLayoutId(int viewType);
 

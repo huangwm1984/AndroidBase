@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by HanHailong on 15/9/6.
  */
-public abstract class RecyclerViewQuickAdapter<T> extends RecyclerViewBaseQuickAdapter<T, RecyclerViewBaseAdapterHelper> {
+public abstract class QuickAdapter<T> extends BaseQuickAdapter<T, BaseAdapterHelper> {
 
     /**
      * Create a QuickAdapter.
@@ -17,7 +17,7 @@ public abstract class RecyclerViewQuickAdapter<T> extends RecyclerViewBaseQuickA
      * @param context     The context.
      * @param layoutResId The layout resource id of each item.
      */
-    public RecyclerViewQuickAdapter(Context context, @LayoutRes int layoutResId) {
+    public QuickAdapter(Context context, @LayoutRes int layoutResId) {
         super(context, layoutResId);
     }
 
@@ -29,7 +29,7 @@ public abstract class RecyclerViewQuickAdapter<T> extends RecyclerViewBaseQuickA
      * @param layoutResId The layout resource id of each item.
      * @param data        A new list is created out of this one to avoid mutable list
      */
-    public RecyclerViewQuickAdapter(Context context, @LayoutRes int layoutResId, List<T> data) {
+    public QuickAdapter(Context context, @LayoutRes int layoutResId, List<T> data) {
         super(context, layoutResId, data);
     }
 
@@ -39,7 +39,7 @@ public abstract class RecyclerViewQuickAdapter<T> extends RecyclerViewBaseQuickA
      * @param context              The context
      * @param multiItemTypeSupport multiitemtypesupport
      */
-    protected RecyclerViewQuickAdapter(Context context, RecyclerViewMultiItemTypeSupport<T> multiItemTypeSupport) {
+    protected QuickAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport) {
         super(context, multiItemTypeSupport);
     }
 
@@ -51,7 +51,7 @@ public abstract class RecyclerViewQuickAdapter<T> extends RecyclerViewBaseQuickA
      * @param multiItemTypeSupport
      * @param data
      */
-    protected RecyclerViewQuickAdapter(Context context, RecyclerViewMultiItemTypeSupport<T> multiItemTypeSupport, List<T> data) {
+    protected QuickAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport, List<T> data) {
         super(context, multiItemTypeSupport, data);
     }
 
