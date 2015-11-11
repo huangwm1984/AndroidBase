@@ -5,12 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends RecyclerView.Adapter<BaseAdapterHelper> implements View.OnClickListener {
+public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends RecyclerView.Adapter<BaseAdapterHelper> implements View.OnClickListener, View.OnLongClickListener {
 
     protected static final String TAG = BaseQuickAdapter.class.getSimpleName();
 
@@ -22,12 +23,19 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
 
     private OnItemClickListener mOnItemClickListener = null;
 
+    private OnItemLongClickListener mOnItemLongClickListener = null;
+
     protected MultiItemTypeSupport<T> mMultiItemTypeSupport;
 
 
     //define interface
     public static interface OnItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    //define interface
+    public static interface OnItemLongClickListener {
+        void onItemLongClick(View view, int position);
     }
 
     /**
@@ -94,6 +102,7 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
             view = LayoutInflater.from(viewGroup.getContext()).inflate(layoutResId, viewGroup, false);
         }
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         BaseAdapterHelper vh = new BaseAdapterHelper(view);
         return vh;
     }
@@ -122,6 +131,18 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.mOnItemClickListener = listener;
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (mOnItemLongClickListener != null) {
+            mOnItemLongClickListener.onItemLongClick(v, (int) v.getTag());
+        }
+        return true;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        this.mOnItemLongClickListener = listener;
     }
 
     public void add(T elem) {
