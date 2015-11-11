@@ -53,11 +53,13 @@
             android:name=".view.recyclerview.normal.NormalActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".view.recyclerview.multi.MultiItemActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".permission.PermissionActivity"
             android:screenOrientation="portrait" />
-
 
     </application>
 
