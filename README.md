@@ -6,7 +6,7 @@
 
 3.数据库框架：Ormlite
 
-4.图片异步加载类库：Android-Universal-Image-Loader
+4.图片异步加载类库：Glide
 
 5.快速绑定控件：Butterknife
 
