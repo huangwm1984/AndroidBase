@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission-sdk-m android:name="android.permission.READ_CONTACTS" />
+    <uses-permission-sdk-m android:name="android.permission.WRITE_CONTACTS" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -56,6 +60,11 @@
         <activity
             android:name=".view.recyclerview.multi.MultiItemActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.recyclerview.extra.HeaderOrFooterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/RecyclerViewTheme"/>
 
         <activity
             android:name=".permission.PermissionActivity"

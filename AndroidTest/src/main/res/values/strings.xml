@@ -20,7 +20,7 @@
     <string-array name="recyclerview_list">
         <item>Normal RecyclerView</item>
         <item>MultiItem RecyclerView</item>
-        <item>MultiThreadDownload</item>
+        <item>HeaderAndFooter RecyclerView</item>
         <item>Indicator</item>
         <item>BannerView</item>
         <item>PullToRefresh ListView LoadMore</item>

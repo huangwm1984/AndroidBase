@@ -4,6 +4,8 @@ import android.content.Intent;
 
 import com.android.test.R;
 import com.android.test.TestBaseActivity;
+import com.android.test.view.recyclerview.extra.HeaderOrFooterActivity;
+import com.android.test.view.recyclerview.extra.block.HeaderBlock;
 import com.android.test.view.recyclerview.multi.MultiItemActivity;
 import com.android.test.view.recyclerview.normal.NormalActivity;
 
@@ -45,6 +47,7 @@ public class RecyclerViewTabActivity extends TestBaseActivity {
                 gotoActivity(MultiItemActivity.class, false);
                 break;
             case 2:
+                gotoActivity(HeaderOrFooterActivity.class, false);
                 break;
             case 3:
 

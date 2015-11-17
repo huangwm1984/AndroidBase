@@ -13,9 +13,7 @@ import com.android.base.common.Log;
 import com.android.base.lifecyclelistener.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
-import com.android.base.uiblock.UIBlockManager;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.android.base.block.UIBlockManager;
 
 import java.lang.ref.WeakReference;
 
@@ -41,8 +39,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         }
         ButterKnife.bind(this);
         mApplicationContext = getApplicationContext();
-        mHandler = new MyHandler(this);
         NetworkStateReceiver.registerNetworkStateReceiver(this);
+        mHandler = new MyHandler(this);
+        mUIBlockManager = new UIBlockManager(this);
         onActivityCreated(this, savedInstanceState);
     }
 
@@ -77,21 +76,26 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     }
 
     @Override
-    protected void onDestroy() {
-        if (mHandler != null) {
-            mHandler.removeCallbacksAndMessages(null);
+    public void onBackPressed() {
+        if (!mUIBlockManager.onBackPressed()) {
+            super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mHandler != null) mHandler.removeCallbacksAndMessages(null);
         super.onDestroy();
         NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
         AppManager.getAppManager().finishActivity();
-        if(mUIBlockManager!= null) mUIBlockManager.onDestroy();
+        mUIBlockManager.onDestroy();
         onActivityDestroyed(this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(mUIBlockManager!= null) mUIBlockManager.onActivityResult(requestCode, resultCode, data);
+        mUIBlockManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private static class MyHandler extends Handler {
@@ -105,44 +109,13 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         @Override
         public void handleMessage(Message msg) {
             BaseActivity outer = mReference.get();
-            if (outer == null || outer.isFinishing()) {
+            if (outer == null && outer.isFinishing()) {
                 Log.e("outer is null");
                 return;
             }
 
             outer.handleMessage(msg);
         }
-    }
-
-    /**
-     * ImageLoader配置1
-     */
-    public DisplayImageOptions getDisplayImageOptions() {
-        return new DisplayImageOptions.Builder().cacheInMemory(true)//设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
-                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//设置图片以如何的编码方式显示
-                .bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true).build();
-
-    }
-
-    /**
-     * ImageLoader配置2
-     */
-    public DisplayImageOptions getDisplayImageOptions(int loadingDrawableId, int FailDrawableId) {
-        return new DisplayImageOptions.Builder().showImageOnLoading(loadingDrawableId).showImageForEmptyUri(FailDrawableId).showImageOnFail(FailDrawableId).cacheInMemory(true)//设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
-                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//设置图片以如何的编码方式显示
-                .bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true).build();
-    }
-
-    /**
-     * ImageLoader配置3
-     */
-    public DisplayImageOptions getDisplayImageOptions(int FailDrawableId) {
-        return new DisplayImageOptions.Builder().showImageForEmptyUri(FailDrawableId).showImageOnFail(FailDrawableId).cacheInMemory(true)//设置下载的图片是否缓存在内存中
-                .cacheOnDisk(true)//设置下载的图片是否缓存在SD卡中
-                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//设置图片以如何的编码方式显示
-                .bitmapConfig(Bitmap.Config.RGB_565).considerExifParams(true).build();
     }
 
 
@@ -158,10 +131,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     public void gotoActivity(Class<? extends Activity> clazz, boolean finish, Bundle bundle) {
 
         Intent intent = new Intent(this, clazz);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-
+        if (bundle != null) intent.putExtras(bundle);
         startActivity(intent);
         if (finish) {
             finish();
@@ -172,9 +142,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     public void gotoActivity(Class<? extends Activity> clazz, int flags, boolean finish, Bundle bundle) {
 
         Intent intent = new Intent(this, clazz);
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
+        if (bundle != null) intent.putExtras(bundle);
 
         intent.addFlags(flags);
 
@@ -184,15 +152,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         }
     }
 
-    /**
-     * 获取UI解耦块管理
-     * @return
-     */
     public UIBlockManager getUIBlockManager() {
-        mUIBlockManager = new UIBlockManager(this);
+        if(mUIBlockManager == null) mUIBlockManager = new UIBlockManager(this);
         return mUIBlockManager;
     }
-
 
     public void onConnect(NetWorkUtil.netType type) {
     }

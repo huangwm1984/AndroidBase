@@ -25,7 +25,7 @@ public class NormalAdapter extends RecyclerView.Adapter<NormalAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sample_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sample, parent, false);
         return new ViewHolder(view);
     }
 

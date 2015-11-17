@@ -98,7 +98,7 @@ public class OkHttpClientManager
     }
 
 
-    public void execute(Request request, ResultCallback callback)
+    public void execute(final Request request, ResultCallback callback)
     {
         if (callback == null) callback = ResultCallback.DEFAULT_RESULT_CALLBACK;
         final ResultCallback resCallBack = callback;
@@ -115,6 +115,20 @@ public class OkHttpClientManager
             @Override
             public void onResponse(final Response response)
             {
+
+                if (response.code() >= 400 && response.code() <= 599)
+                {
+                    try
+                    {
+                        sendFailResultCallback(request, new RuntimeException(response.body().string()), resCallBack);
+                    } catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+
+
                 try
                 {
                     final String string = response.body().string();

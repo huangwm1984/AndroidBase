@@ -1,4 +1,4 @@
-package com.android.test.view.recyclerview.multi;
+package com.android.test.view.recyclerview.multi.entity;
 
 /**
  * Created by Administrator on 2015/11/10 0010.

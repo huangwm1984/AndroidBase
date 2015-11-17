@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by HanHailong on 15/9/6.
  */
-public abstract class QuickAdapter<T> extends BaseQuickAdapter<T, BaseAdapterHelper> {
+public abstract class QuickRcvAdapter<T> extends BaseRcvQuickAdapter<T, BaseRcvAdapterHelper> {
 
     /**
      * Create a QuickAdapter.
@@ -17,7 +17,7 @@ public abstract class QuickAdapter<T> extends BaseQuickAdapter<T, BaseAdapterHel
      * @param context     The context.
      * @param layoutResId The layout resource id of each item.
      */
-    public QuickAdapter(Context context, @LayoutRes int layoutResId) {
+    public QuickRcvAdapter(Context context, @LayoutRes int layoutResId) {
         super(context, layoutResId);
     }
 
@@ -29,7 +29,7 @@ public abstract class QuickAdapter<T> extends BaseQuickAdapter<T, BaseAdapterHel
      * @param layoutResId The layout resource id of each item.
      * @param data        A new list is created out of this one to avoid mutable list
      */
-    public QuickAdapter(Context context, @LayoutRes int layoutResId, List<T> data) {
+    public QuickRcvAdapter(Context context, @LayoutRes int layoutResId, List<T> data) {
         super(context, layoutResId, data);
     }
 
@@ -39,7 +39,7 @@ public abstract class QuickAdapter<T> extends BaseQuickAdapter<T, BaseAdapterHel
      * @param context              The context
      * @param multiItemTypeSupport multiitemtypesupport
      */
-    protected QuickAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport) {
+    protected QuickRcvAdapter(Context context, MultiItemRcvTypeSupport<T> multiItemTypeSupport) {
         super(context, multiItemTypeSupport);
     }
 
@@ -51,7 +51,7 @@ public abstract class QuickAdapter<T> extends BaseQuickAdapter<T, BaseAdapterHel
      * @param multiItemTypeSupport
      * @param data
      */
-    protected QuickAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport, List<T> data) {
+    protected QuickRcvAdapter(Context context, MultiItemRcvTypeSupport<T> multiItemTypeSupport, List<T> data) {
         super(context, multiItemTypeSupport, data);
     }
 

@@ -30,9 +30,6 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.*;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 /**
  * Allows an abstraction of the ViewHolder pattern.<br>
  * <br>
@@ -270,12 +267,12 @@ public class BaseAdapterHelper
 	 *            The image URL.
 	 * @return The BaseAdapterHelper for chaining.
 	 */
-	public BaseAdapterHelper setImageUrl(int viewId, String imageUrl, DisplayImageOptions options)
+	/*public BaseAdapterHelper setImageUrl(int viewId, String imageUrl, DisplayImageOptions options)
 	{
 		ImageView view = retrieveView(viewId);
 		ImageLoader.getInstance().displayImage(imageUrl, view, options);
 		return this;
-	}
+	}*/
 
 	/**
 	 * Add an action to set the image of an image view. Can be called multiple

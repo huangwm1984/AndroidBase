@@ -30,7 +30,6 @@ public class BaseApplication extends Application {
         super.onCreate();
         initLeakCanary();
         initLogUtils();
-        initOkHttp();
         registerNetWorkStateListener();// 注册网络状态监测器
     }
 
@@ -58,15 +57,6 @@ public class BaseApplication extends Application {
         // 配置日志前缀
         LogUtils.configTagPrefix = "Huangwm-";
     }
-
-
-    /**
-     *
-     */
-    private void initOkHttp() {
-        OkHttpClientManager.getInstance();
-    }
-
 
     private void registerNetWorkStateListener() {
         mNetChangeObserver = new NetChangeObserver() {

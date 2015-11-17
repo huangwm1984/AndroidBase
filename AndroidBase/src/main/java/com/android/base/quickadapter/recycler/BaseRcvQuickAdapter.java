@@ -5,15 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+
+import com.android.base.common.Log;
+import com.apkfuns.logutils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends RecyclerView.Adapter<BaseAdapterHelper> implements View.OnClickListener, View.OnLongClickListener {
+public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> extends RecyclerView.Adapter<BaseRcvAdapterHelper> implements View.OnClickListener, View.OnLongClickListener {
 
-    protected static final String TAG = BaseQuickAdapter.class.getSimpleName();
+    protected static final String TAG = BaseRcvQuickAdapter.class.getSimpleName();
 
     protected final Context context;
 
@@ -25,7 +27,7 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
 
     private OnItemLongClickListener mOnItemLongClickListener = null;
 
-    protected MultiItemTypeSupport<T> mMultiItemTypeSupport;
+    protected MultiItemRcvTypeSupport<T> mMultiItemTypeSupport;
 
 
     //define interface
@@ -44,7 +46,7 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
      * @param context     The context.
      * @param layoutResId The layout resource id of each item.
      */
-    protected BaseQuickAdapter(Context context, int layoutResId) {
+    protected BaseRcvQuickAdapter(Context context, int layoutResId) {
         this(context, layoutResId, null);
     }
 
@@ -56,17 +58,17 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
      * @param layoutResId The layout resource id of each item.
      * @param data        A new list is created out of this one to avoid mutable list
      */
-    protected BaseQuickAdapter(Context context, int layoutResId, List<T> data) {
+    protected BaseRcvQuickAdapter(Context context, int layoutResId, List<T> data) {
         this.data = data == null ? new ArrayList<T>() : data;
         this.context = context;
         this.layoutResId = layoutResId;
     }
 
-    protected BaseQuickAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport) {
+    protected BaseRcvQuickAdapter(Context context, MultiItemRcvTypeSupport<T> multiItemTypeSupport) {
         this(context, multiItemTypeSupport, null);
     }
 
-    protected BaseQuickAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport, List<T> data) {
+    protected BaseRcvQuickAdapter(Context context, MultiItemRcvTypeSupport<T> multiItemTypeSupport, List<T> data) {
         this.context = context;
         this.data = data == null ? new ArrayList<T>() : new ArrayList<T>(data);
         this.mMultiItemTypeSupport = multiItemTypeSupport;
@@ -93,7 +95,7 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
     }
 
     @Override
-    public BaseAdapterHelper onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public BaseRcvAdapterHelper onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = null;
         if (mMultiItemTypeSupport != null) {
             int layoutId = mMultiItemTypeSupport.getLayoutId(viewType);
@@ -103,12 +105,12 @@ public abstract class BaseQuickAdapter<T, H extends BaseAdapterHelper> extends R
         }
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
-        BaseAdapterHelper vh = new BaseAdapterHelper(view);
+        BaseRcvAdapterHelper vh = new BaseRcvAdapterHelper(view);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(BaseAdapterHelper helper, int position) {
+    public void onBindViewHolder(BaseRcvAdapterHelper helper, int position) {
         helper.itemView.setTag(position);
         T item = getItem(position);
         convert((H) helper, item);

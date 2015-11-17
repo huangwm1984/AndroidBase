@@ -3,6 +3,7 @@ package com.android.test.http;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,10 +37,16 @@ public class TestHttpActivity extends BaseActivity {
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        setToolBar();
         TestHttpReq.request1(mHandler);
         TestHttpReq.request2(mHandler);
         TestHttpReq.request3(mHandler);
         TestHttpReq.request4(mHandler);
+    }
+
+    private void setToolBar() {
+        getSupportActionBar().setTitle("OKhttp封装测试");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -119,5 +126,13 @@ public class TestHttpActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

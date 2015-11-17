@@ -32,12 +32,18 @@ public class NormalActivity extends BaseActivity {
 
     @Override
     protected int getMainContentViewId() {
-        return R.layout.act_normal_recyclerview;
+        return R.layout.act_normal_rcv;
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        setToolBar();
         initRecyclerView();
+    }
+
+    private void setToolBar() {
+        getSupportActionBar().setTitle("单类型的Item");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initRecyclerView() {
@@ -117,6 +123,9 @@ public class NormalActivity extends BaseActivity {
             case R.id.action_staggeredgridlayout:
                 StaggeredGridLayoutManager mStaggeredGridLayout = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                 mRecyclerView.setLayoutManager(mStaggeredGridLayout);
+                return true;
+            case android.R.id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

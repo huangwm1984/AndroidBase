@@ -1,4 +1,4 @@
-package com.android.base.uiblock;
+package com.android.base.block;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,13 +18,14 @@ public abstract class UIBlock {
 
     protected String TAG = getClass().getSimpleName();
 
-    private View mRootView;
+    public View mRootView;
 
-    private Activity mActivity;
+    public Activity mActivity;
 
     protected void attachActivity(Activity activity) {
         mActivity = activity;
-        mRootView = mActivity.findViewById(getRootViewId());
+        //mRootView = mActivity.findViewById(getRootViewId());
+        mRootView = getRootView();
 
         //bindViews();
         //beforeSetViews();
@@ -37,7 +38,7 @@ public abstract class UIBlock {
      * 获取块的主布局
      * @return fragment的根view
      */
-    public abstract @IdRes int getRootViewId();
+    public abstract View getRootView();
 
     /**
      * 找到所有的views
@@ -58,11 +59,6 @@ public abstract class UIBlock {
      * view创建完成之后逻辑写在这里
      */
     protected abstract void onViewCreated();
-
-
-    public View getRootView() {
-        return mRootView;
-    }
 
     protected Activity getActivity() {
         return mActivity;

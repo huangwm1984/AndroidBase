@@ -3,19 +3,25 @@ package com.android.test.view.recyclerview.multi;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.android.base.BaseActivity;
 import com.android.base.common.assist.Toastor;
-import com.android.base.quickadapter.recycler.BaseAdapterHelper;
-import com.android.base.quickadapter.recycler.MultiItemTypeSupport;
-import com.android.base.quickadapter.recycler.QuickAdapter;
+import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
+import com.android.base.quickadapter.recycler.BaseRcvQuickAdapter;
+import com.android.base.quickadapter.recycler.MultiItemRcvTypeSupport;
+import com.android.base.quickadapter.recycler.QuickRcvAdapter;
 import com.android.test.MyApplication;
 import com.android.test.R;
+import com.android.test.view.recyclerview.multi.entity.News;
+import com.bumptech.glide.Glide;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -27,22 +33,22 @@ import butterknife.Bind;
 /**
  * Created by Administrator on 2015/11/4 0004.
  */
-public class MultiItemActivity extends BaseActivity {
+public class MultiItemActivity extends BaseActivity implements BaseRcvQuickAdapter.OnItemClickListener, BaseRcvQuickAdapter.OnItemLongClickListener {
     @Bind(R.id.main_recyclerview)
     RecyclerView mRecyclerView;
 
-    private QuickAdapter<News> mQuickAdapter;
+    private QuickRcvAdapter<News> mQuickAdapter;
     private List<News> mData;
 
     @Override
     protected int getMainContentViewId() {
-        return R.layout.act_normal_recyclerview;
+        return R.layout.act_normal_rcv;
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        initData();
         setToolBar();
+        initData();
         initRecyclerView();
         initAdapter();
     }
@@ -86,7 +92,7 @@ public class MultiItemActivity extends BaseActivity {
     }
 
     private void initAdapter() {
-        MultiItemTypeSupport<News> multiItemTypeSupport = new MultiItemTypeSupport<News>() {
+        MultiItemRcvTypeSupport<News> mMultiItemRcvTypeSupport = new MultiItemRcvTypeSupport<News>() {
             @Override
             public int getLayoutId(int viewType) {
                 if (viewType == News.ITEM_TYPE_TEXT) {
@@ -106,9 +112,9 @@ public class MultiItemActivity extends BaseActivity {
             }
         };
 
-        mQuickAdapter = new QuickAdapter<News>(this, multiItemTypeSupport) {
+        mQuickAdapter = new QuickRcvAdapter<News>(this, mMultiItemRcvTypeSupport) {
             @Override
-            protected void convert(final BaseAdapterHelper helper, News item) {
+            protected void convert(final BaseRcvAdapterHelper helper, News item) {
                 switch (helper.getItemViewType()) {
                     case News.ITEM_TYPE_TEXT:
                         helper.setText(R.id.tv_text, item.getText());
@@ -120,12 +126,20 @@ public class MultiItemActivity extends BaseActivity {
                             public void onClick(View v) {
                                 //Toast.makeText(MultiItemActivity.this, "你点击了按钮" + helper.getAdapterPosition(), Toast.LENGTH_SHORT).show();
 
-                                Toastor.showSingleLongToast(mApplicationContext, "你点击了按钮" + helper.getAdapterPosition());
+                                Toastor.showSingletonToast(mApplicationContext, "你点击了按钮" + helper.getAdapterPosition());
                             }
                         });
                         break;
                     case News.ITEM_TYPE_IMAGE:
-                        helper.setImageUrl(R.id.iv_image, item.getImage(), MyApplication.getInstance().getDisplayImageOptions());
+                        //helper.setImageUrl(R.id.iv_image, item.getImage(), MyApplication.getInstance().getDisplayImageOptions());
+                        ImageView imageView = helper.getView(R.id.iv_image);
+                        Glide.with(MultiItemActivity.this)
+                                .load(item.getImage())
+                                .centerCrop()
+                                //.placeholder(R.drawable.loading_spinner)
+                                .crossFade().into(imageView);
+                        //SimpleDraweeView imageView = helper.getSimpleDraweeView(R.id.iv_image);
+                        //imageView.setImageURI(Uri.parse(item.getImage()));
                         break;
                 }
             }
@@ -133,6 +147,8 @@ public class MultiItemActivity extends BaseActivity {
 
         mRecyclerView.setAdapter(mQuickAdapter);
         mQuickAdapter.addAll(mData);
+        mQuickAdapter.setOnItemClickListener(this);
+        mQuickAdapter.setOnItemLongClickListener(this);
     }
 
     @Override
@@ -163,5 +179,24 @@ public class MultiItemActivity extends BaseActivity {
     @Override
     public void onActivityDestroyed(Activity activity) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toastor.showSingletonToast(mApplicationContext, "onItemClick" + position);
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+        Toastor.showSingletonToast(mApplicationContext, "onItemLongClick" + position);
     }
 }

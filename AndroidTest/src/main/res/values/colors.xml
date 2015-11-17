@@ -4,9 +4,18 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="gray">#999999</color>
+    <color name="dark">#000000</color>
     <color name="white">#FFFFFF</color>
 
     <color name="material_blue_500">#009688</color>
     <color name="material_blue_700">#00796B</color>
     <color name="material_green_A200">#FD87A9</color>
+
+    <color name="color_primary_red">#f44336</color>
+    <color name="color_primary_red_dark">#d32f2f</color>
+    <color name="color_primary_green"> #4caf50</color>
+    <color name="color_primary_green_dark">#388e3c</color>
+
+
 </resources>
