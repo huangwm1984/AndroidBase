@@ -9,8 +9,6 @@ import com.android.base.netstate.NetChangeObserver;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
 import com.apkfuns.logutils.LogUtils;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 
 /**
@@ -22,32 +20,11 @@ public class BaseApplication extends Application {
 
     private NetChangeObserver mNetChangeObserver;
 
-    private RefWatcher refWatcher;
-
-
     @Override
     public void onCreate() {
         super.onCreate();
-        initLeakCanary();
         initLogUtils();
         registerNetWorkStateListener();// 注册网络状态监测器
-    }
-
-    private void initLeakCanary() {
-        refWatcher = installLeakCanary(false);
-    }
-
-    protected RefWatcher installLeakCanary(boolean isRelease) {
-        if (isRelease) {
-            return RefWatcher.DISABLED;
-        } else {
-            return LeakCanary.install(this);
-        }
-    }
-
-    public static RefWatcher getRefWatcher(Context context) {
-        BaseApplication application = (BaseApplication) context.getApplicationContext();
-        return application.refWatcher;
     }
 
     private void initLogUtils() {

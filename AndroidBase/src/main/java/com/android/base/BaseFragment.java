@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.base.lifecyclelistener.FragmentLifecycleCallbacks;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
@@ -100,8 +100,8 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
-        refWatcher.watch(this);
+        //RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        //refWatcher.watch(this);
         onFragmentDestroyed(this);
     }
 

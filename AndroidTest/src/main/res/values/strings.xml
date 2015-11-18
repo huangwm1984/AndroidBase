@@ -8,28 +8,30 @@
         <item>MultiThreadDownload</item>
         <item>RecyclerView</item>
         <item>Android 6.0 Permissions</item>
-        <item>PullToRefresh ListView LoadMore</item>
+        <item>Leakcanary Test</item>
+        <item>主流布局7</item>
         <item>主流布局8</item>
         <item>主流布局9</item>
         <item>主流布局10</item>
         <item>主流布局11</item>
         <item>主流布局12</item>
-        <item>主流布局13</item>
+        <item>未完待续...</item>
     </string-array>
 
     <string-array name="recyclerview_list">
         <item>Normal RecyclerView</item>
         <item>MultiItem RecyclerView</item>
         <item>HeaderAndFooter RecyclerView</item>
-        <item>Indicator</item>
-        <item>BannerView</item>
-        <item>PullToRefresh ListView LoadMore</item>
+        <item>主流布局4</item>
+        <item>主流布局5</item>
+        <item>主流布局6</item>
+        <item>主流布局7</item>
         <item>主流布局8</item>
         <item>主流布局9</item>
         <item>主流布局10</item>
         <item>主流布局11</item>
         <item>主流布局12</item>
-        <item>主流布局13</item>
+        <item>未完待续...</item>
     </string-array>
 
     <string name="open">打开</string>
@@ -45,4 +47,10 @@
     <string name="menu_linearlayout_horizontal">LinearLayoutManager_horizontal</string>
     <string name="menu_gridlayout">GridLayoutManager</string>
     <string name="menu_staggeredgridlayout">StaggeredGridLayoutManager</string>
+
+    <string name="start_async_task">Start new AsyncTask</string>
+    <string name="helper_text">Start the async task, <b>rotate the screen</b> and wait for a bit. A
+      wild notification appears.
+    </string>
+
 </resources>

@@ -2,8 +2,10 @@ package com.android.test;
 
 import android.content.Intent;
 
+import com.android.base.common.assist.Toastor;
 import com.android.test.download.DownLoadActivity;
 import com.android.test.http.TestHttpActivity;
+import com.android.test.leakcanary.LeakcanaryActivity;
 import com.android.test.permission.PermissionActivity;
 import com.android.test.view.tabhost.FragmentTabHostActivity;
 import com.android.test.view.recyclerview.RecyclerViewTabActivity;
@@ -52,7 +54,7 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(PermissionActivity.class, false);
                 break;
             case 5:
-
+                gotoActivity(LeakcanaryActivity.class, false);
                 break;
             case 6:
 

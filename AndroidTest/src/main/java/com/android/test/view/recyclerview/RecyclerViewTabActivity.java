@@ -2,6 +2,7 @@ package com.android.test.view.recyclerview;
 
 import android.content.Intent;
 
+import com.android.base.common.assist.Toastor;
 import com.android.test.R;
 import com.android.test.TestBaseActivity;
 import com.android.test.view.recyclerview.extra.HeaderOrFooterActivity;
