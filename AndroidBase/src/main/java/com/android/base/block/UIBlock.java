@@ -75,6 +75,10 @@ public abstract class UIBlock {
         return false;
     }
 
+    protected void onResume(){}
+
+    protected void onPause(){}
+
     protected void onDestroy() {
         mActivity = null;
         mRootView = null;

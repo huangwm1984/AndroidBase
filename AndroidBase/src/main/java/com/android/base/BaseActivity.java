@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
+import com.android.base.block.CommonBlockManager;
 import com.android.base.common.Log;
 import com.android.base.lifecyclelistener.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
@@ -30,6 +31,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     public UIBlockManager mUIBlockManager;
 
+    public CommonBlockManager mCommonBlockManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         NetworkStateReceiver.registerNetworkStateReceiver(this);
         mHandler = new MyHandler(this);
         mUIBlockManager = new UIBlockManager(this);
+        mCommonBlockManager = new CommonBlockManager(this);
         onActivityCreated(this, savedInstanceState);
     }
 
@@ -55,12 +59,16 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     protected void onResume() {
         super.onResume();
         onActivityResumed(this);
+        mUIBlockManager.onResume();
+        mCommonBlockManager.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         onActivityPaused(this);
+        mUIBlockManager.onPause();
+        mCommonBlockManager.onPause();
     }
 
     @Override
@@ -77,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     @Override
     public void onBackPressed() {
-        if (!mUIBlockManager.onBackPressed()) {
+        if (!mUIBlockManager.onBackPressed() || !mCommonBlockManager.onBackPressed()) {
             super.onBackPressed();
         }
     }
@@ -89,6 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
         AppManager.getAppManager().finishActivity();
         mUIBlockManager.onDestroy();
+        mCommonBlockManager.onDestroy();
         onActivityDestroyed(this);
     }
 
@@ -96,6 +105,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mUIBlockManager.onActivityResult(requestCode, resultCode, data);
+        mCommonBlockManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private static class MyHandler extends Handler {
@@ -155,6 +165,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     public UIBlockManager getUIBlockManager() {
         if(mUIBlockManager == null) mUIBlockManager = new UIBlockManager(this);
         return mUIBlockManager;
+    }
+
+    public CommonBlockManager getCommonBlockManager() {
+        if(mCommonBlockManager == null) mCommonBlockManager = new CommonBlockManager(this);
+        return mCommonBlockManager;
     }
 
     public void onConnect(NetWorkUtil.netType type) {

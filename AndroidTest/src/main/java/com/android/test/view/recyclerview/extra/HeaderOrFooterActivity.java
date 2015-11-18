@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -18,34 +19,34 @@ import com.android.base.BaseActivity;
 import com.android.base.LoadingAndRetryManager;
 import com.android.base.OnLoadingAndRetryListener;
 import com.android.base.common.assist.Toastor;
-import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
-import com.android.base.quickadapter.recycler.ExBaseRcvQuickAdapter;
-import com.android.base.widget.DynamicHeightImageView;
 import com.android.base.widget.recycler.ExRecyclerView;
 import com.android.base.widget.recycler.OnRecyclerViewScrollListener;
 import com.android.base.widget.recycler.decoration.DividerGridItemDecoration;
 import com.android.base.widget.recycler.layoutmanager.ExStaggeredGridLayoutManager;
 import com.android.test.AppConfig;
-import com.android.test.MainActivity;
 import com.android.test.R;
+import com.android.test.view.recyclerview.extra.adapter.CartoonAdapter;
+import com.android.test.view.recyclerview.extra.block.FooterBlock;
 import com.android.test.view.recyclerview.extra.block.HeaderBlock;
+import com.android.test.view.recyclerview.extra.data.CartoonDataManager;
 import com.android.test.view.recyclerview.extra.entity.TestDataBean;
 import com.android.test.view.recyclerview.extra.entity.TestDataBean.DataEntity.ObjectListEntity;
-import com.android.test.view.recyclerview.extra.http.HttpReq;
+import com.android.test.view.recyclerview.extra.impl.ResponseCallback;
+import com.android.test.view.recyclerview.extra.net.HttpReq;
 import com.apkfuns.logutils.LogUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.MemoryCategory;
+import com.squareup.okhttp.Request;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2015/11/12 0012.
  */
-public class HeaderOrFooterActivity extends BaseActivity {
+public class HeaderOrFooterActivity extends BaseActivity implements ResponseCallback {
 
     @Bind(R.id.content)
     View mContentView;
@@ -55,16 +56,18 @@ public class HeaderOrFooterActivity extends BaseActivity {
     ImageView mFloatIv;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private Button mFooterBtn;
-    private ExBaseRcvQuickAdapter mQuickRcvAdapter;
     private float mHeaderHeight;
     /** 是否加载数据标志 **/
     private boolean isLoadingData = false;
-    /** 下一页的起始数 */
-    private int mNextStart;
 
     HeaderBlock mHeaderBlock;
+    FooterBlock mFooterBlock;
+    CartoonAdapter mCartoonAdapter;
+    CartoonDataManager mDataManager;
+
     LoadingAndRetryManager mLoadingAndRetryManager;
 
     @Override
@@ -75,12 +78,11 @@ public class HeaderOrFooterActivity extends BaseActivity {
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         setLoadingAndRetry();
-        Glide.get(this).setMemoryCategory(MemoryCategory.LOW);
-        getUIBlockManager().add(new HeaderBlock());
+        setBlock();
+        setSwipeRefreshLayout();
         setWaterFallRcv();
         setHeaderView();
-        setFooterView();
-        HttpReq.loadNewData(mHandler);
+        mDataManager.loadNewData(this);
     }
 
     private void setLoadingAndRetry() {
@@ -94,14 +96,47 @@ public class HeaderOrFooterActivity extends BaseActivity {
         mLoadingAndRetryManager.showLoading();
     }
 
-    private void setWaterFallRcv() {
+    @OnClick(R.id.float_imageButton) void onClickFloatIv(){
+        mWaterFallRcv.smoothScrollToPosition(0);
+    }
+
+    private void setBlock() {
+        getUIBlockManager().add(new HeaderBlock()).add(new FooterBlock());
+        getCommonBlockManager().add(new CartoonAdapter()).add(new CartoonDataManager());
 
         mHeaderBlock = getUIBlockManager().get(HeaderBlock.class);
-        mFooterBtn = new Button(this);
+        mFooterBlock = getUIBlockManager().get(FooterBlock.class);
+
+        mCartoonAdapter = getCommonBlockManager().get(CartoonAdapter.class);
+        mDataManager = getCommonBlockManager().get(CartoonDataManager.class);;
+
+    }
+
+    /**
+     * 设置下拉刷新控件，下拉后加载新的数据
+     */
+    private void setSwipeRefreshLayout() {
+        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
+        // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!isLoadingData) {
+                    //Log.d(TAG, "加载新的数据");
+                    mDataManager.loadNewData(HeaderOrFooterActivity.this);
+                    isLoadingData = true;
+                }
+            }
+        });
+    }
+
+    private void setWaterFallRcv() {
 
         // 设置头部或底部的操作应该在setAdapter之前
         mWaterFallRcv.addHeaderView(mHeaderBlock.mHeaderLl);
-        mWaterFallRcv.addFooterView(mFooterBtn);
+        mWaterFallRcv.addFooterView(mFooterBlock.mFooterLl);
 
         ExStaggeredGridLayoutManager staggeredGridLayoutManager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
@@ -113,13 +148,27 @@ public class HeaderOrFooterActivity extends BaseActivity {
         //mWaterFallRcv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//可替换
 
         List<ObjectListEntity> mData = new ArrayList<>();// 先放一个空的list
-        setWaterFallAdapter(mData);
+        mCartoonAdapter.setAdapter(mData);
 
 
         // 不显示滚动到顶部/底部的阴影（减少绘制）
         mWaterFallRcv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         //waterFallRcv.setClipToPadding(true);
-        mWaterFallRcv.setAdapter(mQuickRcvAdapter);
+
+        mWaterFallRcv.setAdapter(mCartoonAdapter.mQuickRcvAdapter);
+
+        //Solve IndexOutOfBoundsException exception
+        //解决上下拉刷新时还可以进行滑动的问题
+        mWaterFallRcv.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (isLoadingData) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+        });
 
         /**
          * 监听滚动事件
@@ -145,8 +194,8 @@ public class HeaderOrFooterActivity extends BaseActivity {
                 // 到底部自动加载
                 if (!isLoadingData) {
                     isLoadingData = true;
-                    HttpReq.loadOldData(mHandler, mNextStart);
-                    mFooterBtn.setVisibility(View.VISIBLE);
+                    mDataManager.loadOldData(HeaderOrFooterActivity.this);
+                    mFooterBlock.mFooterLl.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -158,37 +207,6 @@ public class HeaderOrFooterActivity extends BaseActivity {
         });
     }
 
-    private void setWaterFallAdapter(List<ObjectListEntity> data) {
-
-        mQuickRcvAdapter = new ExBaseRcvQuickAdapter<ObjectListEntity>(this, R.layout.item_waterfall, data) {
-
-            @Override
-            protected void convert(BaseRcvAdapterHelper helper, ObjectListEntity item) {
-                //helper.setImageUrl(R.id.wf_item_content_imageView, item.getPhoto().getPath(), MyApplication.getInstance().getDisplayImageOptions(R.drawable.default_head_pic, R.drawable.default_head_pic));
-                float picRatio = (float) item.getPhoto().getHeight() / item.getPhoto().getWidth();
-                //helper.setHeightRatio(R.id.wf_item_content_imageView, item.getPhoto().getHeight(), picRatio);
-                //helper.setImageUrl(HeaderOrFooterActivity.this, R.id.wf_item_content_imageView, item.getPhoto().getPath());
-                //DynamicHeightSimpleDraweeView imageView = (DynamicHeightSimpleDraweeView) helper.getView(R.id.wf_item_content_DraweeView);
-                //imageView.setImageURI(Uri.parse(item.getPhoto().getPath()));
-                DynamicHeightImageView contentImageView = helper.getView(R.id.wf_item_content_DraweeView);
-                Glide.with(HeaderOrFooterActivity.this)
-                        .load(item.getPhoto().getPath())
-                        .crossFade()
-                        //.placeholder(R.drawable.default_head_pic)
-                        .into(contentImageView);
-                contentImageView.setHeightRatio(picRatio);
-                ImageView userImageView = helper.getView(R.id.wf_item_user_head_draweeView);
-                helper.setText(R.id.wf_item_description_textView, item.getMsg());
-                Glide.with(HeaderOrFooterActivity.this)
-                        .load("http://wenwen.soso.com/p/20100203/20100203005516-1158326774.jpg")
-                        .crossFade()
-                        .bitmapTransform(new CropCircleTransformation(HeaderOrFooterActivity.this))
-                        .into(userImageView);
-                //helper.setImageUrl(R.id.wf_item_user_head_imageView, "http://wenwen.soso.com/p/20100203/20100203005516-1158326774.jpg", MyApplication.getInstance().getDisplayImageOptions());
-                helper.setText(R.id.wf_item_positon_textView, "No." + helper.getLayoutPosition());
-            }
-        };
-    }
 
     /**
      * 设置头部的view
@@ -201,13 +219,6 @@ public class HeaderOrFooterActivity extends BaseActivity {
                 mWaterFallRcv.scrollToPosition(10);
             }
         });
-        /*mHeaderBlock.mHeaderIv.post(new Runnable() {
-            @Override
-            public void run() {
-                mHeaderHeight = mHeaderBlock.mHeaderIv.getHeight();
-                LogUtils.d("headerHeight" + mHeaderHeight);
-            }
-        });*/
 
         ViewTreeObserver vto = mHeaderBlock.mHeaderIv.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -215,7 +226,7 @@ public class HeaderOrFooterActivity extends BaseActivity {
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     mHeaderBlock.mHeaderIv.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }else{
+                } else {
                     mHeaderBlock.mHeaderIv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 }
                 mHeaderHeight = mHeaderBlock.mHeaderIv.getHeight();
@@ -223,14 +234,6 @@ public class HeaderOrFooterActivity extends BaseActivity {
             }
         });
 
-    }
-
-    /**
-     * 设置底部的view
-     */
-    private void setFooterView() {
-        mFooterBtn.setText("正在加载...");
-        mFooterBtn.getBackground().setAlpha(80);
     }
 
     /**
@@ -288,29 +291,7 @@ public class HeaderOrFooterActivity extends BaseActivity {
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        //Glide.get(this).clearMemory();
-        //Glide.get(this).trimMemory(ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW);
-    }
-
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what) {
-            case AppConfig.REQUEST_GET_FAIL_FOR_BEAN://失败
-                mLoadingAndRetryManager.showEmpty();
-                break;
-            case AppConfig.REQUEST_GET_SUCCESS_FOR_BEAN://成功
-                TestDataBean mData = (TestDataBean) msg.obj;
-                mNextStart = mData.getData().getNext_start();
-                if(mQuickRcvAdapter!=null) {
-                    mQuickRcvAdapter.addAll(mData.getData().getObject_list());
-                    mLoadingAndRetryManager.showContent();
-                    isLoadingData = false;
-                }
-                break;
-            default:
-                break;
-        }
+        Glide.get(activity).clearMemory();
     }
 
     public void setRetryEvent(View retryView)
@@ -323,5 +304,27 @@ public class HeaderOrFooterActivity extends BaseActivity {
                 //loadData();
             }
         });
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+        isLoadingData = false;
+        mFooterBlock.mFooterLl.setVisibility(View.GONE);
+        mCartoonAdapter.mQuickRcvAdapter.update(mDataManager.getData());
+        mLoadingAndRetryManager.showContent();
+    }
+
+    @Override
+    public void onError(Request request, Exception e) {
+        mFooterBlock.mFooterLl.setVisibility(View.GONE);
+        int itemCount = mCartoonAdapter.mQuickRcvAdapter.getItemCount();
+        if(itemCount - 2 <= 0){
+            mLoadingAndRetryManager.showEmpty();
+        }else{
+            mLoadingAndRetryManager.showContent();
+        }
     }
 }

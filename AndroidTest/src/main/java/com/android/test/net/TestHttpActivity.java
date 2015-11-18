@@ -1,10 +1,9 @@
-package com.android.test.http;
+package com.android.test.net;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.base.BaseActivity;
@@ -12,7 +11,6 @@ import com.android.base.common.assist.Toastor;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.test.AppConfig;
 import com.android.test.R;
-import com.apkfuns.logutils.LogUtils;
 
 import butterknife.Bind;
 

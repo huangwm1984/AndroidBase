@@ -21,7 +21,7 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
 
     protected int layoutResId;
 
-    protected final List<T> data;
+    protected List<T> data;
 
     private OnItemClickListener mOnItemClickListener = null;
 
@@ -154,6 +154,11 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
 
     public void addAll(List<T> elem) {
         data.addAll(elem);
+        notifyDataSetChanged();
+    }
+
+    public void update(List<T> elem) {
+        data = elem;
         notifyDataSetChanged();
     }
 

@@ -1,8 +1,5 @@
 package com.android.test.view.recyclerview.extra.block;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +24,7 @@ public class HeaderBlock extends UIBlock {
 
     @Override
     public View getRootView() {
-        return LayoutInflater.from(mActivity).inflate(R.layout.header_waterfall, null);
+        return LayoutInflater.from(mActivity).inflate(R.layout.item_waterfall_header, null);
     }
 
     @Override

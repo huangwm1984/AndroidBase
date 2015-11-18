@@ -9,21 +9,28 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
-    <com.android.base.widget.recycler.ExRecyclerView
-        android:id="@+id/waterFall_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"/>
+       <android.support.v4.widget.SwipeRefreshLayout
+           android:id="@+id/swipeRefreshLayout"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+            <com.android.base.widget.recycler.ExRecyclerView
+                android:id="@+id/waterFall_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar"/>
+
+       </android.support.v4.widget.SwipeRefreshLayout>
 
 
-    <ImageView
-        android:id="@+id/float_imageButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/go_top_icon"
-        android:layout_gravity="right|bottom"/>
+        <ImageView
+            android:id="@+id/float_imageButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/go_top_icon"
+            android:layout_gravity="right|bottom"/>
 
    </FrameLayout>
 

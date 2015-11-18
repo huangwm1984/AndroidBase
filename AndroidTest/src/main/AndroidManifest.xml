@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".http.TestHttpActivity"
+            android:name=".net.TestHttpActivity"
             android:screenOrientation="portrait" >
         </activity>
 

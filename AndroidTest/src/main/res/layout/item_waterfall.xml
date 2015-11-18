@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:fresco="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="6dp"
-                android:background="#f69717"
-    >
+                android:layout_margin="1dp"
+                android:background="#f69717">
 
-   <!-- <com.android.base.widget.fresco.DynamicHeightSimpleDraweeView
-        android:id="@+id/wf_item_content_DraweeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"  -->
-        />
-    
     <com.android.base.widget.DynamicHeightImageView
         android:id="@+id/wf_item_content_DraweeView"
         android:layout_width="match_parent"
@@ -24,18 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
         android:scaleType="fitXY"/>
-
-    <ImageView
-        android:id="@+id/aaa_wf_item_content_DraweeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
-        />
 
     <TextView
         android:id="@+id/wf_item_description_textView"
@@ -47,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="6"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         android:textSize="12sp"
         tools:text="测试文字"
         />
@@ -60,8 +38,8 @@
         android:layout_alignStart="@+id/wf_item_description_textView"
         android:layout_alignTop="@+id/wf_item_comment_num_textView"
         android:drawableLeft="@drawable/item_waterfall_icon_star"
-        android:text="-1"
-        android:textColor="@color/gray"
+        android:text="0"
+        android:textColor="@android:color/black"
         android:textSize="11sp"
         />
 
@@ -74,8 +52,8 @@
         android:layout_marginTop="6dp"
         android:layout_toRightOf="@+id/wf_item_stars_number_textView"
         android:drawableLeft="@drawable/item_waterfall_icon_comments"
-        android:text="-1"
-        android:textColor="@color/gray"
+        android:text="0"
+        android:textColor="@android:color/black"
         android:textSize="11sp"
         />
 
@@ -88,25 +66,10 @@
         android:layout_marginTop="6dp"
         android:layout_toRightOf="@+id/wf_item_comment_num_textView"
         android:drawableLeft="@drawable/item_waterfall_icon_good"
-        android:text="-1"
-        android:textColor="@color/gray"
-        android:textSize="11sp"
-        />
+        android:text="0"
+        android:textColor="@android:color/black"
+        android:textSize="11sp" />
 
-    <!--<com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/wf_item_user_head_draweeView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignLeft="@+id/wf_item_stars_number_textView"
-        android:layout_alignStart="@+id/wf_item_stars_number_textView"
-        android:layout_below="@+id/wf_item_stars_number_textView"
-        android:layout_marginBottom="13dp"
-        android:layout_marginTop="13dp"
-        fresco:failureImage="@drawable/error_photo"
-        fresco:placeholderImage="@drawable/default_head_pic"
-        fresco:placeholderImageScaleType="fitCenter"
-        fresco:roundAsCircle="true"
-        />-->
 
     <ImageView
         android:id="@+id/wf_item_user_head_draweeView"
@@ -128,7 +91,7 @@
         android:layout_toEndOf="@+id/wf_item_user_head_draweeView"
         android:layout_toRightOf="@+id/wf_item_user_head_draweeView"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/gray"
-        tools:text="position"
-        />
+        android:textColor="@android:color/black"
+        tools:text="position"/>
+
 </RelativeLayout>

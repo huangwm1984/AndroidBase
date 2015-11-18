@@ -1,18 +1,14 @@
-package com.android.test.http;
+package com.android.test.net;
 
 import android.os.Handler;
 import android.support.v4.util.ArrayMap;
 
 import com.android.base.common.utils.HandlerUtil;
-import com.android.base.http.OkHttpClientManager;
 import com.android.base.http.callback.ResultCallback;
 import com.android.base.http.request.OkHttpRequest;
 import com.android.test.AppConfig;
 import com.apkfuns.logutils.LogUtils;
 import com.squareup.okhttp.Request;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2015/10/9 0009.

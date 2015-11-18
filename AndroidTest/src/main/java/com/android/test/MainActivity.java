@@ -2,9 +2,8 @@ package com.android.test;
 
 import android.content.Intent;
 
-import com.android.base.common.assist.Toastor;
 import com.android.test.download.DownLoadActivity;
-import com.android.test.http.TestHttpActivity;
+import com.android.test.net.TestHttpActivity;
 import com.android.test.leakcanary.LeakcanaryActivity;
 import com.android.test.permission.PermissionActivity;
 import com.android.test.view.tabhost.FragmentTabHostActivity;

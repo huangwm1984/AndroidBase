@@ -1,4 +1,4 @@
-package com.android.test.view.recyclerview.extra.http;
+package com.android.test.view.recyclerview.extra.net;
 
 import android.os.Handler;
 
@@ -7,9 +7,8 @@ import com.android.base.http.callback.ResultCallback;
 import com.android.base.http.request.OkHttpRequest;
 import com.android.test.AppConfig;
 import com.android.test.view.recyclerview.extra.entity.TestDataBean;
+import com.android.test.view.recyclerview.extra.impl.ResponseCallback;
 import com.squareup.okhttp.Request;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/12 0012.
@@ -43,6 +42,21 @@ public class HttpReq {
             @Override
             public void onResponse(TestDataBean response) {
                 HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_SUCCESS_FOR_BEAN, response);
+            }
+        });
+
+    }
+
+    public static void loadData(String url, final ResponseCallback callback){
+        new OkHttpRequest.Builder().url(url).get(new ResultCallback<TestDataBean>() {
+            @Override
+            public void onError(Request request, Exception e) {
+                callback.onError(request, e);
+            }
+
+            @Override
+            public void onResponse(TestDataBean response) {
+                callback.onSuccess(response);
             }
         });
 

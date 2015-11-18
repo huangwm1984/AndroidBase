@@ -72,6 +72,28 @@ public class UIBlockManager {
         return handled;
     }
 
+    public void onResume() {
+        if (mUIBlockList != null) {
+            callBlock(new Callback() {
+                @Override
+                public void onCall(int i) {
+                    mUIBlockList.get(i).onResume();
+                }
+            });
+        }
+    }
+
+    public void onPause() {
+        if (mUIBlockList != null) {
+            callBlock(new Callback() {
+                @Override
+                public void onCall(int i) {
+                    mUIBlockList.get(i).onPause();
+                }
+            });
+        }
+    }
+
     public void onDestroy() {
         if (mUIBlockList != null) {
             callBlock(new Callback() {
