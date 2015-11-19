@@ -34,7 +34,7 @@ public class NestLinearLayoutManager extends LinearLayoutManager {
 
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
-                          int widthSpec, int heightSpec) {
+            int widthSpec, int heightSpec) {
 
         final int widthMode = View.MeasureSpec.getMode(widthSpec);
         final int heightMode = View.MeasureSpec.getMode(heightSpec);
@@ -85,7 +85,7 @@ public class NestLinearLayoutManager extends LinearLayoutManager {
     }
 
     private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
-                                   int heightSpec, int[] measuredDimension) {
+            int heightSpec, int[] measuredDimension) {
         try {
             View view = recycler.getViewForPosition(position);//fix 动态添加时报IndexOutOfBoundsException
             if (view != null) {
@@ -105,3 +105,4 @@ public class NestLinearLayoutManager extends LinearLayoutManager {
         }
     }
 }
+

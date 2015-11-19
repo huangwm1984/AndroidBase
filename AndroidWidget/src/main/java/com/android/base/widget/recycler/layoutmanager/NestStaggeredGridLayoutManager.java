@@ -78,12 +78,12 @@ public class NestStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
             case View.MeasureSpec.UNSPECIFIED:
                 break;
         }
-        // 设置测量尺寸
+        // 设置测量尺寸  
         setMeasuredDimension(width, height);
     }
 
     private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
-                                   int heightSpec, int[] measuredDimension) {
+            int heightSpec, int[] measuredDimension) {
 
         // 挨个遍历所有item
         if (position < getItemCount()) {

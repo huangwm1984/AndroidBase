@@ -2,6 +2,7 @@ package com.android.test;
 
 import android.content.Intent;
 
+import com.android.test.compress.CompressTestActivity;
 import com.android.test.download.DownLoadActivity;
 import com.android.test.net.TestHttpActivity;
 import com.android.test.leakcanary.LeakcanaryActivity;
@@ -56,7 +57,7 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(LeakcanaryActivity.class, false);
                 break;
             case 6:
-
+                gotoActivity(CompressTestActivity.class, false);
                 break;
             default:
                 break;

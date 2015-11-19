@@ -52,7 +52,7 @@ public class ExStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
                     View view = recycler.getViewForPosition(i);
                     if (view != null) {
                         /**
-                         *占用所有的列
+                         *占用所有的列 
                          * @see https://plus.google.com/+EtienneLawlor/posts/c5T7fu9ujqi
                          */
                         StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();

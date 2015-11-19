@@ -32,11 +32,11 @@ public abstract class OkHttpRequest
     protected Request request;
 
     protected String url;
-    protected String tag;
+    protected Object tag;
     protected Map<String, String> params;
     protected Map<String, String> headers;
 
-    protected OkHttpRequest(String url, String tag,
+    protected OkHttpRequest(String url, Object tag,
                             Map<String, String> params, Map<String, String> headers)
     {
         mOkHttpClient = mOkHttpClientManager.getOkHttpClient();
@@ -97,7 +97,7 @@ public abstract class OkHttpRequest
 
     public void cancel()
     {
-        if (!TextUtils.isEmpty(tag))
+        if (tag != null)
             mOkHttpClientManager.cancelTag(tag);
     }
 
@@ -105,7 +105,7 @@ public abstract class OkHttpRequest
     public static class Builder
     {
         private String url;
-        private String tag;
+        private Object tag;
         private Map<String, String> headers;
         private Map<String, String> params;
         private Pair<String, File>[] files;
@@ -128,7 +128,7 @@ public abstract class OkHttpRequest
             return this;
         }
 
-        public Builder tag(String tag)
+        public Builder tag(Object tag)
         {
             this.tag = tag;
             return this;
