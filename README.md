@@ -10,7 +10,7 @@
 
 5.快速绑定控件：Butterknife
 
-6.文件缓存：Disklrucache
+6.文件缓存：Disklrucache、SpCache(sharepreference保存)
 
 7.内存泄漏监测：Leakcanary
 
