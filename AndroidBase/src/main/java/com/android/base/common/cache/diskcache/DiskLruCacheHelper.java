@@ -1,4 +1,4 @@
-package com.android.base.common.diskcache;
+package com.android.base.common.cache.diskcache;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -80,7 +80,7 @@ public class DiskLruCacheHelper
                     dir + " is not a directory or does not exists. ");
         }
 
-        int appVersion = context == null ? DEFAULT_APP_VERSION : Utils.getAppVersion(context);
+        int appVersion = context == null ? DEFAULT_APP_VERSION : com.android.base.common.cache.diskcache.Utils.getAppVersion(context);
 
         DiskLruCache diskLruCache = DiskLruCache.open(
                 dir,

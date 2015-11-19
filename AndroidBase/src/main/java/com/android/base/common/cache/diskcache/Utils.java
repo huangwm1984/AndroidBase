@@ -1,4 +1,4 @@
-package com.android.base.common.diskcache;
+package com.android.base.common.cache.diskcache;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
