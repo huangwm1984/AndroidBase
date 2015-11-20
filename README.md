@@ -22,7 +22,7 @@
 
 11.ListView、GridView、RecyclerView快速开发适配器
 
-12.Activity解耦UIBlock、CommonBlock
+12.Activity解耦CommonBlock
 
 13.Android 6.0 Permission 封装
 
