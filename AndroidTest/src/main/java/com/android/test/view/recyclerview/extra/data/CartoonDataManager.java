@@ -1,6 +1,8 @@
 package com.android.test.view.recyclerview.extra.data;
 
 
+import android.view.View;
+
 import com.android.base.block.CommonBlock;
 import com.android.base.http.callback.ResultCallback;
 import com.android.base.http.request.OkHttpRequest;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/18 0018.
  */
-public class CartoonDataManager extends CommonBlock{
+public class CartoonDataManager extends CommonBlock {
 
     private String TAG = getClass().getSimpleName();
 
@@ -27,6 +29,11 @@ public class CartoonDataManager extends CommonBlock{
 
     /** 数据的list */
     private List<ObjectListEntity> mDataList;
+
+    @Override
+    public View getRootView() {
+        return null;
+    }
 
     @Override
     protected void onCreated() {

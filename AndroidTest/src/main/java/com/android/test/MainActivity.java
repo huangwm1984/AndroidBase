@@ -2,12 +2,13 @@ package com.android.test;
 
 import android.content.Intent;
 
+import com.android.base.common.assist.Toastor;
 import com.android.test.download.DownLoadActivity;
 import com.android.test.net.TestHttpActivity;
 import com.android.test.leakcanary.LeakcanaryActivity;
 import com.android.test.permission.PermissionActivity;
 import com.android.test.view.tabhost.FragmentTabHostActivity;
-import com.android.test.view.recyclerview.RecyclerViewTabActivity;
+import com.android.test.view.recyclerview.RecyclerViewTestActivity;
 
 public class MainActivity extends TestBaseActivity {
 
@@ -23,15 +24,16 @@ public class MainActivity extends TestBaseActivity {
     }
 
     @Override
-    public Runnable getButtonClickRunnable(final int id) {
-        return new Runnable() {
+    public void getButtonClick(final int id) {
+        /*return new Runnable() {
 
             @Override
             public void run() {
 
                 onClickButton(id);
             }
-        };
+        };*/
+        onClickButton(id);
     }
 
     protected void onClickButton(int id) {
@@ -47,7 +49,7 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(DownLoadActivity.class, false);
                 break;
             case 3:
-                gotoActivity(RecyclerViewTabActivity.class, false);
+                gotoActivity(RecyclerViewTestActivity.class, false);
                 break;
             case 4:
                 gotoActivity(PermissionActivity.class, false);
@@ -56,9 +58,10 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(LeakcanaryActivity.class, false);
                 break;
             case 6:
-
+                Toastor.showSingletonToast(MainActivity.this, "还在开发中...");
                 break;
             default:
+                Toastor.showSingletonToast(MainActivity.this, "还在开发中...");
                 break;
         }
 

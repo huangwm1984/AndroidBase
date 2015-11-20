@@ -3,18 +3,16 @@ package com.android.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.base.block.CommonBlockManager;
 import com.android.base.common.Log;
 import com.android.base.lifecyclelistener.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
-import com.android.base.block.UIBlockManager;
+import com.android.base.block.CommonBlockManager;
 
 import java.lang.ref.WeakReference;
 
@@ -29,8 +27,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     public MyHandler mHandler;
 
-    public UIBlockManager mUIBlockManager;
-
     public CommonBlockManager mCommonBlockManager;
 
     @Override
@@ -44,7 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         mApplicationContext = getApplicationContext();
         NetworkStateReceiver.registerNetworkStateReceiver(this);
         mHandler = new MyHandler(this);
-        mUIBlockManager = new UIBlockManager(this);
         mCommonBlockManager = new CommonBlockManager(this);
         onActivityCreated(this, savedInstanceState);
     }
@@ -59,7 +54,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     protected void onResume() {
         super.onResume();
         onActivityResumed(this);
-        mUIBlockManager.onResume();
         mCommonBlockManager.onResume();
     }
 
@@ -67,7 +61,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     protected void onPause() {
         super.onPause();
         onActivityPaused(this);
-        mUIBlockManager.onPause();
         mCommonBlockManager.onPause();
     }
 
@@ -75,6 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     protected void onStop() {
         super.onStop();
         onActivityStopped(this);
+        mCommonBlockManager.onStop();
     }
 
     @Override
@@ -85,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
 
     @Override
     public void onBackPressed() {
-        if (!mUIBlockManager.onBackPressed() || !mCommonBlockManager.onBackPressed()) {
+        if (!mCommonBlockManager.onBackPressed() || !mCommonBlockManager.onBackPressed()) {
             super.onBackPressed();
         }
     }
@@ -96,7 +90,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         super.onDestroy();
         NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
         AppManager.getAppManager().finishActivity();
-        mUIBlockManager.onDestroy();
         mCommonBlockManager.onDestroy();
         onActivityDestroyed(this);
     }
@@ -104,7 +97,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mUIBlockManager.onActivityResult(requestCode, resultCode, data);
         mCommonBlockManager.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -160,11 +152,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         if (finish) {
             finish();
         }
-    }
-
-    public UIBlockManager getUIBlockManager() {
-        if(mUIBlockManager == null) mUIBlockManager = new UIBlockManager(this);
-        return mUIBlockManager;
     }
 
     public CommonBlockManager getCommonBlockManager() {

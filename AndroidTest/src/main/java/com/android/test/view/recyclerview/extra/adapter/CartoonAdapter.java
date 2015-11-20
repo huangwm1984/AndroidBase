@@ -1,12 +1,11 @@
 package com.android.test.view.recyclerview.extra.adapter;
 
-import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.android.base.block.CommonBlock;
 import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
 import com.android.base.quickadapter.recycler.ExBaseRcvQuickAdapter;
-import com.android.base.quickadapter.recycler.QuickRcvAdapter;
 import com.android.base.widget.DynamicHeightImageView;
 import com.android.test.R;
 import com.android.test.view.recyclerview.extra.entity.TestDataBean.DataEntity.ObjectListEntity;
@@ -19,9 +18,14 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 /**
  * Created by Administrator on 2015/11/18 0018.
  */
-public class CartoonAdapter extends CommonBlock{
+public class CartoonAdapter extends CommonBlock {
 
     public ExBaseRcvQuickAdapter mQuickRcvAdapter;
+
+    @Override
+    public View getRootView() {
+        return null;
+    }
 
     @Override
     protected void onCreated() {

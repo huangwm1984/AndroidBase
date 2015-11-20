@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/11/18 0018.
+ * @author Jack Tony
+ * @date 2015/6/28
+ * modify:huangwm
  */
 public class CommonBlockManager {
 
@@ -88,6 +90,17 @@ public class CommonBlockManager {
                 @Override
                 public void onCall(int i) {
                     mCommonBlockList.get(i).onPause();
+                }
+            });
+        }
+    }
+
+    public void onStop() {
+        if (mCommonBlockList != null) {
+            callBlock(new Callback() {
+                @Override
+                public void onCall(int i) {
+                    mCommonBlockList.get(i).onStop();
                 }
             });
         }

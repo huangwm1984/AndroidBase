@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.android.base.block.UIBlock;
+import com.android.base.block.CommonBlock;
 import com.android.test.R;
 import com.bumptech.glide.Glide;
 
@@ -14,7 +14,7 @@ import butterknife.Bind;
 /**
  * Created by Administrator on 2015/11/13 0013.
  */
-public class HeaderBlock extends UIBlock {
+public class HeaderBlock extends CommonBlock {
 
 
     @Bind(R.id.header_imageView)
@@ -28,7 +28,7 @@ public class HeaderBlock extends UIBlock {
     }
 
     @Override
-    protected void onViewCreated() {
+    protected void onCreated() {
         Glide.with(mActivity).load(R.drawable.default_head_pic).into(mHeaderIv);
     }
 }

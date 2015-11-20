@@ -6,14 +6,13 @@ import com.android.base.common.assist.Toastor;
 import com.android.test.R;
 import com.android.test.TestBaseActivity;
 import com.android.test.view.recyclerview.extra.HeaderOrFooterActivity;
-import com.android.test.view.recyclerview.extra.block.HeaderBlock;
 import com.android.test.view.recyclerview.multi.MultiItemActivity;
 import com.android.test.view.recyclerview.normal.NormalActivity;
 
 /**
  * Created by Administrator on 2015/10/31 0031.
  */
-public class RecyclerViewTabActivity extends TestBaseActivity {
+public class RecyclerViewTestActivity extends TestBaseActivity {
 
 
     @Override
@@ -27,15 +26,8 @@ public class RecyclerViewTabActivity extends TestBaseActivity {
     }
 
     @Override
-    public Runnable getButtonClickRunnable(final int id) {
-        return new Runnable() {
-
-            @Override
-            public void run() {
-
-                onClickButton(id);
-            }
-        };
+    public void getButtonClick(final int id) {
+        onClickButton(id);
     }
 
     protected void onClickButton(int id) {
@@ -51,18 +43,19 @@ public class RecyclerViewTabActivity extends TestBaseActivity {
                 gotoActivity(HeaderOrFooterActivity.class, false);
                 break;
             case 3:
-
+                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
                 break;
             case 4:
-
+                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
                 break;
             case 5:
-
+                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
                 break;
             case 6:
-
+                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
                 break;
             default:
+                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
                 break;
         }
 

@@ -34,6 +34,11 @@
         <item>未完待续...</item>
     </string-array>
 
+    <string-array name="banner_list">
+        <item>Banner</item>
+        <item>Splash</item>
+    </string-array>
+
     <string name="open">打开</string>
     <string name="close">关闭</string>
 

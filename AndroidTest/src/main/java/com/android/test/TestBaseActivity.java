@@ -108,14 +108,16 @@ public abstract class TestBaseActivity extends BaseActivity implements View.OnCl
      * id值得含义为：若{@link #getButtonTexts()}的string[]数组长度为len，则id从0,1,2到len-1.
      * 点击第N个按钮，id变为N。
      */
-    public abstract Runnable getButtonClickRunnable(final int id);
+    //public abstract Runnable getButtonClickRunnable(final int id);
+    public abstract void getButtonClick(final int id);
 
     @Override
     public void onClick(View v) {
-        Runnable r = getButtonClickRunnable(v.getId());
+        /*Runnable r = getButtonClickRunnable(v.getId());
         if (r != null) {
             new Thread(r).start();
-        }
+        }*/
+        getButtonClick(v.getId());
     }
 
 }

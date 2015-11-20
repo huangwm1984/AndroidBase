@@ -50,7 +50,7 @@
         <service android:name=".download.DLService" />
 
         <activity
-            android:name=".view.recyclerview.RecyclerViewTabActivity"
+            android:name=".view.recyclerview.RecyclerViewTestActivity"
             android:screenOrientation="portrait" />
 
         <activity

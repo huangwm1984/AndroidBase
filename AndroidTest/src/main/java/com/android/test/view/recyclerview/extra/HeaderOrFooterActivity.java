@@ -101,15 +101,11 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     }
 
     private void setBlock() {
-        getUIBlockManager().add(new HeaderBlock()).add(new FooterBlock());
-        getCommonBlockManager().add(new CartoonAdapter()).add(new CartoonDataManager());
-
-        mHeaderBlock = getUIBlockManager().get(HeaderBlock.class);
-        mFooterBlock = getUIBlockManager().get(FooterBlock.class);
-
+        getCommonBlockManager().add(new CartoonAdapter()).add(new CartoonDataManager()).add(new HeaderBlock()).add(new FooterBlock());
+        mHeaderBlock = getCommonBlockManager().get(HeaderBlock.class);
+        mFooterBlock = getCommonBlockManager().get(FooterBlock.class);
         mCartoonAdapter = getCommonBlockManager().get(CartoonAdapter.class);
-        mDataManager = getCommonBlockManager().get(CartoonDataManager.class);;
-
+        mDataManager = getCommonBlockManager().get(CartoonDataManager.class);
     }
 
     /**

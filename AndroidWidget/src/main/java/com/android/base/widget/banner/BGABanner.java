@@ -199,12 +199,12 @@ public class BGABanner extends RelativeLayout {
      * @param tips  每一页的提示文案集合
      */
     public void setViewsAndTips(List<View> views, List<String> tips) {
-        if (mAutoPlayAble && views.size() < 3) {
+        /*if (mAutoPlayAble && views.size() < 3) {
             throw new IllegalArgumentException("开启指定轮播时至少有三个页面");
         }
         if (tips != null && tips.size() < views.size()) {
             throw new IllegalArgumentException("提示文案数必须等于页面数量");
-        }
+        }*/
         mViews = views;
         mTips = tips;
         mViewPager.setAdapter(new PageAdapter());
@@ -233,9 +233,9 @@ public class BGABanner extends RelativeLayout {
      * @param tips 提示文案集合
      */
     public void setTips(List<String> tips) {
-        if (tips != null && mViews != null && tips.size() < mViews.size()) {
+        /*if (tips != null && mViews != null && tips.size() < mViews.size()) {
             throw new IllegalArgumentException("提示文案数必须等于页面数量");
-        }
+        }*/
         mTips = tips;
     }
 
