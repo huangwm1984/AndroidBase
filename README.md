@@ -24,6 +24,8 @@
 
 12.Activity解耦CommonBlock
 
-13.Android 6.0 Permission 封装
+13.Android 6.0 Permission封装
+
+14.集成改动版的BGABanner轮播控件
 
 最后感谢github上大神的开源框架和开源精神 (●'◡'●)ﾉ♥
