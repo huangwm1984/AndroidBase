@@ -3,6 +3,7 @@ package com.android.test;
 import android.content.Intent;
 
 import com.android.base.common.assist.Toastor;
+import com.android.test.banner.BannerTestActivity;
 import com.android.test.download.DownLoadActivity;
 import com.android.test.net.TestHttpActivity;
 import com.android.test.leakcanary.LeakcanaryActivity;
@@ -58,7 +59,7 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(LeakcanaryActivity.class, false);
                 break;
             case 6:
-                Toastor.showSingletonToast(MainActivity.this, "还在开发中...");
+                gotoActivity(BannerTestActivity.class, false);
                 break;
             default:
                 Toastor.showSingletonToast(MainActivity.this, "还在开发中...");

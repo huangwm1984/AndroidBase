@@ -32,10 +32,10 @@ public class BannerTestActivity extends TestBaseActivity {
         Intent intent = new Intent();
         switch (id) {
             case 0:
-                gotoActivity(TestHttpActivity.class, false);
+                gotoActivity(BannerActivity.class, false);
                 break;
             case 1:
-                gotoActivity(FragmentTabHostActivity.class, false);
+
                 break;
             default:
                 Toastor.showSingletonToast(BannerTestActivity.this, "还在开发中...");

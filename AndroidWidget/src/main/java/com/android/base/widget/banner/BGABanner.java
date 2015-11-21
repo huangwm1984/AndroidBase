@@ -41,6 +41,9 @@ import com.nineoldandroids.view.ViewHelper;
 
 import java.util.List;
 
+/**
+ * 增加onclick事件监听
+ */
 public class BGABanner extends RelativeLayout {
     private static final String TAG = BGABanner.class.getSimpleName();
     private static final int RMP = LayoutParams.MATCH_PARENT;
@@ -64,6 +67,7 @@ public class BGABanner extends RelativeLayout {
     private int mTipTextColor = Color.WHITE;
     private int mPointDrawableResId = R.drawable.selector_bgabanner_point;
     private Drawable mPointContainerBackgroundDrawable;
+    private ImageViewListener mImageViewListener;
 
     private Handler mAutoPlayHandler = new Handler() {
         @Override
@@ -421,14 +425,24 @@ public class BGABanner extends RelativeLayout {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View view = mViews.get(position % mViews.size());
+        public Object instantiateItem(ViewGroup container, final int position) {
+            final int pos = position % mViews.size();
+            //View view = mViews.get(position % mViews.size());
+            View view = mViews.get(pos);
 
             // 在destroyItem方法中销毁的话，当只有3页时会有问题
             if (container.equals(view.getParent())) {
                 container.removeView(view);
             }
             container.addView(view);
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mImageViewListener!=null){
+                        mImageViewListener.onImageViewOnClick(pos, v);
+                    }
+                }
+            });
             return view;
         }
 
@@ -489,5 +503,13 @@ public class BGABanner extends RelativeLayout {
 
     private static void debug(String msg) {
         Log.i(TAG, msg);
+    }
+
+    public void setImageViewListener(ImageViewListener listener){
+        this.mImageViewListener = listener;
+    }
+
+    public interface ImageViewListener{
+        public void onImageViewOnClick(int position, View view);
     }
 }
