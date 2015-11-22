@@ -81,6 +81,10 @@
             android:name=".banner.BannerActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".banner.SplashActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
