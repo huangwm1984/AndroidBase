@@ -3,6 +3,7 @@ package com.android.test;
 import android.content.Intent;
 
 import com.android.base.common.assist.Toastor;
+import com.android.base.widget.autolayout.AutoLayout;
 import com.android.test.banner.BannerTestActivity;
 import com.android.test.download.DownLoadActivity;
 import com.android.test.net.TestHttpActivity;
