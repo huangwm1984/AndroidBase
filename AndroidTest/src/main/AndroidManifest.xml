@@ -50,19 +50,19 @@
         <service android:name=".download.DLService" />
 
         <activity
-            android:name=".view.recyclerview.RecyclerViewTestActivity"
+            android:name=".view.recycler.RecyclerViewTestActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.recyclerview.normal.NormalActivity"
+            android:name=".view.recycler.normal.NormalActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.recyclerview.multi.MultiItemActivity"
+            android:name=".view.recycler.multi.MultiItemActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.recyclerview.extra.HeaderOrFooterActivity"
+            android:name=".view.recycler.extra.HeaderOrFooterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RecyclerViewTheme"/>
 

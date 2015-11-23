@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="BGABanner">
+    <declare-styleable name="BaseBanner">
         <!-- 指示点容器背景 -->
         <attr name="banner_pointContainerBackground" format="reference|color" />
         <!-- 指示点背景 -->
@@ -46,6 +46,8 @@
         <attr name="banner_tipTextColor" format="reference|color" />
         <!-- 提示文案的文字大小 -->
         <attr name="banner_tipTextSize" format="dimension" />
+        <!-- 是否是轮播状态还是非轮播状态 -->
+        <attr name="banner_LoopEnable" format="boolean" />
     </declare-styleable>
 
 </resources>

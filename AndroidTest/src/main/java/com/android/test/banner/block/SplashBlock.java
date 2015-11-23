@@ -9,13 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.android.base.block.CommonBlock;
-import com.android.base.widget.banner.BGABanner;
+import com.android.base.widget.banner.BaseBanner;
 import com.android.test.R;
 import com.android.test.banner.util.RecycleBitmap;
 import com.apkfuns.logutils.LogUtils;
 
-import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ import java.util.List;
  */
 public class SplashBlock extends CommonBlock {
 
-    BGABanner mBanner;
+    SimpleGuideBanner mBanner;
     List<View> mViews;
     View mLastView;
     /**
@@ -39,7 +37,7 @@ public class SplashBlock extends CommonBlock {
 
     @Override
     protected void onCreated() {
-        mBanner = (BGABanner) getRootView();
+        mBanner = (SimpleGuideBanner) getRootView();
         setLruCache();
         setBanner();
         setData();
@@ -61,7 +59,7 @@ public class SplashBlock extends CommonBlock {
     }
 
     private void setBanner() {
-        mBanner.setTransitionEffect(BGABanner.TransitionEffect.Rotate);
+        mBanner.setTransitionEffect(BaseBanner.TransitionEffect.Rotate);
         mBanner.setPageChangeDuration(Integer.MAX_VALUE);
     }
 
@@ -80,7 +78,8 @@ public class SplashBlock extends CommonBlock {
                 mActivity.finish();
             }
         });
-        mBanner.setViews(mViews);
+        mBanner.setSource(mViews);
+        mBanner.start();
     }
 
     private View getPageView(@DrawableRes int resid) {

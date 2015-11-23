@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.android.base.BaseActivity;
-import com.android.base.widget.banner.BGABanner;
 import com.android.test.R;
 import com.android.test.banner.block.BannerBlock;
 

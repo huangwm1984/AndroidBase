@@ -9,7 +9,7 @@ import com.android.test.net.TestHttpActivity;
 import com.android.test.leakcanary.LeakcanaryActivity;
 import com.android.test.permission.PermissionActivity;
 import com.android.test.view.tabhost.FragmentTabHostActivity;
-import com.android.test.view.recyclerview.RecyclerViewTestActivity;
+import com.android.test.view.recycler.RecyclerViewTestActivity;
 
 public class MainActivity extends TestBaseActivity {
 

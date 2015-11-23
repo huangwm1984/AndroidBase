@@ -1,18 +1,12 @@
 package com.android.test.banner.block;
 
-import android.os.Build;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 
 import com.android.base.block.CommonBlock;
-import com.android.base.common.assist.Toastor;
-import com.android.base.widget.DynamicHeightImageView;
-import com.android.base.widget.banner.BGABanner;
 import com.android.test.R;
+import com.android.test.banner.entity.BannerModel;
 import com.apkfuns.logutils.LogUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SizeReadyCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +16,8 @@ import java.util.List;
  */
 public class BannerBlock extends CommonBlock {
 
-    public BGABanner mBanner;
-    public List<View> mDefaultViews;
+    public SimpleImageBanner mBanner;
+    public List<BannerModel> mData;
 
     private String[] imageUrls = {
             "http://img.taodiantong.cn/v55183/infoimg/2013-07/130720115322ky.jpg",
@@ -39,41 +33,25 @@ public class BannerBlock extends CommonBlock {
 
     @Override
     protected void onCreated() {
-        mBanner = (BGABanner) getRootView();
-        mDefaultViews = getViews(imageUrls.length);
-        mBanner.setViews(mDefaultViews);
-        for(int i=0;i<mDefaultViews.size();i++){
-            Glide.with(mActivity)
-                    .load(imageUrls[i])
-                    .crossFade()
-                    .placeholder(R.drawable.default_viewpager_pic)
-                    .into((ImageView) mDefaultViews.get(i)).getSize(new SizeReadyCallback() {
-                @Override
-                public void onSizeReady(int width, int height) {
+        setData();
+        mBanner = (SimpleImageBanner) getRootView();
+        mBanner.setSource(mData);
+        mBanner.startScroll();
+    }
 
-                }
-            });
+    private void setData() {
+        mData = new ArrayList<>();
+        for(int i=0;i<imageUrls.length;i++){
+            BannerModel bm = new BannerModel();
+            bm.setImageUrl(imageUrls[i]);
+            bm.setTips("这是第" + i + "页");
+            mData.add(bm);
         }
-
-        mBanner.setImageViewListener(new BGABanner.ImageViewListener() {
-            @Override
-            public void onImageViewOnClick(int position, View view) {
-                Toastor.showSingletonToast(mActivity.getApplicationContext(), "你点了中了第" + position + "个");
-            }
-        });
     }
 
     @Override
     protected void onDestroy() {
         Glide.get(mActivity).clearMemory();
         super.onDestroy();
-    }
-
-    private List<View> getViews(int count) {
-        List<View> views = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            views.add(mActivity.getLayoutInflater().inflate(R.layout.item_view_image, null).findViewById(R.id.my_image_view));
-        }
-        return views;
     }
 }
