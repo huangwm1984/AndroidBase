@@ -7,6 +7,7 @@ import android.support.v4.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.base.block.UiBlock;
 import com.android.base.widget.banner.BaseBanner;
 import com.android.test.R;
 import com.apkfuns.logutils.LogUtils;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/22 0022.
  */
-public class SplashSampleBlock extends CommonUiBlock {
+public class SplashSampleBlock extends UiBlock {
 
     SimpleGuideBanner mBanner;
     List<View> mViews;

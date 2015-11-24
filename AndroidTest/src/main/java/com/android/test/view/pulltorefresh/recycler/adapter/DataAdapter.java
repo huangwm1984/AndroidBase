@@ -1,8 +1,6 @@
 package com.android.test.view.pulltorefresh.recycler.adapter;
 
-import android.view.View;
-
-import com.android.base.block.CommonSampleBlock;
+import com.android.base.block.SampleBlock;
 import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
 import com.android.base.quickadapter.recycler.ExBaseRcvQuickAdapter;
 import com.android.test.R;
@@ -12,7 +10,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/24 0024.
  */
-public class DataAdapter extends CommonSampleBlock {
+public class DataAdapter extends SampleBlock {
 
     public ExBaseRcvQuickAdapter mQuickRcvAdapter;
 

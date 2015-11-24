@@ -7,7 +7,7 @@ import android.view.View;
 import com.android.base.block.impl.IBlock;
 
 
-public abstract class CommonSampleBlock implements IBlock {
+public abstract class SampleBlock implements IBlock {
 
     protected String TAG = getClass().getSimpleName();
 

@@ -2,6 +2,7 @@ package com.android.test.banner.block;
 
 import android.view.View;
 
+import com.android.base.block.UiBlock;
 import com.android.test.R;
 import com.android.test.banner.entity.BannerModel;
 import com.bumptech.glide.Glide;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/20 0020.
  */
-public class BannerBlock extends CommonUiBlock {
+public class BannerBlock extends UiBlock {
 
     public SimpleImageBanner mBanner;
     public List<BannerModel> mData;

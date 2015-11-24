@@ -1,9 +1,7 @@
 package com.android.test.view.recycler.extra.data;
 
 
-import android.view.View;
-
-import com.android.base.block.CommonSampleBlock;
+import com.android.base.block.SampleBlock;
 import com.android.base.http.callback.ResultCallback;
 import com.android.base.http.request.OkHttpRequest;
 import com.android.test.view.recycler.extra.entity.TestDataBean;
@@ -17,7 +15,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/18 0018.
  */
-public class CartoonDataManager extends CommonSampleBlock {
+public class CartoonDataManager extends SampleBlock {
 
     private String TAG = getClass().getSimpleName();
 
