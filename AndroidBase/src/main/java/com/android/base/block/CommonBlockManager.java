@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
+import com.android.base.block.impl.IBlock;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ import java.util.List;
  */
 public class CommonBlockManager {
 
-    private List<CommonBlock> mCommonBlockList;
+    private List<IBlock> mCommonBlockList;
 
     protected Activity activity;
 
@@ -23,16 +25,16 @@ public class CommonBlockManager {
         this.activity = activity;
     }
 
-    public CommonBlockManager add(@NonNull CommonBlock commonBlock) {
-        commonBlock.attachActivity(activity);
+    public CommonBlockManager add(@NonNull IBlock iBlock) {
+        iBlock.attachActivity(activity);
         if (mCommonBlockList == null) {
             mCommonBlockList = new ArrayList<>();
         }
-        mCommonBlockList.add(commonBlock);
+        mCommonBlockList.add(iBlock);
         return this;
     }
 
-    public CommonBlockManager remove(@NonNull CommonBlock commonBlock) {
+    public CommonBlockManager remove(@NonNull IBlock commonBlock) {
         commonBlock.onDestroy();
         if (mCommonBlockList != null && mCommonBlockList.contains(commonBlock)) {
             mCommonBlockList.remove(commonBlock);
@@ -41,7 +43,7 @@ public class CommonBlockManager {
     }
 
     @CheckResult
-    public <T extends CommonBlock> T get(@NonNull Class<T> cls) {
+    public <T extends IBlock> T get(@NonNull Class<T> cls) {
         if (mCommonBlockList != null) {
             for (int i = 0, size = mCommonBlockList.size(); i < size; i++) {
                 if (mCommonBlockList.get(i).getClass().getName().equals(cls.getName())) {
@@ -53,7 +55,7 @@ public class CommonBlockManager {
     }
 
     @CheckResult
-    public List<CommonBlock> getCommonBlockList() {
+    public List<IBlock> getCommonBlockList() {
         return mCommonBlockList;
     }
 

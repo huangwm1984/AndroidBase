@@ -5,8 +5,7 @@ import android.os.Bundle;
 
 import com.android.base.BaseActivity;
 import com.android.test.R;
-import com.android.test.banner.block.BannerBlock;
-import com.android.test.banner.block.SplashBlock;
+import com.android.test.banner.block.SplashSampleBlock;
 
 /**
  * Created by Administrator on 2015/11/22 0022.
@@ -20,7 +19,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        getCommonBlockManager().add(new SplashBlock());
+        getCommonBlockManager().add(new SplashSampleBlock());
     }
 
     @Override

@@ -24,8 +24,8 @@ import com.android.base.widget.recycler.decoration.DividerGridItemDecoration;
 import com.android.base.widget.recycler.layoutmanager.ExStaggeredGridLayoutManager;
 import com.android.test.R;
 import com.android.test.view.recycler.extra.adapter.CartoonAdapter;
-import com.android.test.view.recycler.extra.block.FooterBlock;
-import com.android.test.view.recycler.extra.block.HeaderBlock;
+import com.android.test.view.recycler.extra.block.FooterSampleBlock;
+import com.android.test.view.recycler.extra.block.HeaderSampleBlock;
 import com.android.test.view.recycler.extra.data.CartoonDataManager;
 import com.android.test.view.recycler.extra.entity.TestDataBean.DataEntity.ObjectListEntity;
 import com.android.test.view.recycler.extra.impl.ResponseCallback;
@@ -59,8 +59,8 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     /** 是否加载数据标志 **/
     private boolean isLoadingData = false;
 
-    HeaderBlock mHeaderBlock;
-    FooterBlock mFooterBlock;
+    HeaderSampleBlock mHeaderBlock;
+    FooterSampleBlock mFooterBlock;
     CartoonAdapter mCartoonAdapter;
     CartoonDataManager mDataManager;
 
@@ -97,9 +97,9 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     }
 
     private void setBlock() {
-        getCommonBlockManager().add(new CartoonAdapter()).add(new CartoonDataManager()).add(new HeaderBlock()).add(new FooterBlock());
-        mHeaderBlock = getCommonBlockManager().get(HeaderBlock.class);
-        mFooterBlock = getCommonBlockManager().get(FooterBlock.class);
+        getCommonBlockManager().add(new CartoonAdapter()).add(new CartoonDataManager()).add(new HeaderSampleBlock()).add(new FooterSampleBlock());
+        mHeaderBlock = getCommonBlockManager().get(HeaderSampleBlock.class);
+        mFooterBlock = getCommonBlockManager().get(FooterSampleBlock.class);
         mCartoonAdapter = getCommonBlockManager().get(CartoonAdapter.class);
         mDataManager = getCommonBlockManager().get(CartoonDataManager.class);
     }

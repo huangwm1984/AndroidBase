@@ -2,10 +2,8 @@ package com.android.test.banner.block;
 
 import android.view.View;
 
-import com.android.base.block.CommonBlock;
 import com.android.test.R;
 import com.android.test.banner.entity.BannerModel;
-import com.apkfuns.logutils.LogUtils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/20 0020.
  */
-public class BannerBlock extends CommonBlock {
+public class BannerBlock extends CommonUiBlock {
 
     public SimpleImageBanner mBanner;
     public List<BannerModel> mData;
@@ -50,7 +48,7 @@ public class BannerBlock extends CommonBlock {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         Glide.get(mActivity).clearMemory();
         super.onDestroy();
     }

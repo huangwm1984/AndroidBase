@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.base.lifecyclelistener.FragmentLifecycleCallbacks;
+import com.android.base.lifecycle.FragmentLifecycleCallbacks;
 //import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;

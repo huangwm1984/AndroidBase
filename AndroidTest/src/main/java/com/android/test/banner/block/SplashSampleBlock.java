@@ -2,16 +2,13 @@ package com.android.test.banner.block;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.v4.util.LruCache;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.base.block.CommonBlock;
 import com.android.base.widget.banner.BaseBanner;
 import com.android.test.R;
-import com.android.test.banner.util.RecycleBitmap;
 import com.apkfuns.logutils.LogUtils;
 
 import java.util.ArrayList;
@@ -20,7 +17,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/22 0022.
  */
-public class SplashBlock extends CommonBlock {
+public class SplashSampleBlock extends CommonUiBlock {
 
     SimpleGuideBanner mBanner;
     List<View> mViews;
@@ -36,7 +33,7 @@ public class SplashBlock extends CommonBlock {
     }
 
     @Override
-    protected void onCreated() {
+    public void onCreated() {
         mBanner = (SimpleGuideBanner) getRootView();
         setLruCache();
         setBanner();
@@ -109,7 +106,7 @@ public class SplashBlock extends CommonBlock {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         mMemoryCache.evictAll();
         mLastView = null;
         super.onDestroy();

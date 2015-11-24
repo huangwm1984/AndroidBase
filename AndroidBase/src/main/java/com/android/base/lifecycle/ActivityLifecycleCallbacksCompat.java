@@ -22,7 +22,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.base.lifecyclelistener;
+package com.android.base.lifecycle;
 
 import android.app.Activity;
 import android.os.Bundle;

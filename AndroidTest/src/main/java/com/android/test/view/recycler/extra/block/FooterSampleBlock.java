@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.android.base.block.CommonBlock;
 import com.android.test.R;
 
 import butterknife.Bind;
@@ -12,7 +11,7 @@ import butterknife.Bind;
 /**
  * Created by Administrator on 2015/11/18 0018.
  */
-public class FooterBlock extends CommonBlock {
+public class FooterSampleBlock extends CommonUiBlock {
 
     @Bind(R.id.footer_linearlayout)
     public LinearLayout mFooterLl;

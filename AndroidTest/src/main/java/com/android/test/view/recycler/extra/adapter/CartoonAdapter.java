@@ -3,7 +3,7 @@ package com.android.test.view.recycler.extra.adapter;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.base.block.CommonBlock;
+import com.android.base.block.CommonSampleBlock;
 import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
 import com.android.base.quickadapter.recycler.ExBaseRcvQuickAdapter;
 import com.android.base.widget.DynamicHeightImageView;
@@ -18,14 +18,9 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 /**
  * Created by Administrator on 2015/11/18 0018.
  */
-public class CartoonAdapter extends CommonBlock {
+public class CartoonAdapter extends CommonSampleBlock {
 
     public ExBaseRcvQuickAdapter mQuickRcvAdapter;
-
-    @Override
-    public View getRootView() {
-        return null;
-    }
 
     @Override
     protected void onCreated() {

@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.android.base.block.CommonBlock;
 import com.android.test.R;
 import com.bumptech.glide.Glide;
 
@@ -14,7 +13,7 @@ import butterknife.Bind;
 /**
  * Created by Administrator on 2015/11/13 0013.
  */
-public class HeaderBlock extends CommonBlock {
+public class HeaderSampleBlock extends CommonUiBlock {
 
 
     @Bind(R.id.header_imageView)

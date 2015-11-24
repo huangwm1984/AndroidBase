@@ -9,6 +9,7 @@ import com.android.test.download.DownLoadActivity;
 import com.android.test.net.TestHttpActivity;
 import com.android.test.leakcanary.LeakcanaryActivity;
 import com.android.test.permission.PermissionActivity;
+import com.android.test.view.pulltorefresh.PullToRefreshTestActivity;
 import com.android.test.view.tabhost.FragmentTabHostActivity;
 import com.android.test.view.recycler.RecyclerViewTestActivity;
 
@@ -61,6 +62,9 @@ public class MainActivity extends TestBaseActivity {
                 break;
             case 6:
                 gotoActivity(BannerTestActivity.class, false);
+                break;
+            case 7:
+                gotoActivity(PullToRefreshTestActivity.class, false);
                 break;
             default:
                 Toastor.showSingletonToast(MainActivity.this, "还在开发中...");

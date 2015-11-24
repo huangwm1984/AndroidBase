@@ -1,4 +1,4 @@
-package com.android.base.lifecyclelistener;
+package com.android.base.lifecycle;
 
 import android.app.Activity;
 import android.os.Bundle;

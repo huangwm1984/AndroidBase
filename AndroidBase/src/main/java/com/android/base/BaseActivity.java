@@ -9,7 +9,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.base.common.Log;
-import com.android.base.lifecyclelistener.ActivityLifecycleCallbacksCompat;
+import com.android.base.lifecycle.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
 import com.android.base.block.CommonBlockManager;

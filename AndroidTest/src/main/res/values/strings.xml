@@ -8,9 +8,9 @@
         <item>MultiThreadDownload</item>
         <item>RecyclerView</item>
         <item>Android 6.0 Permissions</item>
-        <item>Leakcanary Test</item>
-        <item>Banner Test</item>
-        <item>主流布局8</item>
+        <item>Leakcanary</item>
+        <item>Banner</item>
+        <item>PullToRefresh</item>
         <item>主流布局9</item>
         <item>主流布局10</item>
         <item>主流布局11</item>
@@ -37,6 +37,10 @@
     <string-array name="banner_list">
         <item>Banner</item>
         <item>Splash</item>
+    </string-array>
+
+    <string-array name="pulltorefresh_list">
+        <item>PullToRefreshRecyclerView</item>
     </string-array>
 
     <string name="open">打开</string>
