@@ -1,15 +1,15 @@
 package com.android.base.widget.pulltorefresh;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.android.base.widget.R;
-import com.android.base.widget.recycler.ExRecyclerView;
 
 /**
  * Created by Administrator on 2015/11/24 0024.
  */
-public class PullToRefreshRecyclerView extends PullToRefreshBase<ExRecyclerView> {
+public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
     public PullToRefreshRecyclerView(Context context) {
         super(context);
@@ -31,17 +31,17 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<ExRecyclerView>
         return Orientation.VERTICAL;
     }
 
-    @Override protected ExRecyclerView createRefreshableView(Context context, AttributeSet attrs) {
-        ExRecyclerView recyclerView = new ExRecyclerView(context, attrs);
+    @Override protected RecyclerView createRefreshableView(Context context, AttributeSet attrs) {
+        RecyclerView recyclerView = new RecyclerView(context, attrs);
         recyclerView.setId(R.id.recyclerview);
         return recyclerView;
     }
 
-    public void setAdapter(ExRecyclerView.Adapter adapter){
+    public void setAdapter(RecyclerView.Adapter adapter){
         mRefreshableView.setAdapter(adapter);
     }
 
-    public void setLayoutManager(ExRecyclerView.LayoutManager layoutManager){
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager){
         mRefreshableView.setLayoutManager(layoutManager);
     }
 

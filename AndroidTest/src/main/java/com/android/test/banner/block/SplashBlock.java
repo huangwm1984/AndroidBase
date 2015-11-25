@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/22 0022.
  */
-public class SplashSampleBlock extends UiBlock {
+public class SplashBlock extends UiBlock {
 
     SimpleGuideBanner mBanner;
     List<View> mViews;

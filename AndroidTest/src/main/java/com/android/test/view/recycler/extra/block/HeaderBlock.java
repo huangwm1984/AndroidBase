@@ -14,7 +14,7 @@ import butterknife.Bind;
 /**
  * Created by Administrator on 2015/11/13 0013.
  */
-public class HeaderSampleBlock extends UiBlock {
+public class HeaderBlock extends UiBlock {
 
 
     @Bind(R.id.header_imageView)
@@ -30,5 +30,9 @@ public class HeaderSampleBlock extends UiBlock {
     @Override
     protected void onCreated() {
         Glide.with(mActivity).load(R.drawable.default_head_pic).into(mHeaderIv);
+    }
+
+    public View getHeaderView(){
+        return mHeaderLl;
     }
 }

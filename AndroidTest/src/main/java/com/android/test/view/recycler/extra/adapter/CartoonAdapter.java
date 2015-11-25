@@ -1,10 +1,11 @@
 package com.android.test.view.recycler.extra.adapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.android.base.block.SampleBlock;
 import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
-import com.android.base.quickadapter.recycler.ExBaseRcvQuickAdapter;
+import com.android.base.quickadapter.recycler.ExQuickRcvAdapter;
 import com.android.base.widget.DynamicHeightImageView;
 import com.android.test.R;
 import com.android.test.view.recycler.extra.entity.TestDataBean.DataEntity.ObjectListEntity;
@@ -19,21 +20,21 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  */
 public class CartoonAdapter extends SampleBlock {
 
-    public ExBaseRcvQuickAdapter mQuickRcvAdapter;
+    public ExQuickRcvAdapter mQuickRcvAdapter;
 
     @Override
     protected void onCreated() {
 
     }
 
-    public void setAdapter(List<ObjectListEntity> data){
+    public void setAdapter(List<ObjectListEntity> data, RecyclerView.LayoutManager layoutManager){
 
         if(mQuickRcvAdapter!=null){
             mQuickRcvAdapter.replaceAll(data);
             return;
         }
 
-        mQuickRcvAdapter = new ExBaseRcvQuickAdapter<ObjectListEntity>(mActivity, R.layout.item_waterfall, data) {
+        mQuickRcvAdapter = new ExQuickRcvAdapter<ObjectListEntity>(mActivity, R.layout.item_waterfall, data, layoutManager) {
 
             @Override
             protected void convert(BaseRcvAdapterHelper helper, ObjectListEntity item) {
@@ -57,6 +58,10 @@ public class CartoonAdapter extends SampleBlock {
             }
         };
 
+    }
+
+    public ExQuickRcvAdapter getAdapter(){
+        return mQuickRcvAdapter;
     }
 
 

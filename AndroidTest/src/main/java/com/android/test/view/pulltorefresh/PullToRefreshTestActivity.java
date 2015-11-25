@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.android.base.common.assist.Toastor;
 import com.android.test.R;
 import com.android.test.TestBaseActivity;
+import com.android.test.view.pulltorefresh.recycler.LoadMoreRecyclerActivity;
 import com.android.test.view.pulltorefresh.recycler.PullToRefreshRecyclerActivity;
 
 /**
@@ -35,7 +36,7 @@ public class PullToRefreshTestActivity extends TestBaseActivity {
                 gotoActivity(PullToRefreshRecyclerActivity.class, false);
                 break;
             case 1:
-
+                gotoActivity(LoadMoreRecyclerActivity.class, false);
                 break;
             case 2:
 

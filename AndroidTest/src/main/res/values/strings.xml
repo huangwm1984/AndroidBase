@@ -41,6 +41,7 @@
 
     <string-array name="pulltorefresh_list">
         <item>PullToRefreshRecyclerView</item>
+        <item>LoadMoreRecyclerView</item>
     </string-array>
 
     <string name="open">打开</string>

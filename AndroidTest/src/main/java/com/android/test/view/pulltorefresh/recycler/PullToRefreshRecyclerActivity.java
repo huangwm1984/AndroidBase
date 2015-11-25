@@ -3,14 +3,13 @@ package com.android.test.view.pulltorefresh.recycler;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.android.base.BaseActivity;
 import com.android.base.widget.pulltorefresh.PullToRefreshBase;
 import com.android.base.widget.pulltorefresh.PullToRefreshRecyclerView;
-import com.android.base.widget.recycler.ExRecyclerView;
 import com.android.test.R;
 import com.android.test.view.pulltorefresh.recycler.adapter.DataAdapter;
-import com.android.test.view.recycler.extra.adapter.CartoonAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,14 +50,14 @@ public class PullToRefreshRecyclerActivity extends BaseActivity {
     }
 
     private void setRecyclerView() {
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(manager);
-        mDataAdapter.setAdapter(mData);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mDataAdapter.setAdapter(mData, layoutManager);
         mRecyclerView.setAdapter(mDataAdapter.mQuickRcvAdapter);
         mRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
-        mRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ExRecyclerView>() {
+        mRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
-            public void onPullDownToRefresh(final PullToRefreshBase<ExRecyclerView> refreshView) {
+            public void onPullDownToRefresh(final PullToRefreshBase<RecyclerView> refreshView) {
                 mRecyclerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -68,7 +67,7 @@ public class PullToRefreshRecyclerActivity extends BaseActivity {
             }
 
             @Override
-            public void onPullUpToRefresh(final PullToRefreshBase<ExRecyclerView> refreshView) {
+            public void onPullUpToRefresh(final PullToRefreshBase<RecyclerView> refreshView) {
                 mRecyclerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
@@ -18,14 +19,13 @@ import com.android.base.BaseActivity;
 import com.android.base.LoadingAndRetryManager;
 import com.android.base.OnLoadingAndRetryListener;
 import com.android.base.common.assist.Toastor;
-import com.android.base.widget.recycler.ExRecyclerView;
-import com.android.base.widget.recycler.OnRecyclerViewScrollListener;
+import com.android.base.widget.recycler.OnRcvScrollListener;
 import com.android.base.widget.recycler.decoration.DividerGridItemDecoration;
 import com.android.base.widget.recycler.layoutmanager.ExStaggeredGridLayoutManager;
 import com.android.test.R;
 import com.android.test.view.recycler.extra.adapter.CartoonAdapter;
-import com.android.test.view.recycler.extra.block.FooterSampleBlock;
-import com.android.test.view.recycler.extra.block.HeaderSampleBlock;
+import com.android.test.view.recycler.extra.block.FooterBlock;
+import com.android.test.view.recycler.extra.block.HeaderBlock;
 import com.android.test.view.recycler.extra.data.CartoonDataManager;
 import com.android.test.view.recycler.extra.entity.TestDataBean.DataEntity.ObjectListEntity;
 import com.android.test.view.recycler.extra.impl.ResponseCallback;
@@ -47,7 +47,7 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     @Bind(R.id.content)
     View mContentView;
     @Bind(R.id.waterFall_recyclerView)
-    ExRecyclerView mWaterFallRcv;
+    RecyclerView mWaterFallRcv;
     @Bind(R.id.float_imageButton)
     ImageView mFloatIv;
     @Bind(R.id.toolbar)
@@ -59,8 +59,8 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     /** 是否加载数据标志 **/
     private boolean isLoadingData = false;
 
-    HeaderSampleBlock mHeaderBlock;
-    FooterSampleBlock mFooterBlock;
+    HeaderBlock mHeaderBlock;
+    FooterBlock mFooterBlock;
     CartoonAdapter mCartoonAdapter;
     CartoonDataManager mDataManager;
 
@@ -97,9 +97,9 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     }
 
     private void setBlock() {
-        getCommonBlockManager().add(new CartoonAdapter()).add(new CartoonDataManager()).add(new HeaderSampleBlock()).add(new FooterSampleBlock());
-        mHeaderBlock = getCommonBlockManager().get(HeaderSampleBlock.class);
-        mFooterBlock = getCommonBlockManager().get(FooterSampleBlock.class);
+        getCommonBlockManager().add(new CartoonAdapter()).add(new CartoonDataManager()).add(new HeaderBlock()).add(new FooterBlock());
+        mHeaderBlock = getCommonBlockManager().get(HeaderBlock.class);
+        mFooterBlock = getCommonBlockManager().get(FooterBlock.class);
         mCartoonAdapter = getCommonBlockManager().get(CartoonAdapter.class);
         mDataManager = getCommonBlockManager().get(CartoonDataManager.class);
     }
@@ -127,21 +127,23 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     private void setWaterFallRcv() {
 
         // 设置头部或底部的操作应该在setAdapter之前
-        mWaterFallRcv.addHeaderView(mHeaderBlock.mHeaderLl);
-        mWaterFallRcv.addFooterView(mFooterBlock.mFooterLl);
+        //mWaterFallRcv.addHeaderView(mHeaderBlock.mHeaderLl);
+        //mWaterFallRcv.addFooterView(mFooterBlock.mFooterLl);
 
-        ExStaggeredGridLayoutManager staggeredGridLayoutManager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        //ExStaggeredGridLayoutManager layoutManager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, true);// 可替换
-        mWaterFallRcv.setLayoutManager(staggeredGridLayoutManager);
+        mWaterFallRcv.setLayoutManager(layoutManager);
 
         // 添加分割线
         mWaterFallRcv.addItemDecoration(new DividerGridItemDecoration(this));
         //mWaterFallRcv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));//可替换
 
         List<ObjectListEntity> mData = new ArrayList<>();// 先放一个空的list
-        mCartoonAdapter.setAdapter(mData);
-
+        mCartoonAdapter.setAdapter(mData, layoutManager);
+        mCartoonAdapter.getAdapter().setHeaderView(mHeaderBlock.getHeaderView());
+        mCartoonAdapter.getAdapter().setFooterView(mFooterBlock.getFooterView());
 
         // 不显示滚动到顶部/底部的阴影（减少绘制）
         mWaterFallRcv.setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -165,7 +167,7 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
         /**
          * 监听滚动事件
          */
-        mWaterFallRcv.addOnScrollListener(new OnRecyclerViewScrollListener() {
+        mWaterFallRcv.addOnScrollListener(new OnRcvScrollListener() {
 
             @Override
             public void onScrollUp() {
@@ -187,15 +189,20 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
                 if (!isLoadingData) {
                     isLoadingData = true;
                     mDataManager.loadOldData(HeaderOrFooterActivity.this);
-                    mFooterBlock.mFooterLl.setVisibility(View.VISIBLE);
+                    mFooterBlock.getFooterView().setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
+            public void onScrolled(int distanceX, int distanceY) {
+                setToolbarBgByScrollDistance(distanceY);
+            }
+
+            /*@Override
             public void onMoved(int distanceX, int distanceY) {
                 //LogUtils.d("distance X = " + distanceX + "distance Y = " + distanceY);
                 setToolbarBgByScrollDistance(distanceY);
-            }
+            }*/
         });
     }
 
@@ -304,14 +311,14 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
             mSwipeRefreshLayout.setRefreshing(false);
         }
         isLoadingData = false;
-        mFooterBlock.mFooterLl.setVisibility(View.GONE);
+        mFooterBlock.getFooterView().setVisibility(View.GONE);
         mCartoonAdapter.mQuickRcvAdapter.update(mDataManager.getData());
         mLoadingAndRetryManager.showContent();
     }
 
     @Override
     public void onError(Request request, Exception e) {
-        mFooterBlock.mFooterLl.setVisibility(View.GONE);
+        mFooterBlock.getFooterView().setVisibility(View.GONE);
         int itemCount = mCartoonAdapter.mQuickRcvAdapter.getItemCount();
         if(itemCount - 2 <= 0){
             mLoadingAndRetryManager.showEmpty();
