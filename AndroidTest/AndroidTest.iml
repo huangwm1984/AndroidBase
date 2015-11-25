@@ -94,9 +94,10 @@
     <orderEntry type="library" exported="" name="ormlite-core-4.48" level="project" />
     <orderEntry type="library" exported="" name="leakcanary-watcher-1.3" level="project" />
     <orderEntry type="library" exported="" name="leakcanary-android-1.3" level="project" />
-    <orderEntry type="library" exported="" name="glide-3.6.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.1.1" level="project" />
+    <orderEntry type="library" exported="" name="glide-3.6.1" level="project" />
     <orderEntry type="module" module-name="AndroidBase" exported="" />
     <orderEntry type="module" module-name="AndroidWidget" exported="" />
+    <orderEntry type="library" exported="" name="android-android-23" level="project" />
   </component>
 </module>

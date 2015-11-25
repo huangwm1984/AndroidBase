@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.base.widget.autolayout;
+package com.android.base.autolayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -24,7 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.base.widget.R;
+import com.android.base.R;
+import com.apkfuns.logutils.LogUtils;
 
 public class AutoLayoutHelper
 {

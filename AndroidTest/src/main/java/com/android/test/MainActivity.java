@@ -3,7 +3,7 @@ package com.android.test;
 import android.content.Intent;
 
 import com.android.base.common.assist.Toastor;
-import com.android.base.widget.autolayout.AutoLayout;
+import com.android.test.autolayout.AutoLayoutActivity;
 import com.android.test.banner.BannerTestActivity;
 import com.android.test.download.DownLoadActivity;
 import com.android.test.net.TestHttpActivity;
@@ -65,6 +65,9 @@ public class MainActivity extends TestBaseActivity {
                 break;
             case 7:
                 gotoActivity(PullToRefreshTestActivity.class, false);
+                break;
+            case 8:
+                gotoActivity(AutoLayoutActivity.class, false);
                 break;
             default:
                 Toastor.showSingletonToast(MainActivity.this, "还在开发中...");

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="collected_goods">收藏过的商品</string>
+    <string name="suffered_goods">浏览过的商品</string>
+    <string name="setted_remind">设置过提醒</string>
+    <string name="suggestion">反馈您的意见</string>
+    <string name="about_summai">关于三脉</string>
+    <string name="summai_setting">三脉app设置</string>
+</resources>

@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.base.autolayout.AutoLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.android.base.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="288px"
+        android:orientation="vertical" >
+
+        <com.android.base.autolayout.AutoRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="212px"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/load_regist"
+                android:layout_width="206px"
+                android:layout_height="58px"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="注册"
+                android:textColor="#000000"
+                android:textSize="24px" />
+        </com.android.base.autolayout.AutoRelativeLayout>
+
+        <com.android.base.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="76px"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#532D4F"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="我的收藏"
+                    android:textColor="#ffffff"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#8c4984" />
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#532D4F"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="我的历史"
+                    android:textColor="#ffffff"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#8c4984" />
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#532D4F"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="降价提醒"
+                    android:textColor="#ffffff"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+        </com.android.base.autolayout.AutoLinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="82px"
+            android:background="#CA1622"
+            android:gravity="center"
+            android:text="我偶的三脉"
+            android:textColor="#ffffff"
+            android:textSize="28px"
+            android:visibility="gone" />
+
+        <com.android.base.autolayout.AutoLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200px"
+            android:background="@drawable/yidengl_yonghm_bg"
+            android:gravity="center"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="96px"
+                android:layout_height="96px"
+                android:src="@drawable/yidengl_yonghm_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="19px"
+                android:paddingRight="19px"
+                android:text="过往止境"
+                android:textColor="#ffffff"
+                android:textSize="28px" />
+        </com.android.base.autolayout.AutoLinearLayout>
+    </com.android.base.autolayout.AutoLinearLayout>
+
+    <com.android.base.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="328px"
+        android:background="#F7F7F7"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="14px"
+        android:paddingLeft="12px"
+        android:paddingRight="12px"
+        android:paddingTop="14px" >
+
+        <com.android.base.autolayout.AutoRelativeLayout
+            android:id="@+id/layout_my_collection"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:src="@drawable/yidengl_shouc_icon" />
+
+                <TextView
+                    android:id="@+id/my_collection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12px"
+                    android:text="我的收藏"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3px"
+                    android:text="@string/collected_goods"
+                    android:textColor="#b3b3b3"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.5px"
+                android:layout_alignParentBottom="true"
+                android:background="#dfdfdf" />
+        </com.android.base.autolayout.AutoRelativeLayout>
+
+        <com.android.base.autolayout.AutoRelativeLayout
+            android:id="@+id/layout_my_history"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16px"
+            android:layout_marginRight="16px"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:src="@drawable/yidengl_liszj_icon" />
+
+                <TextView
+                    android:id="@+id/my_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12px"
+                    android:text="我的历史"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3px"
+                    android:text="@string/suffered_goods"
+                    android:textColor="#b3b3b3"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.5px"
+                android:layout_alignParentBottom="true"
+                android:background="#dfdfdf" />
+        </com.android.base.autolayout.AutoRelativeLayout>
+
+        <com.android.base.autolayout.AutoRelativeLayout
+            android:id="@+id/layout_price_remind"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:src="@drawable/yidengl_jjtx_icon" />
+
+                <TextView
+                    android:id="@+id/price_remind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12px"
+                    android:text="降价提醒"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3px"
+                    android:text="@string/setted_remind"
+                    android:textColor="#b3b3b3"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.5px"
+                android:layout_alignParentBottom="true"
+                android:background="#dfdfdf" />
+        </com.android.base.autolayout.AutoRelativeLayout>
+    </com.android.base.autolayout.AutoLinearLayout>
+
+    <com.android.base.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300px"
+        android:background="#F7F7F7"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="12px"
+        android:paddingRight="12px" >
+
+        <com.android.base.autolayout.AutoRelativeLayout
+            android:id="@+id/layout_feedback"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:src="@drawable/yidengl_yijfk_icon" />
+
+                <TextView
+                    android:id="@+id/feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12px"
+                    android:text="意见反馈"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3px"
+                    android:text="@string/suggestion"
+                    android:textColor="#b3b3b3"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.5px"
+                android:layout_alignParentBottom="true"
+                android:background="#dfdfdf" />
+        </com.android.base.autolayout.AutoRelativeLayout>
+
+        <com.android.base.autolayout.AutoRelativeLayout
+            android:id="@+id/layout_contact_us"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16px"
+            android:layout_marginRight="16px"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:src="@drawable/yidengl_lianxwm_icon" />
+
+                <TextView
+                    android:id="@+id/contact_us"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12px"
+                    android:text="练习我们"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3px"
+                    android:text="@string/about_summai"
+                    android:textColor="#b3b3b3"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.5px"
+                android:layout_alignParentBottom="true"
+                android:background="#dfdfdf" />
+        </com.android.base.autolayout.AutoRelativeLayout>
+
+        <com.android.base.autolayout.AutoRelativeLayout
+            android:id="@+id/layout_setting"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+
+            <com.android.base.autolayout.AutoLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="48px"
+                    android:layout_height="48px"
+                    android:src="@drawable/yidengl_shez_icon" />
+
+                <TextView
+                    android:id="@+id/setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12px"
+                    android:text="设置"
+                    android:textSize="24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3px"
+                    android:text="@string/summai_setting"
+                    android:textColor="#b3b3b3"
+                    android:textSize="24px" />
+            </com.android.base.autolayout.AutoLinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.5px"
+                android:layout_alignParentBottom="true"
+                android:background="#dfdfdf" />
+        </com.android.base.autolayout.AutoRelativeLayout>
+    </com.android.base.autolayout.AutoLinearLayout>
+
+   
+
+</com.android.base.autolayout.AutoLinearLayout>

@@ -14,31 +14,30 @@
  * limitations under the License.
  */
 
-package com.android.base.widget.autolayout;
+package com.android.base.autolayout;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
-public class AutoFrameLayout extends FrameLayout
+public class AutoRelativeLayout extends RelativeLayout
 {
     private final AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
 
-    public AutoFrameLayout(Context context)
+    public AutoRelativeLayout(Context context)
     {
         super(context);
     }
 
-    public AutoFrameLayout(Context context, AttributeSet attrs)
+    public AutoRelativeLayout(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
 
-    public AutoFrameLayout(Context context, AttributeSet attrs, int defStyleAttr)
+    public AutoRelativeLayout(Context context, AttributeSet attrs, int defStyle)
     {
-        super(context, attrs, defStyleAttr);
+        super(context, attrs, defStyle);
     }
 
     @Override
@@ -46,6 +45,8 @@ public class AutoFrameLayout extends FrameLayout
     {
         return new LayoutParams(getContext(), attrs);
     }
+
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
@@ -61,7 +62,7 @@ public class AutoFrameLayout extends FrameLayout
         super.onLayout(changed, left, top, right, bottom);
     }
 
-    public static class LayoutParams extends FrameLayout.LayoutParams
+    public static class LayoutParams extends RelativeLayout.LayoutParams
             implements AutoLayoutHelper.AutoLayoutParams
     {
         private AutoLayoutHelper.AutoLayoutInfo mAutoLayoutInfo;
@@ -77,11 +78,6 @@ public class AutoFrameLayout extends FrameLayout
             super(width, height);
         }
 
-        public LayoutParams(int width, int height, int gravity)
-        {
-            super(width, height, gravity);
-        }
-
         public LayoutParams(ViewGroup.LayoutParams source)
         {
             super(source);
@@ -90,18 +86,6 @@ public class AutoFrameLayout extends FrameLayout
         public LayoutParams(MarginLayoutParams source)
         {
             super(source);
-        }
-
-        public LayoutParams(FrameLayout.LayoutParams source)
-        {
-            super((MarginLayoutParams) source);
-            gravity = source.gravity;
-        }
-
-        public LayoutParams(LayoutParams source)
-        {
-            this((FrameLayout.LayoutParams) source);
-            mAutoLayoutInfo = source.mAutoLayoutInfo;
         }
 
         @Override

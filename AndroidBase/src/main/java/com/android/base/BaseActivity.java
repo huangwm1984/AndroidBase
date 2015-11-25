@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
+import com.android.base.autolayout.AutoLayout;
 import com.android.base.common.Log;
 import com.android.base.lifecycle.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
@@ -36,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         if (getMainContentViewId() != 0) {
             setContentView(getMainContentViewId()); // set view
         }
+        AutoLayout.getInstance().auto(this);
         ButterKnife.bind(this);
         mApplicationContext = getApplicationContext();
         NetworkStateReceiver.registerNetworkStateReceiver(this);

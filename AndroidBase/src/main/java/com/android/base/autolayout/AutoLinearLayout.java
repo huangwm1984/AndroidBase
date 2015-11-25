@@ -1,4 +1,4 @@
-package com.android.base.widget.autolayout;
+package com.android.base.autolayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
