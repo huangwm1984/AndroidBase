@@ -34,10 +34,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppManager.getAppManager().addActivity(this);
         if (getMainContentViewId() != 0) {
             setContentView(getMainContentViewId()); // set view
         }
+        AppManager.getAppManager().addActivity(this);
         mApplicationContext = getApplicationContext();
         ButterKnife.bind(this);
         AutoLayout.getInstance().auto(this);
@@ -119,7 +119,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
             mCommonBlockManager.onDestroy();
         }
         NetworkStateReceiver.unRegisterNetworkStateReceiver(this);
-        AppManager.getAppManager().finishActivity();
+        AppManager.getAppManager().finishActivity(this);
     }
 
     @Override
