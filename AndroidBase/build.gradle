@@ -31,7 +31,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp:2.6.0'
     compile 'com.squareup.okio:okio:1.6.0'
     compile 'com.alibaba:fastjson:1.2.7'
     compile 'com.jakewharton:disklrucache:2.0.2'

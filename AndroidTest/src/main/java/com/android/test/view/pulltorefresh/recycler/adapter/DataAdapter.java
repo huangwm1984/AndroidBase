@@ -1,8 +1,10 @@
 package com.android.test.view.pulltorefresh.recycler.adapter;
 
 import android.content.Intent;
+import android.view.View;
 
 import com.android.base.block.SampleBlock;
+import com.android.base.common.assist.Toastor;
 import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
 import com.android.base.quickadapter.recycler.QuickRcvAdapter;
 import com.android.test.R;
@@ -39,8 +41,14 @@ public class DataAdapter extends SampleBlock {
 
         mQuickRcvAdapter = new QuickRcvAdapter<String>(mActivity, R.layout.item_pull_to_refresh, data) {
             @Override
-            protected void convert(BaseRcvAdapterHelper helper, String item) {
+            protected void convert(BaseRcvAdapterHelper helper, final String item) {
                 helper.setText(R.id.textView, "No." + item);
+                helper.setOnClickListener(R.id.textView, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toastor.showSingleLongToast(v.getContext(), "你点中了" + item);
+                    }
+                });
             }
         };
     }

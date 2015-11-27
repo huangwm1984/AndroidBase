@@ -152,7 +152,7 @@ public class LoadMoreRecyclerActivity extends BaseActivity {
                         //mDataAdapter.getAdapter().addAll(mData);
                         isLoadingData = false;
                     }
-                }, 500);
+                }, 5000);
 
 
             }

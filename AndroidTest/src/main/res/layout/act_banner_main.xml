@@ -4,7 +4,7 @@
             android:layout_height="match_parent" >
 
 
-        <com.android.test.banner.block.SimpleImageBanner
+        <com.android.test.view.banner.block.SimpleImageBanner
             android:id="@+id/banner_main_default"
             android:layout_width="match_parent"
             android:layout_height="180dp"
