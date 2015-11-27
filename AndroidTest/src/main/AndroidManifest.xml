@@ -67,6 +67,10 @@
             android:theme="@style/RecyclerViewTheme"/>
 
         <activity
+            android:name=".view.recycler.scrollview.RecyclerViewInsideScrollViewActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".permission.PermissionActivity"
             android:screenOrientation="portrait" />
 

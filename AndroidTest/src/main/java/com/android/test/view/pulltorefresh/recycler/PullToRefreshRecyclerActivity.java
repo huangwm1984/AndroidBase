@@ -29,7 +29,7 @@ public class PullToRefreshRecyclerActivity extends BaseActivity {
 
     @Override
     protected int getMainContentViewId() {
-        return R.layout.act_pull_to_refresh_recycler;
+        return R.layout.act_pull_to_refresh_rcv;
     }
 
     @Override

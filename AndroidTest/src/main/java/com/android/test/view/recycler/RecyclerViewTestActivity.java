@@ -9,6 +9,7 @@ import com.android.test.TestBaseActivity;
 import com.android.test.view.recycler.extra.HeaderOrFooterActivity;
 import com.android.test.view.recycler.multi.MultiItemActivity;
 import com.android.test.view.recycler.normal.NormalActivity;
+import com.android.test.view.recycler.scrollview.RecyclerViewInsideScrollViewActivity;
 
 /**
  * Created by Administrator on 2015/10/31 0031.
@@ -44,7 +45,7 @@ public class RecyclerViewTestActivity extends TestBaseActivity {
                 gotoActivity(HeaderOrFooterActivity.class, false);
                 break;
             case 3:
-                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
+                gotoActivity(RecyclerViewInsideScrollViewActivity.class, false);
                 break;
             case 4:
                 Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
