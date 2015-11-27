@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -144,7 +145,12 @@ public class FragmentTabHostActivity extends BaseActivity implements FragmentTab
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 

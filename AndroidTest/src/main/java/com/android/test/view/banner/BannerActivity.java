@@ -1,28 +1,33 @@
-package com.android.test.autolayout;
+package com.android.test.view.banner;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.MenuItem;
 
 import com.android.base.BaseActivity;
 import com.android.test.R;
+import com.android.test.view.banner.block.BannerBlock;
 
 /**
- * Created by Administrator on 2015/11/25 0025.
+ * Created by Administrator on 2015/11/20 0020.
  */
-public class AutoLayoutActivity extends BaseActivity{
+public class BannerActivity extends BaseActivity {
+
+
     @Override
     protected int getMainContentViewId() {
-        return R.layout.act_auto_layout;
+        return R.layout.act_banner_main;
     }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        getCommonBlockManager().add(new BannerBlock());
         setToolBar();
     }
 
     private void setToolBar() {
-        getSupportActionBar().setTitle("测试多层嵌套的AutoLayout适配");
+        getSupportActionBar().setTitle("Banner Test");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -47,7 +52,12 @@ public class AutoLayoutActivity extends BaseActivity{
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 

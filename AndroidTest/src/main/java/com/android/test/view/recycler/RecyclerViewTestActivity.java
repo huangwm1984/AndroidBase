@@ -1,6 +1,7 @@
 package com.android.test.view.recycler;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.android.base.common.assist.Toastor;
 import com.android.test.R;

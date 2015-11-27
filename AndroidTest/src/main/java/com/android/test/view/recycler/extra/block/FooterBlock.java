@@ -1,14 +1,11 @@
 package com.android.test.view.recycler.extra.block;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.android.base.block.UiBlock;
 import com.android.test.R;
-import com.android.test.view.recycler.RecyclerViewTestActivity;
 
 import butterknife.Bind;
 
@@ -21,12 +18,17 @@ public class FooterBlock extends UiBlock {
     public LinearLayout mFooterLl;
 
     @Override
-    public View getRootView() {
-        return LayoutInflater.from(mActivity).inflate(R.layout.item_waterfall_footer, null);
+    public int getRootViewId() {
+        return 0;
     }
 
     @Override
-    protected void onCreated() {
+    public View resetRootView(View oldRootView, LayoutInflater inflater) {
+        return inflater.inflate(R.layout.item_waterfall_footer, null);
+    }
+
+    @Override
+    public void onViewCreated() {
     }
 
     public View getFooterView(){

@@ -1,4 +1,4 @@
-package com.android.base.widget.recycler.layoutmanager;
+package com.android.base.widget.recyclerview.layoutmanager;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;

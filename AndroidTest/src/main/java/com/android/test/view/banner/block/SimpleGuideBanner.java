@@ -1,4 +1,4 @@
-package com.android.test.banner.block;
+package com.android.test.view.banner.block;
 
 import android.content.Context;
 import android.util.AttributeSet;

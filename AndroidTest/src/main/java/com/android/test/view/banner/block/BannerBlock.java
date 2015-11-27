@@ -1,10 +1,8 @@
-package com.android.test.banner.block;
-
-import android.view.View;
+package com.android.test.view.banner.block;
 
 import com.android.base.block.UiBlock;
 import com.android.test.R;
-import com.android.test.banner.entity.BannerModel;
+import com.android.test.view.banner.entity.BannerModel;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -26,12 +24,12 @@ public class BannerBlock extends UiBlock {
             "http://pic.58pic.com/58pic/12/64/27/55U58PICrdX.jpg"};
 
     @Override
-    public View getRootView() {
-        return mActivity.findViewById(R.id.banner_main_default);
+    public int getRootViewId() {
+        return R.id.banner_main_default;
     }
 
     @Override
-    protected void onCreated() {
+    public void onViewCreated() {
         setData();
         mBanner = (SimpleImageBanner) getRootView();
         mBanner.setSource(mData);

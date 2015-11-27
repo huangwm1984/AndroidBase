@@ -1,9 +1,5 @@
-package com.android.test.banner.util;
+package com.android.test.view.banner.util;
 
-
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2015/11/22 0022.

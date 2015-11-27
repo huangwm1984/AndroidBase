@@ -3,6 +3,7 @@ package com.android.test.net;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -68,7 +69,12 @@ public class TestHttpActivity extends BaseActivity {
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 

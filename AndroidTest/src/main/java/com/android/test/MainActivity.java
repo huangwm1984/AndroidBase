@@ -1,14 +1,16 @@
 package com.android.test;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 
 import com.android.base.common.assist.Toastor;
-import com.android.test.autolayout.AutoLayoutActivity;
-import com.android.test.banner.BannerTestActivity;
 import com.android.test.download.DownLoadActivity;
 import com.android.test.net.TestHttpActivity;
 import com.android.test.leakcanary.LeakcanaryActivity;
 import com.android.test.permission.PermissionActivity;
+import com.android.test.view.autolayout.AutoLayoutActivity;
+import com.android.test.view.banner.BannerTestActivity;
 import com.android.test.view.pulltorefresh.PullToRefreshTestActivity;
 import com.android.test.view.tabhost.FragmentTabHostActivity;
 import com.android.test.view.recycler.RecyclerViewTestActivity;
@@ -73,6 +75,16 @@ public class MainActivity extends TestBaseActivity {
                 Toastor.showSingletonToast(MainActivity.this, "还在开发中...");
                 break;
         }
+
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 }

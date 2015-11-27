@@ -1,11 +1,12 @@
-package com.android.test.banner;
+package com.android.test.view.banner;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 
 import com.android.base.BaseActivity;
 import com.android.test.R;
-import com.android.test.banner.block.SplashBlock;
+import com.android.test.view.banner.block.SplashBlock;
 
 /**
  * Created by Administrator on 2015/11/22 0022.
@@ -43,7 +44,12 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 

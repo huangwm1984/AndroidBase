@@ -15,6 +15,14 @@
             <option value="$PROJECT_DIR$/AndroidWidget" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AndroidBase" />
+            <option value="$PROJECT_DIR$/AndroidTest" />
+            <option value="$PROJECT_DIR$/AndroidWidget" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

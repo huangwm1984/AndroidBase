@@ -3,6 +3,7 @@ package com.android.test.view.recycler.extra;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -19,9 +20,8 @@ import com.android.base.BaseActivity;
 import com.android.base.LoadingAndRetryManager;
 import com.android.base.OnLoadingAndRetryListener;
 import com.android.base.common.assist.Toastor;
-import com.android.base.widget.recycler.OnRcvScrollListener;
-import com.android.base.widget.recycler.decoration.DividerGridItemDecoration;
-import com.android.base.widget.recycler.layoutmanager.ExStaggeredGridLayoutManager;
+import com.android.base.widget.recyclerview.OnRcvScrollListener;
+import com.android.base.widget.recyclerview.decoration.DividerGridItemDecoration;
 import com.android.test.R;
 import com.android.test.view.recycler.extra.adapter.CartoonAdapter;
 import com.android.test.view.recycler.extra.block.FooterBlock;
@@ -284,7 +284,12 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 

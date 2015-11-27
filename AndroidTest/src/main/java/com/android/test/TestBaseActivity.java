@@ -2,6 +2,7 @@ package com.android.test;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -77,7 +78,12 @@ public abstract class TestBaseActivity extends BaseActivity implements View.OnCl
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 

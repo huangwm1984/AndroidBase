@@ -1,16 +1,16 @@
 package com.android.base;
 
+import java.util.Stack;
+
 import android.app.Activity;
 import android.content.Context;
-
-import java.util.Stack;
 
 /**
  * activity堆栈式管理
  */
 public class AppManager {
 
-    private static Stack<Activity> mActivityStack;
+    private static Stack<Activity> activityStack;
     private static AppManager mInstance;
 
     private AppManager() {}
@@ -33,17 +33,17 @@ public class AppManager {
      * 添加Activity到堆栈
      */
     public void addActivity(Activity activity) {
-        if (mActivityStack == null) {
-            mActivityStack = new Stack<Activity>();
+        if (activityStack == null) {
+            activityStack = new Stack<Activity>();
         }
-        mActivityStack.add(activity);
+        activityStack.add(activity);
     }
 
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
-        Activity activity = mActivityStack.lastElement();
+        Activity activity = activityStack.lastElement();
         return activity;
     }
 
@@ -51,7 +51,7 @@ public class AppManager {
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     public void finishActivity() {
-        Activity activity = mActivityStack.lastElement();
+        Activity activity = activityStack.lastElement();
         finishActivity(activity);
     }
 
@@ -60,7 +60,7 @@ public class AppManager {
      */
     public void finishActivity(Activity activity) {
         if (activity != null && !activity.isFinishing()) {
-            mActivityStack.remove(activity);
+            activityStack.remove(activity);
             activity.finish();
             activity = null;
         }
@@ -70,7 +70,7 @@ public class AppManager {
      * 结束指定类名的Activity
      */
     public void finishActivity(Class<?> cls) {
-        for (Activity activity : mActivityStack) {
+        for (Activity activity : activityStack) {
             if (activity.getClass().equals(cls)) {
                 finishActivity(activity);
                 break;
@@ -82,13 +82,13 @@ public class AppManager {
      * 结束所有Activity
      */
     public void finishAllActivity() {
-        for (int i = 0, size = mActivityStack.size(); i < size; i++) {
-            if (null != mActivityStack.get(i)) {
-                finishActivity(mActivityStack.get(i));
+        for (int i = 0, size = activityStack.size(); i < size; i++) {
+            if (null != activityStack.get(i)) {
+                finishActivity(activityStack.get(i));
                 break;
             }
         }
-        mActivityStack.clear();
+        activityStack.clear();
     }
 
     /**
@@ -97,8 +97,8 @@ public class AppManager {
      * @author kymjs
      */
     public static Activity getActivity(Class<?> cls) {
-        if (mActivityStack != null)
-            for (Activity activity : mActivityStack) {
+        if (activityStack != null)
+            for (Activity activity : activityStack) {
                 if (activity.getClass().equals(cls)) {
                     return activity;
                 }

@@ -1,4 +1,4 @@
-package com.android.test.banner.block;
+package com.android.test.view.banner.block;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.android.base.common.assist.Check;
 import com.android.base.widget.banner.BaseBanner;
 import com.android.test.R;
-import com.android.test.banner.entity.BannerModel;
+import com.android.test.view.banner.entity.BannerModel;
 import com.bumptech.glide.Glide;
 
 

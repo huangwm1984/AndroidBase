@@ -2,6 +2,8 @@ package com.android.base.block;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
@@ -15,7 +17,7 @@ import java.util.List;
  * @date 2015/6/28
  * modify:huangwm
  */
-public class CommonBlockManager {
+public class CommonBlockManager implements IBlock {
 
     private List<IBlock> mCommonBlockList;
 
@@ -23,21 +25,19 @@ public class CommonBlockManager {
 
     public CommonBlockManager(@NonNull Activity activity) {
         this.activity = activity;
+        mCommonBlockList = new ArrayList<>();
     }
 
-    public CommonBlockManager add(@NonNull IBlock iBlock) {
-        iBlock.attachActivity(activity);
-        if (mCommonBlockList == null) {
-            mCommonBlockList = new ArrayList<>();
-        }
-        mCommonBlockList.add(iBlock);
+    public CommonBlockManager add(@NonNull IBlock block) {
+        block.attachActivity(activity);
+        mCommonBlockList.add(block);
         return this;
     }
 
-    public CommonBlockManager remove(@NonNull IBlock commonBlock) {
-        commonBlock.onDestroy();
-        if (mCommonBlockList != null && mCommonBlockList.contains(commonBlock)) {
-            mCommonBlockList.remove(commonBlock);
+    public CommonBlockManager remove(@NonNull IBlock block) {
+        block.onDestroy();
+        if (mCommonBlockList.contains(block)) {
+            mCommonBlockList.remove(block);
         }
         return this;
     }
@@ -46,7 +46,7 @@ public class CommonBlockManager {
     public <T extends IBlock> T get(@NonNull Class<T> cls) {
         if (mCommonBlockList != null) {
             for (int i = 0, size = mCommonBlockList.size(); i < size; i++) {
-                if (mCommonBlockList.get(i).getClass().getName().equals(cls.getName())) {
+                if (mCommonBlockList.get(i).getClass().getCanonicalName().equals(cls.getCanonicalName())) {
                     return (T) mCommonBlockList.get(i);
                 }
             }
@@ -62,72 +62,103 @@ public class CommonBlockManager {
 
     /// 回调 start -------------------
 
+    @Override
+    public void onSaveInstanceState(final Bundle outState, final PersistableBundle outPersistentState) {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onSaveInstanceState(outState, outPersistentState);
+            }
+        });
+    }
+    @Override
+    public void onRestoreInstanceState(final Bundle savedInstanceState) {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onRestoreInstanceState(savedInstanceState);
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onStart();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onResume();
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onPause();
+            }
+        });
+    }
+
+    @Override
+    public void onStop() {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onStop();
+            }
+        });
+    }
+
+    @Override
+    public void onRestart() {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onRestart();
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        callBlock(new Callback() {
+            @Override
+            public void onCall(IBlock block) {
+                block.onDestroy();
+            }
+        });
+        mCommonBlockList.clear();
+        mCommonBlockList = null;
+    }
+
+    @Override
     public boolean onBackPressed() {
-        boolean handled = false;
-        if (mCommonBlockList != null) {
-            for (int i = 0, size = mCommonBlockList.size(); i < size; i++) {
-                handled = mCommonBlockList.get(i).onBackPressed();
-                if (handled) {
-                    break;
-                }
+        for (IBlock block : mCommonBlockList) {
+            if (block.onBackPressed()) {
+                return true;
             }
         }
-        return handled;
+        return false;
     }
 
-    public void onResume() {
-        if (mCommonBlockList != null) {
-            callBlock(new Callback() {
-                @Override
-                public void onCall(int i) {
-                    mCommonBlockList.get(i).onResume();
-                }
-            });
-        }
-    }
-
-    public void onPause() {
-        if (mCommonBlockList != null) {
-            callBlock(new Callback() {
-                @Override
-                public void onCall(int i) {
-                    mCommonBlockList.get(i).onPause();
-                }
-            });
-        }
-    }
-
-    public void onStop() {
-        if (mCommonBlockList != null) {
-            callBlock(new Callback() {
-                @Override
-                public void onCall(int i) {
-                    mCommonBlockList.get(i).onStop();
-                }
-            });
-        }
-    }
-
-    public void onDestroy() {
-        if (mCommonBlockList != null) {
-            callBlock(new Callback() {
-                @Override
-                public void onCall(int i) {
-                    mCommonBlockList.get(i).onDestroy();
-                }
-            });
-            mCommonBlockList.clear();
-            mCommonBlockList = null;
-        }
-    }
-
+    @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         callBlock(new Callback() {
             @Override
-            public void onCall(int i) {
-                if(mCommonBlockList != null){
-                    mCommonBlockList.get(i).onActivityResult(requestCode, resultCode, data);
-                }
+            public void onCall(IBlock block) {
+                block.onActivityResult(requestCode, resultCode, data);
             }
         });
     }
@@ -135,16 +166,23 @@ public class CommonBlockManager {
     //// 回调 end -------------------
 
     private void callBlock(final Callback callback) {
-        if (mCommonBlockList != null) {
-            for (int i = 0, size = mCommonBlockList.size(); i < size; i++) {
-                callback.onCall(i);
-            }
+        for (int i = 0, size = mCommonBlockList.size(); i < size; i++) {
+            callback.onCall(mCommonBlockList.get(i));
         }
+    }
+
+    public Activity getActivity() {
+        return activity;
     }
 
     private interface Callback {
 
-        void onCall(int i);
+        void onCall(IBlock block);
+
+    }
+
+    @Override
+    public void attachActivity(Activity activity) {
 
     }
 }

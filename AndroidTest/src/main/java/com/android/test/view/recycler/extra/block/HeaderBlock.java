@@ -23,13 +23,19 @@ public class HeaderBlock extends UiBlock {
     public LinearLayout mHeaderLl;
 
     @Override
-    public View getRootView() {
-        return LayoutInflater.from(mActivity).inflate(R.layout.item_waterfall_header, null);
+    public int getRootViewId() {
+        return 0;
     }
 
     @Override
-    protected void onCreated() {
+    public void onViewCreated() {
         Glide.with(mActivity).load(R.drawable.default_head_pic).into(mHeaderIv);
+    }
+
+    @Override
+    public View resetRootView(View oldRootView, LayoutInflater inflater) {
+        View view = inflater.from(mActivity).inflate(R.layout.item_waterfall_header, null);
+        return view;
     }
 
     public View getHeaderView(){

@@ -1,4 +1,4 @@
-package com.android.test.banner.entity;
+package com.android.test.view.banner.entity;
 
 /**
  * Created by Administrator on 2015/11/23 0023.

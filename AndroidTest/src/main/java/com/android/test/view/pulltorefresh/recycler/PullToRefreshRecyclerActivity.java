@@ -2,6 +2,7 @@ package com.android.test.view.pulltorefresh.recycler;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -40,7 +41,7 @@ public class PullToRefreshRecyclerActivity extends BaseActivity {
 
     private void setData() {
         for (int i = 0; i < 25; i++) {
-            mData.add("这是一条RecyclerView的数据" + i);
+            mData.add("这是一条RecyclerView的数据" + (i + 1));
         }
     }
 
@@ -52,7 +53,7 @@ public class PullToRefreshRecyclerActivity extends BaseActivity {
     private void setRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
-        mDataAdapter.setAdapter(mData, layoutManager);
+        mDataAdapter.setDataAndAdapter(mData);
         mRecyclerView.setAdapter(mDataAdapter.mQuickRcvAdapter);
         mRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         mRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
@@ -71,12 +72,13 @@ public class PullToRefreshRecyclerActivity extends BaseActivity {
                 mRecyclerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        int count = mDataAdapter.getAdapter().getItemCount();
+                        for (int i = count; i < count+15; i++) {
+                            mData.add("这是一条RecyclerView的数据" + (i + 1));
+                        }
+                        mDataAdapter.getAdapter().notifyDataSetChanged();
                         refreshView.onRefreshComplete();
-                        /*data.add(new Bean());
-                        data.add(new Bean());
-                        data.add(new Bean());
-                        adapter.notifyItemInserted(data.size() - 1);
-                        //adapter.notifyDataSetChanged();*/
+                        refreshView.getRefreshableView().smoothScrollToPosition(count + 1);
                     }
                 }, 500);
             }
@@ -104,7 +106,12 @@ public class PullToRefreshRecyclerActivity extends BaseActivity {
     }
 
     @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+    public void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+
+    }
+
+    @Override
+    public void onActivityRestoreInstanceState(Bundle savedInstanceState) {
 
     }
 

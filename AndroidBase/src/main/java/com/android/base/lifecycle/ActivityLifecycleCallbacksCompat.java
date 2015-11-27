@@ -25,7 +25,9 @@
 package com.android.base.lifecycle;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 
 
 public interface ActivityLifecycleCallbacksCompat {
@@ -40,7 +42,9 @@ public interface ActivityLifecycleCallbacksCompat {
 
     void onActivityStopped(Activity activity);
 
-    void onActivitySaveInstanceState(Activity activity, Bundle outState);
+    void onActivitySaveInstanceState(Bundle outState, PersistableBundle outPersistentState);
+
+    void onActivityRestoreInstanceState(Bundle savedInstanceState);
 
     void onActivityDestroyed(Activity activity);
 }

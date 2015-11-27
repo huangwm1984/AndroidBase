@@ -1,4 +1,4 @@
-package com.android.test.banner.block;
+package com.android.test.view.banner.block;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,12 +29,12 @@ public class SplashBlock extends UiBlock {
     private LruCache<String, Bitmap> mMemoryCache;
 
     @Override
-    public View getRootView() {
-        return mActivity.findViewById(R.id.banner_splash_pager);
+    public int getRootViewId() {
+        return R.id.banner_splash_pager;
     }
 
     @Override
-    public void onCreated() {
+    public void onViewCreated() {
         mBanner = (SimpleGuideBanner) getRootView();
         setLruCache();
         setBanner();

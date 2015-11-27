@@ -1,12 +1,10 @@
-package com.android.test.banner;
+package com.android.test.view.banner;
 
 import android.content.Intent;
 
 import com.android.base.common.assist.Toastor;
 import com.android.test.R;
 import com.android.test.TestBaseActivity;
-import com.android.test.net.TestHttpActivity;
-import com.android.test.view.tabhost.FragmentTabHostActivity;
 
 /**
  * Created by Administrator on 2015/11/20 0020.
