@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$/AndroidBase" />
             <option value="$PROJECT_DIR$/AndroidTest" />
             <option value="$PROJECT_DIR$/AndroidWidget" />
-            <option value="$PROJECT_DIR$/speechDemo" />
           </set>
         </option>
         <option name="myModules">
@@ -22,7 +21,6 @@
             <option value="$PROJECT_DIR$/AndroidBase" />
             <option value="$PROJECT_DIR$/AndroidTest" />
             <option value="$PROJECT_DIR$/AndroidWidget" />
-            <option value="$PROJECT_DIR$/speechDemo" />
           </set>
         </option>
       </GradleProjectSettings>

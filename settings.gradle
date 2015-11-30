@@ -1,2 +1,1 @@
 include ':AndroidBase', ':AndroidWidget', ':AndroidTest'
-include ':speechDemo'
