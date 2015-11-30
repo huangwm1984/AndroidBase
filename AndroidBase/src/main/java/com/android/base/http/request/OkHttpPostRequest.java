@@ -88,6 +88,8 @@ public class OkHttpPostRequest extends OkHttpRequest
     {
         validParams();
         RequestBody requestBody = null;
+
+
         switch (type)
         {
             case TYPE_PARAMS:

@@ -21,7 +21,6 @@ import java.util.Map;
 
 /**
  * Created by zhy on 15/11/6.
- * modify:huangwm 使用高性能的ArrayMap
  */
 public abstract class OkHttpRequest
 {
@@ -144,8 +143,7 @@ public abstract class OkHttpRequest
         {
             if (this.params == null)
             {
-                //params = new IdentityHashMap<>();
-                headers = new ArrayMap<String, String>();
+                params = new IdentityHashMap<>();
             }
             params.put(key, val);
             return this;
@@ -161,8 +159,7 @@ public abstract class OkHttpRequest
         {
             if (this.headers == null)
             {
-                //headers = new IdentityHashMap<>();
-                headers = new ArrayMap<String, String>();
+                headers = new IdentityHashMap<>();
             }
             headers.put(key, val);
             return this;
