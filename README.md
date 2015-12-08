@@ -28,6 +28,6 @@
 
 14.集成BaseBanner控件
 
-15.集成hongyangAndroid的多分辨率终极适配方案AndroidAutoLayout，
+15.集成hongyangAndroid的多分辨率终极适配方案AndroidAutoLayout
 
 最后感谢github上大神的开源框架和开源精神 (●'◡'●)ﾉ♥
