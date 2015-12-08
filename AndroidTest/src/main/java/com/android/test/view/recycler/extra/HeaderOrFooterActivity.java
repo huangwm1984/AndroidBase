@@ -149,7 +149,7 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
         mWaterFallRcv.setOverScrollMode(View.OVER_SCROLL_NEVER);
         //waterFallRcv.setClipToPadding(true);
 
-        mWaterFallRcv.setAdapter(mCartoonAdapter.mQuickRcvAdapter);
+        mWaterFallRcv.setAdapter(mCartoonAdapter.getAdapter());
 
         //Solve IndexOutOfBoundsException exception
         //解决上下拉刷新时还可以进行滑动的问题
@@ -317,14 +317,14 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
         }
         isLoadingData = false;
         mFooterBlock.getFooterView().setVisibility(View.GONE);
-        mCartoonAdapter.mQuickRcvAdapter.update(mDataManager.getData());
+        mCartoonAdapter.getAdapter().addAll((List<ObjectListEntity>)object);
         mLoadingAndRetryManager.showContent();
     }
 
     @Override
     public void onError(Request request, Exception e) {
         mFooterBlock.getFooterView().setVisibility(View.GONE);
-        int itemCount = mCartoonAdapter.mQuickRcvAdapter.getItemCount();
+        int itemCount = mCartoonAdapter.getAdapter().getItemCount();
         if(itemCount - 2 <= 0){
             mLoadingAndRetryManager.showEmpty();
         }else{

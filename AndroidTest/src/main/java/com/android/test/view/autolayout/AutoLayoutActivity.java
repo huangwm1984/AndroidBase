@@ -23,7 +23,7 @@ public class AutoLayoutActivity extends BaseActivity{
     }
 
     private void setToolBar() {
-        getSupportActionBar().setTitle("测试多层嵌套的AutoLayout适配");
+        getSupportActionBar().setTitle("测试多层嵌套的AutoLayout适配-1");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

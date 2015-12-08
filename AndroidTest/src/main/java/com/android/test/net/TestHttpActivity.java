@@ -41,6 +41,7 @@ public class TestHttpActivity extends BaseActivity {
         TestHttpReq.request2(mHandler);
         TestHttpReq.request3(mHandler);
         TestHttpReq.request4(mHandler);
+        TestHttpReq.request5(mHandler);
     }
 
     private void setToolBar() {

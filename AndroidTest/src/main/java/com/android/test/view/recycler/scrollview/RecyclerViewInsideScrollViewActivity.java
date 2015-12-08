@@ -9,8 +9,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.android.base.BaseActivity;
-import com.android.base.widget.recyclerview.extra.HeaderAndFooterRecyclerViewAdapter;
-import com.android.base.widget.recyclerview.extra.RecyclerViewUtils;
+import com.android.base.widget.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.android.base.widget.recyclerview.RecyclerViewUtils;
 import com.android.test.R;
 import com.android.test.view.pulltorefresh.recycler.adapter.DataAdapter;
 import com.android.test.view.pulltorefresh.recycler.widget.HeaderBanner;

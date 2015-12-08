@@ -38,43 +38,40 @@ public class SimpleFooterTest extends RelativeLayout implements IBlock {
     }
 
     private void init(Context context) {
-        LogUtils.e("SimpleFooterTest init------------------");
         inflate(context, R.layout.item_waterfall_footer, this);
     }
 
     @Override
     public void attachActivity(Activity activity) {
-        LogUtils.e("SimpleFooterTest attachActivity------------------");
     }
 
     @Override
     public void onStart() {
-        LogUtils.e("SimpleFooterTest onStart------------------");
     }
 
     @Override
     public void onRestart() {
-        LogUtils.e("SimpleFooterTest onRestart------------------");
+
     }
 
     @Override
     public void onResume() {
-        LogUtils.e("SimpleFooterTest onResume------------------");
+
     }
 
     @Override
     public void onPause() {
-        LogUtils.e("SimpleFooterTest onPause------------------");
+
     }
 
     @Override
     public void onStop() {
-        LogUtils.e("SimpleFooterTest onStop------------------");
+
     }
 
     @Override
     public void onDestroy() {
-        LogUtils.e("SimpleFooterTest onDestroy------------------");
+
     }
 
     @Override

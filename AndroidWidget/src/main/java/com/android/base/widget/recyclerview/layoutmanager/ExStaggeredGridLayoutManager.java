@@ -21,6 +21,15 @@ public class ExStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
     }
 
     /**
+     * Returns the current used by the GridLayoutManager.
+     *
+     * @return The current used by the GridLayoutManager.
+     */
+    public GridLayoutManager.SpanSizeLookup getSpanSizeLookup() {
+        return mSpanSizeLookup;
+    }
+
+    /**
      * 设置某个位置的item的跨列程度，这里和GridLayoutManager有点不一样，
      * 如果你设置某个位置的item的span>1了，那么这个item会占据所有列
      *
@@ -29,15 +38,6 @@ public class ExStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
      */
     public void setSpanSizeLookup(GridLayoutManager.SpanSizeLookup spanSizeLookup) {
         mSpanSizeLookup = spanSizeLookup;
-    }
-
-    /**
-     * Returns the current used by the GridLayoutManager.
-     *
-     * @return The current used by the GridLayoutManager.
-     */
-    public GridLayoutManager.SpanSizeLookup getSpanSizeLookup() {
-        return mSpanSizeLookup;
     }
 
     @Override
@@ -52,10 +52,10 @@ public class ExStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
                     View view = recycler.getViewForPosition(i);
                     if (view != null) {
                         /**
-                         *占用所有的列 
+                         *占用所有的列
                          * @see https://plus.google.com/+EtienneLawlor/posts/c5T7fu9ujqi
                          */
-                        StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+                        LayoutParams lp = (LayoutParams) view.getLayoutParams();
                         lp.setFullSpan(true);
                     }
                     // recycler.recycleView(view);

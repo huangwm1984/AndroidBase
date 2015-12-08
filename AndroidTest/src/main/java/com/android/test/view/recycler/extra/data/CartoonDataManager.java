@@ -26,7 +26,7 @@ public class CartoonDataManager extends SampleBlock {
     private int mNextStart;
 
     /** 数据的list */
-    private List<ObjectListEntity> mDataList;
+    //private List<ObjectListEntity> mDataList;
 
     @Override
     protected void onCreated() {
@@ -52,20 +52,21 @@ public class CartoonDataManager extends SampleBlock {
             public void onResponse(TestDataBean response) {
                 LogUtils.d("获取到数据");
                 mNextStart = response.getData().getNext_start();
-                if (mDataList == null || index == LATEST_INDEX) {
+                /*if (mDataList == null || index == LATEST_INDEX) {
                     mDataList = response.getData().getObject_list();
                 } else {
                     mDataList.addAll(response.getData().getObject_list());
 
                 }
-                callback.onSuccess(mDataList);
+                callback.onSuccess(mDataList);*/
+                callback.onSuccess(response.getData().getObject_list());
             }
         });
     }
 
-    public List<ObjectListEntity> getData() {
-        return mDataList;
-    }
+    //public List<ObjectListEntity> getData() {
+    //    return mDataList;
+    //}
 
     public void loadOldData(final ResponseCallback callback) {
         loadData(mNextStart, callback);
