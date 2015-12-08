@@ -41,7 +41,7 @@ public class DataAdapter extends SampleBlock {
 
         mQuickRcvAdapter = new QuickRcvAdapter<String>(mActivity, R.layout.item_pull_to_refresh, data) {
             @Override
-            protected void convert(BaseRcvAdapterHelper helper, final String item) {
+            protected void convert(BaseRcvAdapterHelper helper, int position, final String item) {
                 helper.setText(R.id.textView, "No." + item);
                 helper.setOnClickListener(R.id.textView, new View.OnClickListener() {
                     @Override

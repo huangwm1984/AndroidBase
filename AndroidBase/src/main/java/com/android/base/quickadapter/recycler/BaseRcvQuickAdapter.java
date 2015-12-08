@@ -113,7 +113,7 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
     public void onBindViewHolder(BaseRcvAdapterHelper helper, int position) {
         helper.itemView.setTag(position);
         T item = getItem(position);
-        convert((H) helper, item);
+        convert((H) helper, position, item);
     }
 
     /**
@@ -122,7 +122,7 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
      * @param helper A fully initialized helper.
      * @param item   The item that needs to be displayed.
      */
-    protected abstract void convert(H helper, T item);
+    protected abstract void convert(H helper, int position, T item);
 
     @Override
     public void onClick(View v) {

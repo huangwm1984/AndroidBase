@@ -82,7 +82,7 @@ class DLTask implements Runnable, IDLThreadListener {
 
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastTime > 1000 || totalProgress == info.totalBytes) {
-            LogUtils.e(info.appName + "  下载进度：" + totalProgress);
+            //LogUtils.e(info.appName + "  下载进度：" + totalProgress);
             try {
                 mDLInfoDao.update(info);
             } catch (SQLException e) {

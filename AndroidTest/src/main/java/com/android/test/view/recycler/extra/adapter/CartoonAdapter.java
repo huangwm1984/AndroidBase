@@ -37,7 +37,7 @@ public class CartoonAdapter extends SampleBlock {
         mQuickRcvAdapter = new ExQuickRcvAdapter<ObjectListEntity>(mActivity, R.layout.item_waterfall, data, layoutManager) {
 
             @Override
-            protected void convert(BaseRcvAdapterHelper helper, ObjectListEntity item) {
+            protected void convert(BaseRcvAdapterHelper helper, int position, ObjectListEntity item) {
 
                 float picRatio = (float) item.getPhoto().getHeight() / item.getPhoto().getWidth();
                 DynamicHeightImageView contentImageView = helper.getView(R.id.wf_item_content_DraweeView);

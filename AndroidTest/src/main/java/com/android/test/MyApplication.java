@@ -75,10 +75,10 @@ public class MyApplication extends BaseApplication {
         }
     }
 
-    public DLInfo getDLTask(DLInfo info){
-        if(mDownloadTaskMap != null && !mDownloadTaskMap.isEmpty()){
+    public DLInfo getDLTask(String key){
+        if(mDownloadTaskMap != null){
             try {
-                return mDownloadTaskMap.get(info.getBaseUrl());
+                return mDownloadTaskMap.get(key);
             } catch (NullPointerException e){
                 return null;
             }

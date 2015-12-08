@@ -113,7 +113,7 @@ public class MultiItemActivity extends BaseActivity implements BaseRcvQuickAdapt
 
         mQuickAdapter = new QuickRcvAdapter<News>(this, mMultiItemRcvTypeSupport) {
             @Override
-            protected void convert(final BaseRcvAdapterHelper helper, News item) {
+            protected void convert(final BaseRcvAdapterHelper helper, int position, News item) {
                 switch (helper.getItemViewType()) {
                     case News.ITEM_TYPE_TEXT:
                         helper.setText(R.id.tv_text, item.getText());
