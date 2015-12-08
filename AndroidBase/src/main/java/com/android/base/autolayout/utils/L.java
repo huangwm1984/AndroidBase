@@ -1,4 +1,4 @@
-package com.android.base.autolayout;
+package com.android.base.autolayout.utils;
 
 import android.util.Log;
 

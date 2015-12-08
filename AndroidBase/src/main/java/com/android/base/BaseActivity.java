@@ -9,12 +9,13 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.base.autolayout.AutoLayout;
+import com.android.base.autolayout.AutoLayoutActivity;
 import com.android.base.common.Log;
 import com.android.base.lifecycle.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
 import com.android.base.block.CommonBlockManager;
+import com.apkfuns.logutils.LogUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by huangwm on 2015/7/28 0028.
  */
-public abstract class BaseActivity extends AppCompatActivity implements ActivityLifecycleCallbacksCompat {
+public abstract class BaseActivity extends AutoLayoutActivity implements ActivityLifecycleCallbacksCompat {
 
     public Context mApplicationContext;
 
@@ -40,7 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         AppManager.getAppManager().addActivity(this);
         mApplicationContext = getApplicationContext();
         ButterKnife.bind(this);
-        AutoLayout.getInstance().auto(this);
         NetworkStateReceiver.registerNetworkStateReceiver(this);
         mHandler = new MyHandler(this);
         mCommonBlockManager = getCommonBlockManager();
@@ -189,6 +189,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
             mCommonBlockManager = new CommonBlockManager(this);
         }
         return mCommonBlockManager;
+    }
+
+    public Handler getHandler(){
+        return mHandler;
     }
 
     public void onConnect(NetWorkUtil.netType type) {

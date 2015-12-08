@@ -21,6 +21,9 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.android.base.autolayout.utils.AutoLayoutHelper;
+
+
 public class AutoFrameLayout extends FrameLayout
 {
     private final AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
@@ -50,7 +53,9 @@ public class AutoFrameLayout extends FrameLayout
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         if (!isInEditMode())
+        {
             mHelper.adjustChildren();
+        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -63,11 +68,12 @@ public class AutoFrameLayout extends FrameLayout
     public static class LayoutParams extends FrameLayout.LayoutParams
             implements AutoLayoutHelper.AutoLayoutParams
     {
-        private AutoLayoutHelper.AutoLayoutInfo mAutoLayoutInfo;
+        private AutoLayoutInfo mAutoLayoutInfo;
 
         public LayoutParams(Context c, AttributeSet attrs)
         {
             super(c, attrs);
+
             mAutoLayoutInfo = AutoLayoutHelper.getAutoLayoutInfo(c, attrs);
         }
 
@@ -104,7 +110,7 @@ public class AutoFrameLayout extends FrameLayout
         }
 
         @Override
-        public AutoLayoutHelper.AutoLayoutInfo getPercentLayoutInfo()
+        public AutoLayoutInfo getAutoLayoutInfo()
         {
             return mAutoLayoutInfo;
         }

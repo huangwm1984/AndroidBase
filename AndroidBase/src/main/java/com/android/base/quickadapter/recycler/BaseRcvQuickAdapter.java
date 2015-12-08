@@ -21,7 +21,7 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
 
     protected int layoutResId;
 
-    protected List<T> data;
+    protected final List<T> data;
 
     private OnItemClickListener mOnItemClickListener = null;
 
@@ -154,12 +154,8 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
 
     public void addAll(List<T> elem) {
         data.addAll(elem);
-        notifyDataSetChanged();
-    }
-
-    public void update(List<T> elem) {
-        data = elem;
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
+        notifyItemRangeInserted(data.size(), elem.size());
     }
 
     public void set(T oldElem, T newElem) {
@@ -168,7 +164,8 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
 
     public void set(int index, T elem) {
         data.set(index, elem);
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
+        notifyItemInserted(index);
     }
 
     public void remove(T elem) {
@@ -178,7 +175,8 @@ public abstract class BaseRcvQuickAdapter<T, H extends BaseRcvAdapterHelper> ext
 
     public void remove(int index) {
         data.remove(index);
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
+        notifyItemRemoved(index);
     }
 
     public void replaceAll(List<T> elem) {

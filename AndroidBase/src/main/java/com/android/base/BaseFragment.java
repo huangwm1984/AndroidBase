@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.base.autolayout.AutoLayout;
 import com.android.base.lifecycle.FragmentLifecycleCallbacks;
 //import com.squareup.leakcanary.RefWatcher;
 
@@ -58,7 +57,6 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AutoLayout.getInstance().auto(getActivity());
         bindViews(view);
         onFragmentViewCreated(this, view, savedInstanceState);
     }
