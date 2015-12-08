@@ -76,14 +76,18 @@ public class MyApplication extends BaseApplication {
     }
 
     public DLInfo getDLTask(DLInfo info){
-        if(mDownloadTaskMap != null){
-            return mDownloadTaskMap.get(info.getBaseUrl());
+        if(mDownloadTaskMap != null && !mDownloadTaskMap.isEmpty()){
+            try {
+                return mDownloadTaskMap.get(info.getBaseUrl());
+            } catch (NullPointerException e){
+                return null;
+            }
         }
         return null;
     }
 
     public void removeDLTask(DLInfo info){
-        if(mDownloadTaskMap != null){
+        if(mDownloadTaskMap != null && !mDownloadTaskMap.isEmpty()){
             mDownloadTaskMap.remove(info.getBaseUrl(), info);
         }
     }
