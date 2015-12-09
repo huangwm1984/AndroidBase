@@ -36,7 +36,7 @@ public class BannerTestActivity extends TestBaseActivity {
                 gotoActivity(SplashActivity.class, false);
                 break;
             default:
-                Toastor.showSingletonToast(BannerTestActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
         }
     }
