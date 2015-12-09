@@ -1,5 +1,7 @@
 package com.android.base.common.assist;
 
+import android.content.Intent;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -29,5 +31,15 @@ public class Check {
 
 	public static boolean isNull(Object o) {
 		return o == null;
+	}
+
+	/**
+	 * 判断intent和它的bundle是否为空
+	 *
+	 * @param intent
+	 * @return
+	 */
+	public static boolean isBundleEmpty(Intent intent) {
+		return (intent == null) && (intent.getExtras() == null);
 	}
 }

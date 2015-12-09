@@ -44,6 +44,12 @@
         <item>LoadMoreRecyclerView</item>
     </string-array>
 
+    <string-array name="auto_list">
+        <item>AutoLayout-1</item>
+        <item>AutoLayout-2</item>
+        <item>AutoLayout-3</item>
+    </string-array>
+
     <string name="open">打开</string>
     <string name="close">关闭</string>
 
