@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.test" >
+    package="com.hwm.test" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,14 +15,14 @@
     <uses-permission-sdk-m android:name="android.permission.WRITE_CONTACTS" />
 
     <application
-        android:name=".MyApplication"
+        android:name="com.hwm.test.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.hwm.test.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -33,12 +33,12 @@
         </activity>
 
         <activity
-            android:name=".net.TestHttpActivity"
+            android:name="com.hwm.test.net.TestHttpActivity"
             android:screenOrientation="portrait" >
         </activity>
 
         <activity
-            android:name=".view.tabhost.FragmentTabHostActivity"
+            android:name="com.hwm.test.view.tabhost.FragmentTabHostActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Custom.Toolbar2" >
         </activity>
@@ -50,83 +50,85 @@
         <service android:name=".download.DLService" />
 
         <activity
-            android:name=".view.recycler.RecyclerViewTestActivity"
+            android:name="com.hwm.test.view.recycler.RecyclerViewTestActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.recycler.normal.NormalActivity"
+            android:name="com.hwm.test.view.recycler.normal.NormalActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.recycler.multi.MultiItemActivity"
+            android:name="com.hwm.test.view.recycler.multi.MultiItemActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.recycler.extra.HeaderOrFooterActivity"
+            android:name="com.hwm.test.view.recycler.extra.HeaderOrFooterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/RecyclerViewTheme"/>
 
         <activity
-            android:name=".view.recycler.scrollview.RecyclerViewInsideScrollViewActivity"
+            android:name="com.hwm.test.view.recycler.scrollview.RecyclerViewInsideScrollViewActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".permission.PermissionActivity"
+            android:name="com.hwm.test.permission.PermissionActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".leakcanary.LeakcanaryActivity" />
+            android:name="com.hwm.test.leakcanary.LeakcanaryActivity" />
 
         <activity
-            android:name=".view.banner.BannerTestActivity"
+            android:name="com.hwm.test.view.banner.BannerTestActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.banner.BannerActivity"
+            android:name="com.hwm.test.view.banner.BannerActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.banner.SplashActivity"
+            android:name="com.hwm.test.view.banner.SplashActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.pulltorefresh.PullToRefreshTestActivity"
+            android:name="com.hwm.test.view.pulltorefresh.PullToRefreshTestActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.pulltorefresh.recycler.PullToRefreshRecyclerActivity"
+            android:name="com.hwm.test.view.pulltorefresh.recycler.PullToRefreshRecyclerActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.pulltorefresh.recycler.LoadMoreRecyclerActivity"
+            android:name="com.hwm.test.view.pulltorefresh.recycler.LoadMoreRecyclerActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.autolayout.AutoLayoutTestActivity"
+            android:name="com.hwm.test.view.autolayout.AutoLayoutTestActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.autolayout.AutoLayoutActivity"
+            android:name="com.hwm.test.view.autolayout.AutoLayoutActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.autolayout.AutoLayoutViewPagerActivity"
+            android:name="com.hwm.test.view.autolayout.AutoLayoutViewPagerActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.autolayout.AutoLayoutCategoryActivity"
+            android:name="com.hwm.test.view.autolayout.AutoLayoutCategoryActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".view.other.SideLayoutActivity"
+            android:name="com.hwm.test.view.other.SideLayoutActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".download.test.GameListActivity"
+            android:name="com.hwm.test.download.test.GameListActivity"
             android:screenOrientation="portrait" />
 
         <meta-data android:name="design_width" android:value="1080"></meta-data>
         <meta-data android:name="design_height" android:value="1920"></meta-data>
+
+        <meta-data android:name="QBSDKAppKey" android:value="kMV9PLTmUDvf1kaYMG/jqfxH"/>
 
     </application>
 
