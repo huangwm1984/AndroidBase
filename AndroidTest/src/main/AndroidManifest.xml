@@ -78,15 +78,15 @@
             android:name=".leakcanary.LeakcanaryActivity" />
 
         <activity
-            android:name=".banner.BannerTestActivity"
+            android:name=".view.banner.BannerTestActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".banner.BannerActivity"
+            android:name=".view.banner.BannerActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".banner.SplashActivity"
+            android:name=".view.banner.SplashActivity"
             android:screenOrientation="portrait"/>
 
         <activity
