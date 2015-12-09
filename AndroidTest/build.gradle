@@ -11,10 +11,23 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    //配置keystore签名
+    signingConfigs {
+        release {
+            storeFile file('../huangwm.keystore')
+            storePassword "123456"
+            keyAlias "huangwm"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     sourceSets {
