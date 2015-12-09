@@ -10,7 +10,7 @@ import com.android.base.common.utils.ShellUtil;
 import java.io.File;
 
 /**
- * modify form <a href="http://www.trinea.cn" target="_blank">Trinea</a>
+ * modify form Trinea
  *
  * @author trinea
  * @date 2014-12-10
@@ -112,7 +112,7 @@ public class SilentInstaller {
     /**
      * Installation return code<br/>
      * the new package failed because it has specified that it is a test-only package and the caller has not supplied
-     * the {@link ##INSTALL_ALLOW_TEST} flag.
+     * the {@link #INSTALL_FAILED_TEST_ONLY} flag.
      */
     public static final int INSTALL_FAILED_TEST_ONLY = -15;
 
@@ -381,7 +381,8 @@ public class SilentInstaller {
          **/
         StringBuilder command = new StringBuilder().append("LD_LIBRARY_PATH=/vendor/lib:/system/lib pm install ")
                 .append(pmParams == null ? "" : pmParams).append(" ").append(filePath.replace(" ", "\\ "));
-        ShellUtil.CommandResult commandResult = ShellUtil.execCommand(command.toString(), !isSystemApplication(context), true);
+        ShellUtil.CommandResult commandResult = ShellUtil.execCommand(command.toString(),
+                !isSystemApplication(context), true);
         if (commandResult.responseMsg != null
                 && (commandResult.responseMsg.contains("Success") || commandResult.responseMsg.contains("success"))) {
             return INSTALL_SUCCEEDED;
@@ -508,7 +509,8 @@ public class SilentInstaller {
      * @return APP_INSTALL_AUTO or APP_INSTALL_INTERNAL or APP_INSTALL_EXTERNAL.
      */
     public int getInstallLocation() {
-        ShellUtil.CommandResult commandResult = ShellUtil.execCommand("LD_LIBRARY_PATH=/vendor/lib:/system/lib pm get-install-location", false, true);
+        ShellUtil.CommandResult commandResult = ShellUtil.execCommand(
+                "LD_LIBRARY_PATH=/vendor/lib:/system/lib pm get-install-location", false, true);
         if (commandResult.result == 0 && commandResult.responseMsg != null && commandResult.responseMsg.length() > 0) {
             try {
                 return Integer.parseInt(commandResult.responseMsg.substring(0, 1));

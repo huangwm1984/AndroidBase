@@ -14,6 +14,8 @@ import android.os.Build;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import com.android.base.common.assist.Check;
+
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -182,6 +184,23 @@ public class PackageUtil {
     }
 
     /**
+     * 获取已安装的全部应用信息
+     */
+    public static boolean isInsatalled(Context context, String pkg) {
+        if (!Check.isEmpty(pkg)) {
+            List<PackageInfo> list = getInsatalledPackages(context);
+            if (!Check.isEmpty(list)) {
+                for (PackageInfo pi : list) {
+                    if (pkg.equalsIgnoreCase(pi.packageName)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * 获取指定程序信息
      */
     public static ApplicationInfo getApplicationInfo(Context context, String pkg) {
@@ -196,7 +215,7 @@ public class PackageUtil {
     /**
      * 获取指定程序信息
      */
-    public static PackageInfo getPackageInfo(Context context, String pkg) {
+    public static android.content.pm.PackageInfo getPackageInfo(Context context, String pkg) {
         try {
             return context.getPackageManager().getPackageInfo(pkg, 0);
         } catch (NameNotFoundException e) {
@@ -216,7 +235,7 @@ public class PackageUtil {
      * 启动应用
      */
     public static boolean startAppByPackageName(Context context, String packageName, Map<String, String> param) {
-        PackageInfo pi = null;
+        android.content.pm.PackageInfo pi = null;
         try {
             pi = context.getPackageManager().getPackageInfo(packageName, 0);
             Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);

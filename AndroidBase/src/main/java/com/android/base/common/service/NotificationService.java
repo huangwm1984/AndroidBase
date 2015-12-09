@@ -20,11 +20,11 @@ import com.android.base.common.Log;
  * <p/>
  * manifest:
  * <service android:name=".service.NotificationService"
- * android:label="@string/app_name"
- * android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
- * <intent-filter>
- * <action android:name="android.service.notification.NotificationListenerService" />
- * </intent-filter>
+ *  android:label="@string/app_name"
+ *  android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+ *  <intent-filter>
+ *      <action android:name="android.service.notification.NotificationListenerService" />
+ *  </intent-filter>
  * </service>
  *
  * @author MaTianyu
@@ -138,7 +138,7 @@ public class NotificationService extends NotificationListenerService {
     public void printCurrentNotifications() {
         StatusBarNotification[] ns = getActiveNotifications();
         for (StatusBarNotification n : ns) {
-            Log.i(TAG, String.format("%20s", n.getPackageName()) + ": " + n.getNotification().tickerText);
+            Log.i(TAG, String.format("%20s",n.getPackageName()) + ": " + n.getNotification().tickerText);
         }
     }
 
@@ -153,7 +153,7 @@ public class NotificationService extends NotificationListenerService {
         /**
          * Implement this method to learn about new notifications as they are posted by apps.
          *
-         * @param sbn A data structure encapsulating the original {@link Notification}
+         * @param sbn A data structure encapsulating the original {@link android.app.Notification}
          *            object as well as its identifying information (tag and id) and source
          *            (package name).
          */
@@ -167,13 +167,13 @@ public class NotificationService extends NotificationListenerService {
          * <p/>
          * NOTE: The {@link StatusBarNotification} object you receive will be "light"; that is, the
          * result from {@link StatusBarNotification#getNotification} may be missing some heavyweight
-         * fields such as {@link Notification#contentView} and
-         * {@link Notification#largeIcon}. However, all other fields on
+         * fields such as {@link android.app.Notification#contentView} and
+         * {@link android.app.Notification#largeIcon}. However, all other fields on
          * {@link StatusBarNotification}, sufficient to match this call with a prior call to
          * {@link #onNotificationPosted(StatusBarNotification)}, will be intact.
          *
          * @param sbn A data structure encapsulating at least the original information (tag and id)
-         *            and source (package name) used to post the {@link Notification} that
+         *            and source (package name) used to post the {@link android.app.Notification} that
          *            was just removed.
          */
         public abstract void onNotificationRemoved(StatusBarNotification sbn);
