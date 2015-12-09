@@ -184,7 +184,7 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
             @Override
             public void onBottom() {
                 //Log.d(TAG, "on bottom");
-                Toastor.showSingletonToast(HeaderOrFooterActivity.this, "bottom");
+                Toastor.showSingletonToast(mApplicationContext, "bottom");
                 // 到底部自动加载
                 if (!isLoadingData) {
                     isLoadingData = true;
@@ -304,7 +304,7 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toastor.showSingletonToast(HeaderOrFooterActivity.this, "retry event invoked");
+                Toastor.showSingletonToast(mApplicationContext, "retry event invoked");
                 //loadData();
             }
         });

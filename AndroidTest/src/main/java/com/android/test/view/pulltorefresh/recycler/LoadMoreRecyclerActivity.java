@@ -136,7 +136,7 @@ public class LoadMoreRecyclerActivity extends BaseActivity {
 
             @Override
             public void onBottom() {
-                Toastor.showSingletonToast(LoadMoreRecyclerActivity.this, "bottom");
+                Toastor.showSingletonToast(mApplicationContext, "bottom");
                 // 到底部自动加载
 
 

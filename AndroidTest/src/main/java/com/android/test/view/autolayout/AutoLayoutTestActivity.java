@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 
 import com.android.base.BaseActivity;
-import com.android.base.common.assist.Toastor;
 import com.android.test.R;
 import com.android.test.TestBaseActivity;
 import com.android.test.download.test.GameListActivity;

@@ -225,7 +225,7 @@ public class GameListActivity extends BaseActivity implements ResponseCallback {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toastor.showSingletonToast(GameListActivity.this, "retry event invoked");
+                Toastor.showSingletonToast(mApplicationContext, "retry event invoked");
                 isLoadingData = true;
                 mGameDataManager.loadNewData(GameListActivity.this);
             }

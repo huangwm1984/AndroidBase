@@ -42,7 +42,7 @@ public class PullToRefreshTestActivity extends TestBaseActivity {
 
                 break;
             default:
-                Toastor.showSingletonToast(PullToRefreshTestActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
         }
 

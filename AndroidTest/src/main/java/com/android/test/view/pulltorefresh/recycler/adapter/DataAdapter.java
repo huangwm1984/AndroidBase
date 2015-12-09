@@ -46,7 +46,7 @@ public class DataAdapter extends SampleBlock {
                 helper.setOnClickListener(R.id.textView, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toastor.showSingleLongToast(v.getContext(), "你点中了" + item);
+                        Toastor.showSingleLongToast(v.getContext().getApplicationContext(), "你点中了" + item);
                     }
                 });
             }

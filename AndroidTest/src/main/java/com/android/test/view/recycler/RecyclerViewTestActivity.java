@@ -48,16 +48,16 @@ public class RecyclerViewTestActivity extends TestBaseActivity {
                 gotoActivity(RecyclerViewInsideScrollViewActivity.class, false);
                 break;
             case 4:
-                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
             case 5:
-                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
             case 6:
-                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
             default:
-                Toastor.showSingletonToast(RecyclerViewTestActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
         }
 

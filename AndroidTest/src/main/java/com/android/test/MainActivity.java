@@ -84,10 +84,10 @@ public class MainActivity extends TestBaseActivity {
                 break;
             case 9:
                 //gotoActivity(SideLayoutActivity.class, false);
-                Toastor.showSingletonToast(MainActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
             default:
-                Toastor.showSingletonToast(MainActivity.this, "还在开发中...");
+                Toastor.showSingletonToast(mApplicationContext, "还在开发中...");
                 break;
         }
 
