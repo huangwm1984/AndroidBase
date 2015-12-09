@@ -1,6 +1,7 @@
 package com.android.base.block;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -14,6 +15,8 @@ public abstract class SampleBlock implements IBlock {
 
     public Activity mActivity;
 
+    public Context mApplicationContext;
+
     public void attachActivity(Activity activity) {
         onAttach(activity);
         onCreated();
@@ -26,6 +29,7 @@ public abstract class SampleBlock implements IBlock {
 
     protected void onAttach(Activity activity) {
         mActivity = activity;
+        mApplicationContext = mActivity.getApplicationContext();
     }
 
     protected Activity getActivity() {
