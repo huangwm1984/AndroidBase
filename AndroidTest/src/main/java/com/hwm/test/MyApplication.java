@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.base.BaseApplication;
 import com.android.base.LoadingAndRetryManager;
+import com.android.base.common.assist.Check;
 import com.hwm.test.R;
 import com.hwm.test.download.bizs.DLInfo;
 import com.squareup.leakcanary.LeakCanary;
@@ -65,14 +66,14 @@ public class MyApplication extends BaseApplication {
     }
 
     public void updateDLTask(DLInfo info){
-        if(mDownloadTaskMap != null){
-            mDownloadTaskMap.put(info.getBaseUrl(), info);
+        if(mDownloadTaskMap != null && info!=null){
+            mDownloadTaskMap.put(info.baseUrl, info);
 
         }
     }
 
     public DLInfo getDLTask(String key){
-        if(mDownloadTaskMap != null){
+        if(mDownloadTaskMap != null && !Check.isEmpty(key)){
             try {
                 return mDownloadTaskMap.get(key);
             } catch (NullPointerException e){
@@ -84,7 +85,7 @@ public class MyApplication extends BaseApplication {
 
     public void removeDLTask(DLInfo info){
         if(mDownloadTaskMap != null && !mDownloadTaskMap.isEmpty()){
-            mDownloadTaskMap.remove(info.getBaseUrl(), info);
+            mDownloadTaskMap.remove(info.baseUrl, info);
         }
     }
 

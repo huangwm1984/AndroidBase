@@ -16,15 +16,20 @@ import com.android.base.quickadapter.recycler.BaseRcvQuickAdapter;
 import com.android.base.quickadapter.recycler.QuickRcvAdapter;
 import com.hwm.test.MyApplication;
 import com.hwm.test.R;
+import com.hwm.test.download.bizs.DLHeader;
 import com.hwm.test.download.bizs.DLInfo;
 import com.hwm.test.download.bizs.DLManager;
 import com.hwm.test.download.db.dao.DLInfoDao;
+import com.hwm.test.download.interfaces.IDListener;
 import com.hwm.test.download.interfaces.SimpleDListener;
 import com.hwm.test.download.test.entity.GameInfo;
 import com.hwm.test.download.test.util.FileUtils;
 import com.hwm.test.download.test.util.Utils;
 import com.apkfuns.logutils.LogUtils;
 import com.bumptech.glide.Glide;
+
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -47,6 +52,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
 
     @Override
     protected void onCreated() {
+        EventBus.getDefault().register(this);
         mIsExpend = new ArrayMap<>();
         mDLManager = DLManager.getInstance(mActivity.getApplicationContext());
         MyApplication.getInstance().setAllDLTasks(mDLManager.getAllTasks());
@@ -97,37 +103,41 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
                         mNumberProgressBar.setProgress(info.progress);
                         mNumberProgressBar.setMax(info.totalBytes);
 
-                        if (info!=null && info.getTotalBytes() > 0) {
-                            String downladScale = FileUtils.generateFileSize(info.getCurrentBytes()) + "/"
-                                    + FileUtils.generateFileSize(info.getTotalBytes());
+                        if (info.totalBytes > 0) {
+                            String downladScale = FileUtils.generateFileSize(info.currentBytes) + "/"
+                                    + FileUtils.generateFileSize(info.totalBytes);
                             mTvDownloadScale.setText(downladScale);
                         }
 
-                        if(info.getState() == DLState.DOWNLOAD){
+                        if(info.networkSpeed > 0){
+                            mTvDownloadSpeed.setText(FileUtils.generateFileSize(info.networkSpeed));
+                        }
+
+                        if(info.state == DLState.DOWNLOAD){
                             mBtnOperate.setText("下载");
                             mNumberProgressBar.setVisibility(View.GONE);
                             mTvDownloadSpeed.setVisibility(View.GONE);
                             mTvDownloadScale.setVisibility(View.GONE);
-                        }else if(info.getState() == DLState.DOWNLOADING){
+                        }else if(info.state == DLState.DOWNLOADING){
                             mBtnOperate.setText("暂停");
                             mNumberProgressBar.setProgress(info.progress);
                             LogUtils.e("下载中 当前进度="+info.progress);
                             mNumberProgressBar.setVisibility(View.VISIBLE);
                             mTvDownloadSpeed.setVisibility(View.VISIBLE);
                             mTvDownloadScale.setVisibility(View.VISIBLE);
-                        }else if(info.getState() == DLState.PAUSE){
+                        }else if(info.state == DLState.PAUSE){
                             mBtnOperate.setText("继续");
                             mNumberProgressBar.setProgress(info.progress);
                             LogUtils.e("暂停 当前进度="+info.progress);
                             mNumberProgressBar.setVisibility(View.VISIBLE);
                             mTvDownloadSpeed.setVisibility(View.VISIBLE);
                             mTvDownloadScale.setVisibility(View.VISIBLE);
-                        }else if(info.getState() == DLState.COMPLETE){
+                        }else if(info.state == DLState.COMPLETE){
                             mBtnOperate.setText("安装");
                             mNumberProgressBar.setVisibility(View.GONE);
                             mTvDownloadSpeed.setVisibility(View.GONE);
                             mTvDownloadScale.setVisibility(View.GONE);
-                        }else if(info.getState() == DLState.FAIL){
+                        }else if(info.state == DLState.FAIL){
                             mBtnOperate.setText("继续");
                             mNumberProgressBar.setProgress(info.progress);
                             LogUtils.e("失败 当前进度="+info.progress);
@@ -240,7 +250,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
                     mDLManager.dlStop(info.baseUrl);
                     mBtnOperate.setText("继续");
                 }else if(info.state == DLState.PAUSE || info.state == DLState.FAIL){
-                    mDLManager.dlStart(info.baseUrl, new DownloadListener(mItem, position));
+                    mDLManager.dlStart(info.baseUrl/*, new DownloadListener(mItem, position)*/);
                     mBtnOperate.setText("暂停");
                 }else if(info.state == DLState.DOWNLOAD){
                     addDownloadListener(mItem, position);
@@ -262,13 +272,13 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
     private void addDownloadListener(final GameInfo.DataEntity item, int position) {
 
         //下载监听
-        mDLManager.dlStart(item.getShorturl(), saveDir, null, item.getTopic_cn(), new DownloadListener(item, position));
+        mDLManager.dlStart(item.getShorturl(), saveDir, null, item.getTopic_cn(), position, null);/*, new DownloadListener(item, position));*/
 
 
 
     }
 
-    class DownloadListener extends SimpleDListener{//创建下载监听对象
+    /*class DownloadListener extends SimpleDListener{//创建下载监听对象
 
         GameInfo.DataEntity item;
         int position;
@@ -294,7 +304,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
                         if(mNumberProgressBar!=null){
                             mNumberProgressBar.setVisibility(View.VISIBLE);
                         }*/
-                        if (isCurrentListViewItemVisible(position)) {
+                        /*if (isCurrentListViewItemVisible(position)) {
                             BaseRcvAdapterHelper holder = getViewHolder(position);
 
                             Button mBtnOperate = holder.getView(R.id.btn_operate);
@@ -313,14 +323,14 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
         public void onStart(DLInfo info) {
             MyApplication.getInstance().updateDLTask(info);
             LogUtils.e("开始下载状态="+info.state);
-            LogUtils.e("开始下载"+info.getAppName());
+            LogUtils.e("开始下载"+info.appName);
             /*ProgressBar mNumberProgressBar = (ProgressBar) mRecyclerView.findViewWithTag(item.getAddress());
             if(mNumberProgressBar!=null){
                 if(info.getTotalBytes() != 0){
                     mNumberProgressBar.setMax(info.totalBytes);
                 }
             }*/
-            if (isCurrentListViewItemVisible(position)) {
+            /*if (isCurrentListViewItemVisible(position)) {
                 BaseRcvAdapterHelper holder = getViewHolder(position);
 
                 ProgressBar mNumberProgressBar = holder.getView(R.id.number_progress_bar);
@@ -351,7 +361,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
                             mTvDownloadSpeed.setVisibility(View.VISIBLE);
                         }*/
 
-                        if (isCurrentListViewItemVisible(position)) {
+                        /*if (isCurrentListViewItemVisible(position)) {
                             LogUtils.e("名字:"+info.appName+"  pos="+position);
                             BaseRcvAdapterHelper holder = getViewHolder(position);
 
@@ -384,7 +394,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
                         if(mBtnOperate!=null){
                             mBtnOperate.setText("继续");
                         }*/
-                        if (isCurrentListViewItemVisible(position)) {
+                        /*if (isCurrentListViewItemVisible(position)) {
                             BaseRcvAdapterHelper holder = getViewHolder(position);
 
                             Button mBtnOperate = holder.getView(R.id.btn_operate);
@@ -417,7 +427,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
                         }
                         getAdapter().notifyDataSetChanged();*/
 
-                        if (isCurrentListViewItemVisible(position)) {
+                        /*if (isCurrentListViewItemVisible(position)) {
                             BaseRcvAdapterHelper holder = getViewHolder(position);
 
                             Button mBtnOperate = holder.getView(R.id.btn_operate);
@@ -450,7 +460,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
                             mBtnOperate.setText("继续");
                         }
                         getAdapter().notifyDataSetChanged();*/
-                        if (isCurrentListViewItemVisible(position)) {
+                        /*if (isCurrentListViewItemVisible(position)) {
                             BaseRcvAdapterHelper holder = getViewHolder(position);
 
                             Button mBtnOperate = holder.getView(R.id.btn_operate);
@@ -464,7 +474,7 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
         }
 
 
-    };
+    };*/
 
 
     public void initFlag(List<GameInfo.DataEntity> data) {
@@ -518,4 +528,100 @@ public class GameAdapter extends SampleBlock implements BaseRcvQuickAdapter.OnIt
         return first <= position && position <= last;
     }
 
+
+    @Subscriber(tag = "onStart")
+    public void onStart(DLInfo info) {
+        MyApplication.getInstance().updateDLTask(info);
+        LogUtils.e("开始下载状态="+info.state);
+        LogUtils.e("开始下载"+info.appName);
+
+        if(mActivity != null && !mActivity.isFinishing()){
+            if (isCurrentListViewItemVisible(info.position)) {
+                BaseRcvAdapterHelper holder = getViewHolder(info.position);
+
+                Button mBtnOperate = holder.getView(R.id.btn_operate);
+                mBtnOperate.setText("暂停");
+
+                ProgressBar mNumberProgressBar = holder.getView(R.id.number_progress_bar);
+                mNumberProgressBar.setMax(info.totalBytes);
+                mNumberProgressBar.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Subscriber(tag = "onProgress")
+    public void onProgress(final DLInfo info) {
+        MyApplication.getInstance().updateDLTask(info);
+        if(mActivity != null && !mActivity.isFinishing()){
+            if (isCurrentListViewItemVisible(info.position)) {
+                LogUtils.e("名字:"+info.appName+"  pos="+info.position);
+                BaseRcvAdapterHelper holder = getViewHolder(info.position);
+
+                ProgressBar mNumberProgressBar = holder.getView(R.id.number_progress_bar);
+                mNumberProgressBar.setProgress(info.progress);
+
+                TextView mTvDownloadScale = holder.getView(R.id.tv_download_scale);
+                String downladScale = FileUtils.generateFileSize(info.currentBytes) + "/"
+                        + FileUtils.generateFileSize(info.totalBytes);
+                mTvDownloadScale.setText(downladScale);
+                mTvDownloadScale.setVisibility(View.VISIBLE);
+
+                TextView mTvDownloadSpeed = holder.getView(R.id.tv_download_speed);
+                mTvDownloadSpeed.setText(FileUtils.generateFileSize(info.networkSpeed));
+                mTvDownloadSpeed.setVisibility(View.VISIBLE);
+            }
+
+        }
+    }
+
+    @Subscriber(tag = "onStop")
+    public void onStop(DLInfo info) {
+        MyApplication.getInstance().updateDLTask(info);
+
+        if(mActivity != null && !mActivity.isFinishing()){
+            if (isCurrentListViewItemVisible(info.position)) {
+                BaseRcvAdapterHelper holder = getViewHolder(info.position);
+
+                Button mBtnOperate = holder.getView(R.id.btn_operate);
+                mBtnOperate.setText("继续");
+            }
+        }
+    }
+
+    @Subscriber(tag = "onFinish")
+    public void onFinish(DLInfo info) {
+        MyApplication.getInstance().updateDLTask(info);
+        if(mActivity != null && !mActivity.isFinishing()){
+            if (isCurrentListViewItemVisible(info.position)) {
+                BaseRcvAdapterHelper holder = getViewHolder(info.position);
+
+                Button mBtnOperate = holder.getView(R.id.btn_operate);
+                mBtnOperate.setText("安装");
+
+                TextView mTvDownloadScale = holder.getView(R.id.tv_download_scale);
+                mTvDownloadScale.setVisibility(View.GONE);
+
+                TextView mTvDownloadSpeed = holder.getView(R.id.tv_download_speed);
+                mTvDownloadSpeed.setVisibility(View.GONE);
+
+                getAdapter().notifyDataSetChanged();
+            }
+
+        }
+    }
+
+    @Subscriber(tag = "onError")
+    public void onError(int status, String error, DLInfo info) {
+        MyApplication.getInstance().updateDLTask(info);
+        if(mActivity!=null && !mActivity.isFinishing()){
+            if (isCurrentListViewItemVisible(info.position)) {
+                BaseRcvAdapterHelper holder = getViewHolder(info.position);
+
+                Button mBtnOperate = holder.getView(R.id.btn_operate);
+                mBtnOperate.setText("继续");
+
+                getAdapter().notifyDataSetChanged();
+            }
+        }
+    }
 }

@@ -82,6 +82,8 @@ public class DLCons {
         public static final String TB_TASK_STATE = "state";
         public static final String TB_TASK_APP_NAME = "name";
         public static final String TB_TASK_APP_PROGRESS = "progress";
+        public static final String TB_TASK_APP_POSITION = "position";
+        public static final String TB_TASK_APP_SPEED = "speed";
 
         public static final String TB_THREAD = "thread_info";
         public static final String TB_THREAD_URL_BASE = "base_url";

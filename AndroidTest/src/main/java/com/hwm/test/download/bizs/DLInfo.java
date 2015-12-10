@@ -53,9 +53,12 @@ public class DLInfo {
     public int state;//下载状态
     @DatabaseField(columnName = DBCons.TB_TASK_APP_NAME)
     public String appName;//应用名字
+    @DatabaseField(columnName = DBCons.TB_TASK_APP_SPEED)
     public long networkSpeed;//下载速度
     @DatabaseField(columnName = DBCons.TB_TASK_APP_PROGRESS)
     public int progress;//下载进度
+    @DatabaseField(columnName = DBCons.TB_TASK_APP_POSITION)
+    public int position;
 
     public DLInfo() {
         threads = new ArrayList<>();
@@ -69,167 +72,5 @@ public class DLInfo {
         threads.remove(info);
     }
 
-    public int getTotalBytes() {
-        return totalBytes;
-    }
 
-    public int getCurrentBytes() {
-        return currentBytes;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getDirPath() {
-        return dirPath;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public String getRealUrl() {
-        return realUrl;
-    }
-
-    public int getRedirect() {
-        return redirect;
-    }
-
-    public boolean isHasListener() {
-        return hasListener;
-    }
-
-    public boolean isResume() {
-        return isResume;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public String geteTag() {
-        return eTag;
-    }
-
-    public String getDisposition() {
-        return disposition;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public List<DLHeader> getRequestHeaders() {
-        return requestHeaders;
-    }
-
-    public List<DLThreadInfo> getThreads() {
-        return threads;
-    }
-
-    public IDListener getListener() {
-        return listener;
-    }
-
-    public File getFile() {
-        return file;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public String getAppName() {
-        return appName;
-    }
-
-    public long getNetworkSpeed() {
-        return networkSpeed;
-    }
-
-    public int getProgress() {
-        return progress;
-    }
-
-    public void setTotalBytes(int totalBytes) {
-        this.totalBytes = totalBytes;
-    }
-
-    public void setCurrentBytes(int currentBytes) {
-        this.currentBytes = currentBytes;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setDirPath(String dirPath) {
-        this.dirPath = dirPath;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    public void setRealUrl(String realUrl) {
-        this.realUrl = realUrl;
-    }
-
-    public void setRedirect(int redirect) {
-        this.redirect = redirect;
-    }
-
-    public void setHasListener(boolean hasListener) {
-        this.hasListener = hasListener;
-    }
-
-    public void setResume(boolean resume) {
-        isResume = resume;
-    }
-
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
-    }
-
-    public void seteTag(String eTag) {
-        this.eTag = eTag;
-    }
-
-    public void setDisposition(String disposition) {
-        this.disposition = disposition;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setRequestHeaders(List<DLHeader> requestHeaders) {
-        this.requestHeaders = requestHeaders;
-    }
-
-    public void setListener(IDListener listener) {
-        this.listener = listener;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
-    public void setNetworkSpeed(long networkSpeed) {
-        this.networkSpeed = networkSpeed;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
 }

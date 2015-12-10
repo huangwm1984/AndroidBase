@@ -80,6 +80,8 @@ import static com.hwm.test.download.bizs.DLCons.DLState;
  *         修改数据库为ormlite数据库
  *         DLTask文件中加入下载速率、已下载大小
  *         SimpleListener文件回调参数修改为DLinfo实体类
+ * @author huangwm 2015-12-10
+ *         使用AndroidEventBus做为进度回调通知
  */
 public final class DLManager {
     private static final String TAG = DLManager.class.getSimpleName();
@@ -174,31 +176,31 @@ public final class DLManager {
     }
 
     /**
-     * @see #dlStart(String, String, String, String, List, IDListener)
+     * @see #dlStart(String, String, String, String, int, List, IDListener)
      */
     public void dlStart(String url) {
-        dlStart(url, "", "", "", null, null);
+        dlStart(url, "", "", "", -1, null, null);
     }
 
     /**
-     * @see #dlStart(String, String, String, String, List, IDListener)
+     * @see #dlStart(String, String, String, String, int, List, IDListener)
      */
     public void dlStart(String url, IDListener listener) {
-        dlStart(url, "", "", "", null, listener);
+        dlStart(url, "", "", "", -1, null, listener);
     }
 
     /**
-     * @see #dlStart(String, String, String, String, List, IDListener)
+     * @see #dlStart(String, String, String, String, int, List, IDListener)
      */
     public void dlStart(String url, String dir, IDListener listener) {
-        dlStart(url, dir, "", "", null, listener);
+        dlStart(url, dir, "", "", -1, null, listener);
     }
 
     /**
-     * @see #dlStart(String, String, String, String, List, IDListener)
+     * @see #dlStart(String, String, String, String, int, List, IDListener)
      */
-    public void dlStart(String url, String dir, String name, String appName, IDListener listener) {
-        dlStart(url, dir, name, appName, null, listener);
+    public void dlStart(String url, String dir, String name, String appName, int position, IDListener listener) {
+        dlStart(url, dir, name, appName, position, null, listener);
     }
 
     /**
@@ -219,7 +221,7 @@ public final class DLManager {
      * @param listener 下载监听器
      *                 Listener of download task.
      */
-    public void dlStart(String url, String dir, String name, String appName, List<DLHeader> headers, IDListener listener) {
+    public void dlStart(String url, String dir, String name, String appName, int position, List<DLHeader> headers, IDListener listener) {
         boolean hasListener = listener != null;
         if (TextUtils.isEmpty(url)) {
             if (hasListener) listener.onError(DLError.ERROR_INVALID_URL, "Url can not be null.", null);
@@ -263,6 +265,9 @@ public final class DLManager {
                 info.dirPath = dir;
                 info.fileName = name;
                 info.appName = appName;
+                if(position != -1){
+                    info.position = position;
+                }
             } else {
                 info.isResume = true;
                 for (DLThreadInfo threadInfo : info.threads) {

@@ -9,6 +9,8 @@ import com.hwm.test.download.db.dao.DLInfoDao;
 import com.hwm.test.download.db.dao.DLThreadInfoDao;
 import com.apkfuns.logutils.LogUtils;
 
+import org.simple.eventbus.EventBus;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,6 +56,7 @@ class DLTask implements Runnable, IDLThreadListener {
         this.mDLInfoDao = infoDao;
         this.mDLThreadInfoDao = threadInfoDao;
         //if (!info.isResume) DLDBManager.getInstance(context).insertTaskInfo(info);
+        EventBus.getDefault().register(this);
         if (!info.isResume) {
             try {
                 mDLInfoDao.save(info);
@@ -67,8 +70,8 @@ class DLTask implements Runnable, IDLThreadListener {
     public synchronized void onProgress(int progress) {
         //已下载大小
         totalProgress += progress;
-        info.setProgress(totalProgress);
-        info.setCurrentBytes(totalProgress);
+        info.progress = totalProgress;
+        info.currentBytes = totalProgress;
 
         //计算下载速度
         long totalTime = (System.currentTimeMillis() - mPreviousTime)/1000;
@@ -76,7 +79,7 @@ class DLTask implements Runnable, IDLThreadListener {
             totalTime += 1;
         }
         long networkSpeed = totalProgress / totalTime;
-        info.setNetworkSpeed(networkSpeed);
+        info.networkSpeed = networkSpeed;
 
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastTime > 1000 || totalProgress == info.totalBytes) {
@@ -87,6 +90,7 @@ class DLTask implements Runnable, IDLThreadListener {
                 e.printStackTrace();
             }
             if (info.hasListener) info.listener.onProgress(info);
+            EventBus.getDefault().post(info, "onProgress");
             lastTime = currentTime;
         }
     }
@@ -113,6 +117,7 @@ class DLTask implements Runnable, IDLThreadListener {
             }
             count = 0;
             if (info.hasListener) info.listener.onStop(info);
+            EventBus.getDefault().post(info, "onStop");
         }
     }
 
@@ -130,6 +135,8 @@ class DLTask implements Runnable, IDLThreadListener {
                 info.listener.onProgress(info);
                 info.listener.onFinish(info);
             }
+            EventBus.getDefault().post(info, "onProgress");
+            EventBus.getDefault().post(info, "onFinish");
             return;
         }
         info.removeDLThread(threadInfo);
@@ -155,6 +162,8 @@ class DLTask implements Runnable, IDLThreadListener {
                 info.listener.onProgress(info);
                 info.listener.onFinish(info);
             }
+            EventBus.getDefault().post(info, "onProgress");
+            EventBus.getDefault().post(info, "onFinish");
             DLManager.getInstance(context).addDLTask();
         }
     }
@@ -193,6 +202,7 @@ class DLTask implements Runnable, IDLThreadListener {
                     default:
                         if (info.hasListener)
                             info.listener.onError(code, conn.getResponseMessage(), info);
+                        EventBus.getDefault().post(info, "onError");
                         DLManager.getInstance(context).removeDLTask(info.baseUrl);
                         info.state = DLState.FAIL;
                         try {
@@ -204,6 +214,7 @@ class DLTask implements Runnable, IDLThreadListener {
                 }
             } catch (Exception e) {
                 if (info.hasListener) info.listener.onError(ERROR_OPEN_CONNECT, e.toString(), info);
+                EventBus.getDefault().post(info, "onError");
                 DLManager.getInstance(context).removeDLTask(info.baseUrl);
                 info.state = DLState.FAIL;
                 try {
@@ -236,6 +247,7 @@ class DLTask implements Runnable, IDLThreadListener {
         //    return;
         //}
         if (info.hasListener) info.listener.onStart(info);
+        EventBus.getDefault().post(info, "onStart");
         switch (code) {
             case HTTP_OK:
                 mPreviousTime = System.currentTimeMillis();
