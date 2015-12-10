@@ -141,7 +141,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements Activit
         @Override
         public void handleMessage(Message msg) {
             BaseActivity outer = mReference.get();
-            if (outer == null && outer.isFinishing()) {
+            if (outer == null || outer.isFinishing()) {
                 Log.e("outer is null");
                 return;
             }
