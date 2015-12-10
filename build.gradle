@@ -20,3 +20,7 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+//MD5 : 72:6D:39:79:4B:CC:AC:36:E4:FD:A2:A3:EE:E4:07:69
+//SHA1: B9:39:CB:5F:F8:0C:7C:43:51:55:1D:2F:BF:D5:FF:13:97:D2:47:5E
