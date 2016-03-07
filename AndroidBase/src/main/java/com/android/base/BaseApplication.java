@@ -2,13 +2,15 @@ package com.android.base;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 
-import com.android.base.http.OkHttpClientManager;
 import com.android.base.netstate.NetChangeObserver;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
 import com.apkfuns.logutils.LogUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -20,11 +22,16 @@ public class BaseApplication extends Application {
 
     private NetChangeObserver mNetChangeObserver;
 
+    public File mNetCacheFile;
+
+    public int mMaxCacheSize = 50 * 1024 * 1024;
+
     @Override
     public void onCreate() {
         super.onCreate();
         initLogUtils();
         registerNetWorkStateListener();// 注册网络状态监测器
+        OkHttpUtils.getInstance().debug("Huangwm-OkHttpUtils").setConnectTimeout(10, TimeUnit.SECONDS);;
     }
 
     private void initLogUtils() {
@@ -83,6 +90,16 @@ public class BaseApplication extends Application {
                 ((BaseActivity) mCurrentActivity).onConnect(type);
             }
         }
+    }
+
+    public File getNetCacheFile(){
+        if(mNetCacheFile == null){
+            mNetCacheFile = new File(getCacheDir() + "/netcache");
+        }
+        if(!mNetCacheFile.exists()){
+            mNetCacheFile.mkdirs();
+        }
+        return mNetCacheFile;
     }
 
 }

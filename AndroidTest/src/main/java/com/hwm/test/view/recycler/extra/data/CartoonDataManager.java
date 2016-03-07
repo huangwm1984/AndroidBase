@@ -1,13 +1,17 @@
 package com.hwm.test.view.recycler.extra.data;
 
 
+import com.alibaba.fastjson.JSON;
 import com.android.base.block.SampleBlock;
-import com.android.base.http.callback.ResultCallback;
-import com.android.base.http.request.OkHttpRequest;
 import com.hwm.test.view.recycler.extra.entity.TestDataBean;
 import com.hwm.test.view.recycler.extra.impl.ResponseCallback;
 import com.apkfuns.logutils.LogUtils;
-import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.request.OkHttpRequest;
+
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2015/11/18 0018.
@@ -39,26 +43,37 @@ public class CartoonDataManager extends SampleBlock {
         final String URL_HEAD
                 = "http://www.duitang.com/napi/blog/list/by_club_id/?club_id=54aa79d9a3101a0f75731c62&limit=0&start=";
         // 执行网络请求
-        new OkHttpRequest.Builder().url(URL_HEAD + index).get(new ResultCallback<TestDataBean>() {
-            @Override
-            public void onError(Request request, Exception e) {
-                callback.onError(request, e);
-            }
+        OkHttpUtils
+                .get()
+                .url(URL_HEAD + index)
+                .build()
+                .execute(new StringCallback()
+                {
 
-            @Override
-            public void onResponse(TestDataBean response) {
-                LogUtils.d("获取到数据");
-                mNextStart = response.getData().getNext_start();
-                /*if (mDataList == null || index == LATEST_INDEX) {
-                    mDataList = response.getData().getObject_list();
-                } else {
-                    mDataList.addAll(response.getData().getObject_list());
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        callback.onError(call, e);
+                    }
 
-                }
-                callback.onSuccess(mDataList);*/
-                callback.onSuccess(response.getData().getObject_list());
-            }
-        });
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        LogUtils.d("获取到数据");
+
+                        TestDataBean mTestDataBean = JSON.parseObject(response, TestDataBean.class);
+
+                        mNextStart = mTestDataBean.getData().getNext_start();
+                        /*if (mDataList == null || index == LATEST_INDEX) {
+                            mDataList = response.getData().getObject_list();
+                        } else {
+                            mDataList.addAll(response.getData().getObject_list());
+
+                        }
+                        callback.onSuccess(mDataList);*/
+                        callback.onSuccess(mTestDataBean.getData().getObject_list());
+                    }
+                });
+
     }
 
     //public List<ObjectListEntity> getData() {

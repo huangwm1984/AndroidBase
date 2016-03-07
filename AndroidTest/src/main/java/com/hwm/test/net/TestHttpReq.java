@@ -1,14 +1,19 @@
 package com.hwm.test.net;
 
 import android.os.Handler;
+import android.service.carrier.CarrierMessagingService;
 import android.support.v4.util.ArrayMap;
 
+import com.alibaba.fastjson.JSON;
 import com.android.base.common.utils.HandlerUtil;
-import com.android.base.http.callback.ResultCallback;
-import com.android.base.http.request.OkHttpRequest;
 import com.hwm.test.AppConfig;
 import com.apkfuns.logutils.LogUtils;
-import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.request.OkHttpRequest;
+
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2015/10/9 0009.
@@ -36,24 +41,33 @@ public class TestHttpReq {
                 HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_SUCCESS, response.toString());
             }
         });*/
-        new OkHttpRequest.Builder().url(reqUrl1).get(new ResultCallback<String>() {
-            @Override
-            public void onError(Request request, Exception e) {
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_FAIL);
-            }
+        OkHttpUtils
+                .get()
+                .url(reqUrl1)
+                .addParams("username", "hyman")
+                .addParams("password", "123")
+                .build()
+                .execute(new StringCallback()
+                {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_FAIL);
+                    }
 
-            @Override
-            public void onResponse(String response) {
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_SUCCESS, response.toString());
-            }
-        });
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_SUCCESS, response.toString());
+                    }
+                });
+
     }
 
     public static void request2(final Handler handler) {
 
-        ArrayMap<String, String> map = new ArrayMap<String, String>();
+        /*ArrayMap<String, String> map = new ArrayMap<String, String>();
         map.put("geyeId", "1590");
-        map.put("isNeedff", "1");
+        map.put("isNeedff", "1");*/
 
         /*OkHttpClientManager.postAsyn(reqUrl2, map, new OkHttpClientManager.ResultCallback<String>() {
             @Override
@@ -66,19 +80,27 @@ public class TestHttpReq {
                 HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS, response);
             }
         });*/
+        OkHttpUtils
+                .post()
+                .url(reqUrl2)
+                .addParams("geyeId", "1590")
+                .addParams("isNeedff", "1")
+                .build()
+                .execute(new StringCallback()
+                {
 
-        new OkHttpRequest.Builder().url(reqUrl2).params(map).post(new ResultCallback<String>() {
-            @Override
-            public void onError(Request request, Exception e) {
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_FAIL);
-            }
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_FAIL);
+                    }
 
-            @Override
-            public void onResponse(String response) {
-                //LogUtils.e(response);
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS, response);
-            }
-        });
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS, response);
+                    }
+                });
+
 
     }
 
@@ -99,25 +121,36 @@ public class TestHttpReq {
                 HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS_FOR_BEAN, response);
             }
         });*/
+        OkHttpUtils
+                .post()
+                .url(reqUrl2)
+                .addParams("geyeId", "1590")
+                .addParams("isNeedff", "1")
+                .build()
+                .execute(new StringCallback()
+                {
 
-        new OkHttpRequest.Builder().url(reqUrl2).params(map).post(new ResultCallback<TestBean>() {
-            @Override
-            public void onError(Request request, Exception e) {
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_FAIL_FOR_BEAN);
-            }
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_FAIL_FOR_BEAN);
+                    }
 
-            @Override
-            public void onResponse(TestBean response) {
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS_FOR_BEAN, response);
-            }
-        });
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        TestBean mTestBean = JSON.parseObject(response, TestBean.class);
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS_FOR_BEAN, mTestBean);
+                    }
+                });
+
+
     }
 
     public static void request4(final Handler handler) {
 
-        ArrayMap<String, String> map = new ArrayMap<String, String>();
+       /* ArrayMap<String, String> map = new ArrayMap<String, String>();
         map.put("geyeId", "1590");
-        map.put("isNeedff", "1");
+        map.put("isNeedff", "1");*/
 
         /*OkHttpClientManager.postAsyn(reqUrl2, map, new OkHttpClientManager.ResultCallback<String>() {
             @Override
@@ -130,26 +163,36 @@ public class TestHttpReq {
                 HandlerUtil.sendMessage(handler, AppConfig.REQUEST_POST_SUCCESS, response);
             }
         });*/
+        OkHttpUtils
+                .get()
+                .url(reqUrl2)
+                .addParams("geyeId", "1590")
+                .addParams("isNeedff", "1")
+                .build()
+                .execute(new StringCallback()
+                {
 
-        new OkHttpRequest.Builder().url(reqUrl2).params(map).get(new ResultCallback<TestBean>() {
-            @Override
-            public void onError(Request request, Exception e) {
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_FAIL_FOR_BEAN);
-            }
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_FAIL_FOR_BEAN);
+                    }
 
-            @Override
-            public void onResponse(TestBean response) {
-                HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_SUCCESS_FOR_BEAN, response);
-            }
-        });
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        TestBean mTestBean = JSON.parseObject(response, TestBean.class);
+                        HandlerUtil.sendMessage(handler, AppConfig.REQUEST_GET_SUCCESS_FOR_BEAN, mTestBean);
+                    }
+                });
+
 
     }
 
     public static void request5(final Handler handler) {
 
-        ArrayMap<String, String> map = new ArrayMap<String, String>();
+       /* ArrayMap<String, String> map = new ArrayMap<String, String>();
         map.put("page", "1");
-        map.put("limit", "12");
+        map.put("limit", "12");*/
 
         /*OkHttpClientManager.postAsyn(reqUrl2, map, new OkHttpClientManager.ResultCallback<String>() {
             @Override
@@ -163,17 +206,26 @@ public class TestHttpReq {
             }
         });*/
 
-        new OkHttpRequest.Builder().url(NEW_GAME).params(map).post(new ResultCallback<String>() {
-            @Override
-            public void onError(Request request, Exception e) {
-                LogUtils.e(e);
-            }
+        OkHttpUtils
+                .get()
+                .url(NEW_GAME)
+                .addParams("page", "1")
+                .addParams("limit", "12")
+                .build()
+                .execute(new StringCallback()
+                {
 
-            @Override
-            public void onResponse(String response) {
-               LogUtils.e(response);
-            }
-        });
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        LogUtils.e(e);
+                    }
+
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        LogUtils.e(response);
+                    }
+                });
 
     }
 }

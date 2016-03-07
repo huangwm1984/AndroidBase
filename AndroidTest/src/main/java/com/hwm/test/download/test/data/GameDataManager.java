@@ -2,13 +2,16 @@ package com.hwm.test.download.test.data;
 
 import android.support.v4.util.ArrayMap;
 
+import com.alibaba.fastjson.JSON;
 import com.android.base.block.SampleBlock;
-import com.android.base.http.OkHttpClientManager;
-import com.android.base.http.callback.ResultCallback;
-import com.android.base.http.request.OkHttpRequest;
 import com.hwm.test.download.test.entity.GameInfo;
 import com.hwm.test.view.recycler.extra.impl.ResponseCallback;
-import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.request.RequestCall;
+
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2015/12/1 0001.
@@ -33,6 +36,8 @@ public class GameDataManager extends SampleBlock {
     /** 数据的list */
     //private List<GameInfo.DataEntity> mDataList;
 
+    String mUrl;
+
     @Override
     protected void onCreated() {
 
@@ -51,32 +56,36 @@ public class GameDataManager extends SampleBlock {
         //map.put("page", String.valueOf(page));
         //map.put("limit", String.valueOf(mPageNum));
 
-        String url = String.format(URL_HOT_APP, page);
+        mUrl = String.format(URL_HOT_APP, page);
 
         // 执行网络请求
-        new OkHttpRequest.Builder().url(url).params(map).get(new ResultCallback<GameInfo>() {
-            @Override
-            public void onError(Request request, Exception e) {
-                callback.onError(request, e);
-            }
+        OkHttpUtils
+                .get()
+                .url(mUrl)
+                .build()
+                .execute(new StringCallback()
+                {
 
-            @Override
-            public void onResponse(GameInfo response) {
-                /*if (mDataList == null || mPage == 1) {
-                    mDataList = response.getData();
-                } else {
-                    mDataList.addAll(response.getData());
-                }
-                mPage = page + 1;
-                callback.onSuccess(mDataList);*/
-                if(isFirst){
-                    mTotalCount = response.getTotal();
-                    isFirst = false;
-                }
-                mPage = page + 1;
-                callback.onSuccess(response.getData());
-            }
-        });
+                    @Override
+                    public void onError(Call call, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        GameInfo mGameInfo = JSON.parseObject(response,GameInfo.class);
+
+                        if(isFirst){
+                            mTotalCount = mGameInfo.getTotal();
+                            isFirst = false;
+                        }
+                        mPage = page + 1;
+                        callback.onSuccess(mGameInfo.getData());
+
+                    }
+                });
+
     }
 
     /*public List<GameInfo.DataEntity> getData() {
@@ -89,7 +98,8 @@ public class GameDataManager extends SampleBlock {
 
     @Override
     public void onDestroy() {
-        OkHttpClientManager.getInstance().cancelTag(mActivity);//取消以Activity.this作为tag的请求
+        RequestCall call = OkHttpUtils.get().url(mUrl).build();
+        call.cancel();
         super.onDestroy();
     }
 }

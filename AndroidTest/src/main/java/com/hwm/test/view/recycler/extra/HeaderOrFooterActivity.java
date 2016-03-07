@@ -31,13 +31,14 @@ import com.hwm.test.view.recycler.extra.impl.ResponseCallback;
 import com.apkfuns.logutils.LogUtils;
 import com.bumptech.glide.Glide;
 import com.hwm.test.view.recycler.extra.entity.TestDataBean;
-import com.squareup.okhttp.Request;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2015/11/12 0012.
@@ -322,7 +323,7 @@ public class HeaderOrFooterActivity extends BaseActivity implements ResponseCall
     }
 
     @Override
-    public void onError(Request request, Exception e) {
+    public void onError(Call call, Exception e) {
         mFooterBlock.getFooterView().setVisibility(View.GONE);
         int itemCount = mCartoonAdapter.getAdapter().getItemCount();
         if(itemCount - 2 <= 0){

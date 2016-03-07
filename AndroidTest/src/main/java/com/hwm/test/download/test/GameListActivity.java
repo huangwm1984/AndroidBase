@@ -25,13 +25,14 @@ import com.hwm.test.download.test.data.GameDataManager;
 import com.hwm.test.download.test.entity.GameInfo;
 import com.hwm.test.view.pulltorefresh.recycler.widget.SimpleFooterTest;
 import com.hwm.test.view.recycler.extra.impl.ResponseCallback;
-import com.squareup.okhttp.Request;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2015/12/1 0001.
@@ -244,7 +245,7 @@ public class GameListActivity extends BaseActivity implements ResponseCallback {
     }
 
     @Override
-    public void onError(Request request, Exception e) {
+    public void onError(Call call, Exception e) {
         isLoadingData = false;
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setRefreshing(false);
