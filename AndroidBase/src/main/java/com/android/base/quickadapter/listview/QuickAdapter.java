@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.base.quickadapter;
+package com.android.base.quickadapter.listview;
 
 import android.content.Context;
 import android.view.View;
@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.android.base.quickadapter.BaseAdapterHelper.get;
+import static com.android.base.quickadapter.listview.BaseAdapterHelper.get;
 
 /**
  * Abstraction class of a BaseAdapter in which you only need to provide the
@@ -72,7 +72,7 @@ public abstract class QuickAdapter<T> extends
 	}
 
 	protected BaseAdapterHelper getAdapterHelper(int position,
-			View convertView, ViewGroup parent)
+												 View convertView, ViewGroup parent)
 	{
 
 		if (mMultiItemSupport != null)

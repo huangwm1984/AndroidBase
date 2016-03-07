@@ -1,4 +1,4 @@
-package com.android.base.quickadapter.recycler;
+package com.android.base.quickadapter.recyclerview;
 
 public interface MultiItemRcvTypeSupport<T> {
 

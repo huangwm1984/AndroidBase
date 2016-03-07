@@ -4,8 +4,8 @@ import android.view.View;
 
 import com.android.base.block.SampleBlock;
 import com.android.base.common.assist.Toastor;
-import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
-import com.android.base.quickadapter.recycler.QuickRcvAdapter;
+import com.android.base.quickadapter.recyclerview.BaseRcvAdapterHelper;
+import com.android.base.quickadapter.recyclerview.QuickRcvAdapter;
 import com.hwm.test.R;
 
 import java.util.List;

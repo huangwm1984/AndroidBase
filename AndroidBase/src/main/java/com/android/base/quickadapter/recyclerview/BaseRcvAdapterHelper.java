@@ -1,4 +1,4 @@
-package com.android.base.quickadapter.recycler;
+package com.android.base.quickadapter.recyclerview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.zhy.autolayout.utils.AutoUtils;
 
 
 public class BaseRcvAdapterHelper extends RecyclerView.ViewHolder {
@@ -32,6 +33,8 @@ public class BaseRcvAdapterHelper extends RecyclerView.ViewHolder {
 
     public BaseRcvAdapterHelper(View itemView) {
         super(itemView);
+        //对于recyclerview，注意添加这一行，即可在item上使用高度
+        AutoUtils.autoSize(itemView);
         this.views = new SparseArray<View>();
     }
 

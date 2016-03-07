@@ -1,4 +1,4 @@
-package com.android.base.quickadapter;
+package com.android.base.quickadapter.listview;
 
 public interface MultiItemTypeSupport<T>
 {

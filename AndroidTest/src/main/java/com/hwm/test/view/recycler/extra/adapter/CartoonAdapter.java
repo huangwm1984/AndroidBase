@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.android.base.block.SampleBlock;
-import com.android.base.quickadapter.recycler.BaseRcvAdapterHelper;
-import com.android.base.quickadapter.recycler.ExQuickRcvAdapter;
+import com.android.base.quickadapter.recyclerview.BaseRcvAdapterHelper;
+import com.android.base.quickadapter.recyclerview.ExQuickRcvAdapter;
 import com.android.base.widget.DynamicHeightImageView;
 import com.hwm.test.R;
 import com.bumptech.glide.Glide;

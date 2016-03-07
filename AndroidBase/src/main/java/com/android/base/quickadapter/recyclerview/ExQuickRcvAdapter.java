@@ -1,4 +1,4 @@
-package com.android.base.quickadapter.recycler;
+package com.android.base.quickadapter.recyclerview;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

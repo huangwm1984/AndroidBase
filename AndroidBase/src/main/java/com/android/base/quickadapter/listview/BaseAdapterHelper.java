@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.base.quickadapter;
+package com.android.base.quickadapter.listview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,7 +28,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.widget.*;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.Checkable;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import com.zhy.autolayout.utils.AutoUtils;
 
 /**
  * Allows an abstraction of the ViewHolder pattern.<br>
@@ -74,6 +82,8 @@ public class BaseAdapterHelper
 		convertView = LayoutInflater.from(context) //
 				.inflate(layoutId, parent, false);
 		convertView.setTag(this);
+		//对于listview，注意添加这一行，即可在item上使用高度
+		AutoUtils.autoSize(convertView);
 	}
 
 	/**
@@ -88,14 +98,14 @@ public class BaseAdapterHelper
 	 * @return A BaseAdapterHelper instance.
 	 */
 	public static BaseAdapterHelper get(Context context, View convertView,
-			ViewGroup parent, int layoutId)
+										ViewGroup parent, int layoutId)
 	{
 		return get(context, convertView, parent, layoutId, -1);
 	}
 
 	/** This method is package private and should only be used by QuickAdapter. */
 	static BaseAdapterHelper get(Context context, View convertView,
-			ViewGroup parent, int layoutId, int position)
+								 ViewGroup parent, int layoutId, int position)
 	{
 		if (convertView == null)
 		{
@@ -522,7 +532,7 @@ public class BaseAdapterHelper
 	 * @return The BaseAdapterHelper for chaining.
 	 */
 	public BaseAdapterHelper setOnClickListener(int viewId,
-			View.OnClickListener listener)
+												View.OnClickListener listener)
 	{
 		View view = retrieveView(viewId);
 		view.setOnClickListener(listener);
@@ -539,7 +549,7 @@ public class BaseAdapterHelper
 	 * @return The BaseAdapterHelper for chaining.
 	 */
 	public BaseAdapterHelper setOnTouchListener(int viewId,
-			View.OnTouchListener listener)
+												View.OnTouchListener listener)
 	{
 		View view = retrieveView(viewId);
 		view.setOnTouchListener(listener);
@@ -556,7 +566,7 @@ public class BaseAdapterHelper
 	 * @return The BaseAdapterHelper for chaining.
 	 */
 	public BaseAdapterHelper setOnLongClickListener(int viewId,
-			View.OnLongClickListener listener)
+													View.OnLongClickListener listener)
 	{
 		View view = retrieveView(viewId);
 		view.setOnLongClickListener(listener);
