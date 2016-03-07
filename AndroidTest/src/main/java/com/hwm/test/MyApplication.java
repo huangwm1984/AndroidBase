@@ -7,8 +7,8 @@ import com.android.base.LoadingAndRetryManager;
 import com.android.base.common.assist.Check;
 import com.hwm.test.R;
 import com.hwm.test.download.bizs.DLInfo;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+//import com.squareup.leakcanary.LeakCanary;
+//import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MyApplication extends BaseApplication {
 
     private static MyApplication mInstance;
-    private RefWatcher refWatcher;
+    //private RefWatcher refWatcher;
     //下载任务列表
     private ConcurrentHashMap<String, DLInfo> mDownloadTaskMap;
 
@@ -27,11 +27,11 @@ public class MyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        initLeakCanary();
+        //initLeakCanary();
         initLoadingAndRetry();
     }
 
-    private void initLeakCanary() {
+    /*private void initLeakCanary() {
         refWatcher = installLeakCanary(false);
     }
 
@@ -46,7 +46,7 @@ public class MyApplication extends BaseApplication {
     public static RefWatcher getRefWatcher(Context context) {
         MyApplication application = (MyApplication) context.getApplicationContext();
         return application.refWatcher;
-    }
+    }*/
 
     private void initLoadingAndRetry() {
         LoadingAndRetryManager.BASE_RETRY_LAYOUT_ID = R.layout.act_base_retry;
