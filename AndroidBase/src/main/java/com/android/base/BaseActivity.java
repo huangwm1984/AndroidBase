@@ -8,14 +8,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-
-import com.android.base.autolayout.AutoLayoutActivity;
 import com.android.base.common.Log;
 import com.android.base.lifecycle.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
 import com.android.base.block.CommonBlockManager;
 import com.apkfuns.logutils.LogUtils;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.lang.ref.WeakReference;
 
