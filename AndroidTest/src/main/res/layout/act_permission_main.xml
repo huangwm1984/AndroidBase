@@ -2,20 +2,19 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context=".MainActivityFragment">
+              android:orientation="vertical">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_camera"
+        android:text="访问相机"
         android:id="@+id/button_camera" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_contacts"
-        android:id="@+id/button_contacts" />
+        android:text="访问相册"
+        android:id="@+id/button_gallery" />
 
     <FrameLayout
         android:id="@+id/sample_content_fragment"

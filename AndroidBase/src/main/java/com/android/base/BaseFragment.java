@@ -3,6 +3,7 @@ package com.android.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,25 +17,12 @@ import com.apkfuns.logutils.LogUtils;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Administrator on 2015/7/28 0028.
  */
-public abstract class BaseFragment extends Fragment implements FragmentLifecycleCallbacks {
-
-    //public View rootView;//缓存Fragment view
-    /**
-     * 是否可见状态
-     */
-    private boolean isVisible;
-    /**
-     * 标志位，View已经初始化完成。
-     */
-    private boolean isPrepared;
-    /**
-     * 是否第一次加载
-     */
-    private boolean isFirstLoad = true;
+public abstract class BaseFragment extends Fragment implements FragmentLifecycleCallbacks, EasyPermissions.PermissionCallbacks {
 
     @SuppressWarnings("deprecation")
     @Override
@@ -63,13 +51,10 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
         if (parent != null) {
             parent.removeView(rootView);
         }*/
-        isFirstLoad = true;
         View rootView = null;
         if (getMainContentViewId() != 0) {
             rootView = inflater.inflate(getMainContentViewId(), container, false);
         }
-        isPrepared = true;
-        lazyLoad();
         onFragmentCreateView(this, inflater, container, savedInstanceState);
         return rootView;
     }
@@ -137,7 +122,23 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
         onFragmentSaveInstanceState(this, outState);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        // EasyPermissions handles the request result.
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        LogUtils.d("onPermissionsGranted:" + requestCode + ":" + perms.size());
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        LogUtils.d("onPermissionsDenied:" + requestCode + ":" + perms.size());
+    }
 
     /*public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, int layoutId) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -220,60 +221,6 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
         for (int i = 0; i < step; i++) {
             activity.onBackPressed();
         }
-    }
-
-    /**
-     * 如果是与ViewPager一起使用，调用的是setUserVisibleHint
-     *
-     * @param isVisibleToUser 是否显示出来了
-     */
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            isVisible = true;
-            onVisible();
-        } else {
-            isVisible = false;
-            onInvisible();
-        }
-    }
-
-    /**
-     * 如果是通过FragmentTransaction的show和hide的方法来控制显示，调用的是onHiddenChanged.
-     * 若是初始就show的Fragment 为了触发该事件 需要先hide再show
-     *
-     * @param hidden
-     */
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            isVisible = true;
-            onVisible();
-        } else {
-            isVisible = false;
-            onInvisible();
-        }
-    }
-
-    protected void onVisible() {
-        lazyLoad();
-    }
-
-    protected void onInvisible() {
-    }
-
-    /**
-     * 要实现延迟加载Fragment内容,需要在 onCreateView
-     * isPrepared = true;
-     */
-    protected void lazyLoad() {
-        if (!isPrepared || !isVisible || !isFirstLoad) {
-            return;
-        }
-        isFirstLoad = false;
-        //initData();
     }
 
     protected abstract int getMainContentViewId();

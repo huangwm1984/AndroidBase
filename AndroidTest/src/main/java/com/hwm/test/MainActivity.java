@@ -12,7 +12,7 @@ import com.hwm.test.download.db.dao.DLInfoDao;
 import com.hwm.test.download.test.GameListActivity;
 import com.hwm.test.net.TestHttpActivity;
 import com.hwm.test.leakcanary.LeakcanaryActivity;
-import com.hwm.test.permission.PermissionActivity;
+import com.hwm.test.permission.TestPermissionActivity;
 import com.hwm.test.view.autolayout.AutoLayoutTestActivity;
 import com.hwm.test.view.banner.BannerTestActivity;
 import com.hwm.test.view.pulltorefresh.PullToRefreshTestActivity;
@@ -65,7 +65,7 @@ public class MainActivity extends TestBaseActivity {
                 gotoActivity(RecyclerViewTestActivity.class, false);
                 break;
             case 4:
-                gotoActivity(PermissionActivity.class, false);
+                gotoActivity(TestPermissionActivity.class, false);
                 break;
             case 5:
                 gotoActivity(LeakcanaryActivity.class, false);

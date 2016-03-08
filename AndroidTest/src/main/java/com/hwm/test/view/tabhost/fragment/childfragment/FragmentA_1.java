@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.android.base.BaseFragment;
-import com.android.base.quickadapter.BaseAdapterHelper;
-import com.android.base.quickadapter.QuickAdapter;
+import com.android.base.quickadapter.listview.BaseAdapterHelper;
+import com.android.base.quickadapter.listview.QuickAdapter;
 import com.hwm.test.R;
 
 import java.util.ArrayList;
