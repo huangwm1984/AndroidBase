@@ -1,100 +1,32 @@
 package com.hwm.test;
 
-import android.content.Context;
-
-import com.android.base.BaseApplication;
-import com.android.base.LoadingAndRetryManager;
-import com.android.base.common.assist.Check;
-import com.hwm.test.R;
-import com.hwm.test.download.bizs.DLInfo;
-//import com.squareup.leakcanary.LeakCanary;
-//import com.squareup.leakcanary.RefWatcher;
-
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
+import com.android.base.basic.BaseApplication;
+import com.apkfuns.logutils.LogLevel;
+import com.apkfuns.logutils.LogUtils;
 
 /**
- * Created by Administrator on 2015/10/8 0008.
+ * Created by Administrator on 2016/4/27.
  */
 public class MyApplication extends BaseApplication {
 
     private static MyApplication mInstance;
-    //private RefWatcher refWatcher;
-    //下载任务列表
-    private ConcurrentHashMap<String, DLInfo> mDownloadTaskMap;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        //initLeakCanary();
-        initLoadingAndRetry();
+        initLogUtils();
     }
 
-    /*private void initLeakCanary() {
-        refWatcher = installLeakCanary(false);
-    }
-
-    protected RefWatcher installLeakCanary(boolean isRelease) {
-        if (isRelease) {
-            return RefWatcher.DISABLED;
-        } else {
-            return LeakCanary.install(this);
-        }
-    }
-
-    public static RefWatcher getRefWatcher(Context context) {
-        MyApplication application = (MyApplication) context.getApplicationContext();
-        return application.refWatcher;
-    }*/
-
-    private void initLoadingAndRetry() {
-        LoadingAndRetryManager.BASE_RETRY_LAYOUT_ID = R.layout.act_base_retry;
-        LoadingAndRetryManager.BASE_LOADING_LAYOUT_ID = R.layout.act_base_loading;
-        LoadingAndRetryManager.BASE_EMPTY_LAYOUT_ID = R.layout.act_base_empty;
-    }
-
-    public void setAllDLTasks(List<DLInfo> infos){
-        if(mDownloadTaskMap == null){
-            mDownloadTaskMap = new ConcurrentHashMap<>();
-        }
-        if(infos!=null && !infos.isEmpty()){
-            for(DLInfo info : infos){
-                mDownloadTaskMap.put(info.baseUrl, info);
-            }
-        }
-    }
-
-    public void updateDLTask(DLInfo info){
-        if(mDownloadTaskMap != null && info!=null){
-            mDownloadTaskMap.put(info.baseUrl, info);
-
-        }
-    }
-
-    public DLInfo getDLTask(String key){
-        if(mDownloadTaskMap != null && !Check.isEmpty(key)){
-            try {
-                return mDownloadTaskMap.get(key);
-            } catch (NullPointerException e){
-                return null;
-            }
-        }
-        return null;
-    }
-
-    public void removeDLTask(DLInfo info){
-        if(mDownloadTaskMap != null && !mDownloadTaskMap.isEmpty()){
-            mDownloadTaskMap.remove(info.baseUrl, info);
-        }
-    }
-
-    public ConcurrentHashMap<String, DLInfo> getAllTaks(){
-        return mDownloadTaskMap;
+    private void initLogUtils() {
+        LogUtils.getLogConfig()
+                .configAllowLog(true)                    //是否允许日志输出
+                .configTagPrefix("AndroidTest")          //日志log的前缀
+                .configShowBorders(true)                 //是否显示边界
+                .configLevel(LogLevel.TYPE_VERBOSE);     //日志显示等级
     }
 
     public static MyApplication getInstance() {
         return mInstance;
     }
-
 }

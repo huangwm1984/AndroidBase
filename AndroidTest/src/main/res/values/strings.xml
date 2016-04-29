@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidHwmTest</string>
+    <string name="app_name">AndroidTest</string>
     <string name="action_settings">Settings</string>
 
     <string-array name="test_list">

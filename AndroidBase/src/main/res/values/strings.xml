@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AndroidBase</string>
+
+    <string name="unknown_error">Unknown error</string>
+
     <plurals name="fuzzydatetime__seconds_ago">
         <item quantity="one">%d 秒前</item>
         <item quantity="other">%d 秒前</item>
@@ -28,4 +31,5 @@
         <item quantity="one">%d 年前</item>
         <item quantity="other">%d 年前</item>
     </plurals>
+
 </resources>
