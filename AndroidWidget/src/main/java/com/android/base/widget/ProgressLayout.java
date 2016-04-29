@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.base.R;
+import com.android.base.widget.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

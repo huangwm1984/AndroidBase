@@ -3,19 +3,19 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="test_list">
-        <item>OkHttp</item>
-        <item>FragmentTabHost</item>
-        <item>MultiThreadDownload</item>
-        <item>RecyclerView</item>
-        <item>Android 6.0 Permissions</item>
-        <item>Leakcanary</item>
-        <item>Banner</item>
-        <item>PullToRefresh</item>
-        <item>AutoLayout</item>
-        <item>主流布局10</item>
-        <item>主流布局11</item>
-        <item>主流布局12</item>
-        <item>未完待续...</item>
+        <item>Retrofit</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
     </string-array>
 
     <string-array name="recyclerview_list">
