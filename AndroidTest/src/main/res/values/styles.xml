@@ -43,4 +43,19 @@
         <item name="android:listDivider">@drawable/divider_bg</item>
     </style>
 
+    <style name="DLTheme" parent="AppTheme.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:listDivider">@drawable/divider_bg</item>
+    </style>
+
+    <style name="immersion_status">
+        <item name="android:clipToPadding">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
 </resources>

@@ -5,9 +5,7 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
-/**
- * 系统屏幕的一些操作<br>
- */
+
 public final class DensityUtil {
 
     /**
@@ -45,35 +43,22 @@ public final class DensityUtil {
     }
 
     /**
-     * 获取dialog宽度
-     */
-    public static int getDialogW(Context aty) {
-        DisplayMetrics dm = new DisplayMetrics();
-        dm = aty.getResources().getDisplayMetrics();
-        int w = dm.widthPixels - 100;
-        // int w = aty.getWindowManager().getDefaultDisplay().getWidth() - 100;
-        return w;
-    }
-
-    /**
      * 获取屏幕宽度
      */
-    public static int getScreenW(Context aty) {
+    public static int getScreenW(Context context) {
         DisplayMetrics dm = new DisplayMetrics();
-        dm = aty.getResources().getDisplayMetrics();
+        dm = context.getResources().getDisplayMetrics();
         int w = dm.widthPixels;
-        // int w = aty.getWindowManager().getDefaultDisplay().getWidth();
         return w;
     }
 
     /**
      * 获取屏幕高度
      */
-    public static int getScreenH(Context aty) {
+    public static int getScreenH(Context context) {
         DisplayMetrics dm = new DisplayMetrics();
-        dm = aty.getResources().getDisplayMetrics();
+        dm = context.getResources().getDisplayMetrics();
         int h = dm.heightPixels;
-        // int h = aty.getWindowManager().getDefaultDisplay().getHeight();
         return h;
     }
 }

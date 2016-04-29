@@ -22,12 +22,12 @@
 
 11.ListView、GridView、RecyclerView快速开发适配器
 
-12.Activity解耦CommonBlock
+12.Activity 解耦 CommonBlock
 
-13.Android 6.0 Permission封装
+13.GooleSamples 对 Android 6.0 Permission 封装 EasyPermissions
 
-14.集成BaseBanner控件
+14.BaseBanner 控件
 
-15.集成hongyangAndroid的多分辨率终极适配方案AndroidAutoLayout，
+15.hongyangAndroid 多分辨率适配方案 AndroidAutoLayout
 
-最后感谢github上大神的开源框架和开源精神 (●'◡'●)ﾉ♥
+最后感谢 github 上大神的开源框架和开源精神 (●'◡'●)ﾉ♥

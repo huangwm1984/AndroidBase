@@ -7,23 +7,26 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-
-import com.android.base.autolayout.AutoLayout;
 import com.android.base.common.Log;
 import com.android.base.lifecycle.ActivityLifecycleCallbacksCompat;
 import com.android.base.netstate.NetWorkUtil;
 import com.android.base.netstate.NetworkStateReceiver;
 import com.android.base.block.CommonBlockManager;
+import com.apkfuns.logutils.LogUtils;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import butterknife.ButterKnife;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by huangwm on 2015/7/28 0028.
  */
-public abstract class BaseActivity extends AppCompatActivity implements ActivityLifecycleCallbacksCompat {
+public abstract class BaseActivity extends AutoLayoutActivity implements ActivityLifecycleCallbacksCompat, EasyPermissions.PermissionCallbacks {
 
     public Context mApplicationContext;
 
@@ -40,7 +43,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         AppManager.getAppManager().addActivity(this);
         mApplicationContext = getApplicationContext();
         ButterKnife.bind(this);
-        AutoLayout.getInstance().auto(this);
         NetworkStateReceiver.registerNetworkStateReceiver(this);
         mHandler = new MyHandler(this);
         mCommonBlockManager = getCommonBlockManager();
@@ -130,6 +132,24 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // EasyPermissions handles the request result.
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        LogUtils.d("onPermissionsGranted:" + requestCode + ":" + perms.size());
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        LogUtils.d("onPermissionsDenied:" + requestCode + ":" + perms.size());
+    }
+
     private static class MyHandler extends Handler {
 
         WeakReference<BaseActivity> mReference = null;
@@ -141,7 +161,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
         @Override
         public void handleMessage(Message msg) {
             BaseActivity outer = mReference.get();
-            if (outer == null && outer.isFinishing()) {
+            if (outer == null || outer.isFinishing()) {
                 Log.e("outer is null");
                 return;
             }
@@ -189,6 +209,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Activity
             mCommonBlockManager = new CommonBlockManager(this);
         }
         return mCommonBlockManager;
+    }
+
+    public Handler getHandler(){
+        return mHandler;
     }
 
     public void onConnect(NetWorkUtil.netType type) {

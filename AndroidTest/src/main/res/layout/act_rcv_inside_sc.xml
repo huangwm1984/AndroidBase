@@ -11,7 +11,7 @@
                   android:orientation="vertical">
 
 
-        <com.android.test.view.banner.block.SimpleImageBanner
+        <com.hwm.test.view.banner.block.SimpleImageBanner
             android:id="@+id/banner_main_default"
             android:layout_width="match_parent"
             android:layout_height="180dp"

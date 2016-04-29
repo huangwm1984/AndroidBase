@@ -3,26 +3,26 @@ package com.android.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.base.autolayout.AutoLayout;
 import com.android.base.lifecycle.FragmentLifecycleCallbacks;
+import com.apkfuns.logutils.LogUtils;
 //import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Administrator on 2015/7/28 0028.
  */
-public abstract class BaseFragment extends Fragment implements FragmentLifecycleCallbacks {
-
-    public View rootView;//缓存Fragment view
+public abstract class BaseFragment extends Fragment implements FragmentLifecycleCallbacks, EasyPermissions.PermissionCallbacks {
 
     @SuppressWarnings("deprecation")
     @Override
@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        if (rootView == null) {
+        /*if (rootView == null) {
             if (getMainContentViewId() != 0) {
                 rootView = inflater.inflate(getMainContentViewId(), container, false); // set view
             }
@@ -50,6 +50,10 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if (parent != null) {
             parent.removeView(rootView);
+        }*/
+        View rootView = null;
+        if (getMainContentViewId() != 0) {
+            rootView = inflater.inflate(getMainContentViewId(), container, false);
         }
         onFragmentCreateView(this, inflater, container, savedInstanceState);
         return rootView;
@@ -58,7 +62,6 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AutoLayout.getInstance().auto(getActivity());
         bindViews(view);
         onFragmentViewCreated(this, view, savedInstanceState);
     }
@@ -119,7 +122,23 @@ public abstract class BaseFragment extends Fragment implements FragmentLifecycle
         onFragmentSaveInstanceState(this, outState);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        // EasyPermissions handles the request result.
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        LogUtils.d("onPermissionsGranted:" + requestCode + ":" + perms.size());
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        LogUtils.d("onPermissionsDenied:" + requestCode + ":" + perms.size());
+    }
 
     /*public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, int layoutId) {
         super.onCreateView(inflater, container, savedInstanceState);

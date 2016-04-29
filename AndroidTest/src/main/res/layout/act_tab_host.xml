@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dip" >
 
-                    <com.android.test.view.tabhost.MyFragmentTabHost
+                    <com.hwm.test.view.tabhost.MyFragmentTabHost
                         android:id="@android:id/tabhost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

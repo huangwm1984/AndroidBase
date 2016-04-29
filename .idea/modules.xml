@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidBase/AndroidBase.iml" filepath="$PROJECT_DIR$/AndroidBase/AndroidBase.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndroidTest/AndroidTest.iml" filepath="$PROJECT_DIR$/AndroidTest/AndroidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/AndroidWidget/AndroidWidget.iml" filepath="$PROJECT_DIR$/AndroidWidget/AndroidWidget.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HuangwmWorkSpace.iml" filepath="$PROJECT_DIR$/HuangwmWorkSpace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyAndroidBase.iml" filepath="$PROJECT_DIR$/MyAndroidBase.iml" />
     </modules>
   </component>
 </project>

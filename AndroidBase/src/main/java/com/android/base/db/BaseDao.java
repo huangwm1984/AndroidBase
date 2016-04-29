@@ -1,8 +1,5 @@
 package com.android.base.db;
 
-import android.content.Context;
-
-import com.apkfuns.logutils.LogUtils;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedDelete;
@@ -127,6 +124,7 @@ public abstract class BaseDao<T, Integer> {
         }
         return 0;
     }
+
     /**
      * 删，带事务操作
      *
@@ -576,5 +574,53 @@ public abstract class BaseDao<T, Integer> {
             dao.endThreadConnection(databaseConnection);
         }
         return 0;
+    }
+
+    /**
+     * 查，带事务操作
+     * @param key
+     * @param value
+     * @return 查询结果返回第一个
+     * @throws SQLException
+     */
+    public T queryForFirst(String key, Object value) throws SQLException {
+        Dao<T, Integer> dao = getDao();
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = dao.startThreadConnection();
+            dao.setAutoCommit(databaseConnection, false);
+
+            T t = dao.queryBuilder().where().eq(key, value).queryForFirst();
+            dao.commit(databaseConnection);
+            return t;
+        } catch (SQLException e) {
+            dao.rollBack(databaseConnection);
+            e.printStackTrace();
+        } finally {
+            dao.endThreadConnection(databaseConnection);
+        }
+        return null;
+    }
+
+    /**
+     * 删，带事务操作
+     * @param key
+     * @param value
+     * @throws SQLException
+     */
+    public void delete(String key, Object value) throws SQLException {
+        Dao<T, Integer> dao = getDao();
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = dao.startThreadConnection();
+            dao.setAutoCommit(databaseConnection, false);
+            dao.deleteBuilder().where().eq(key, value);
+            dao.commit(databaseConnection);
+        } catch (SQLException e) {
+            dao.rollBack(databaseConnection);
+            e.printStackTrace();
+        } finally {
+            dao.endThreadConnection(databaseConnection);
+        }
     }
 }
