@@ -1,4 +1,4 @@
-package com.hwm.test.test.http.presenter;
+package com.hwm.test.http.presenter;
 
 import com.android.base.basic.BasePresenter;
 import com.android.base.basic.BaseView;
@@ -22,7 +22,9 @@ public interface RetrofitContract {
 
     interface Presenter extends BasePresenter {
 
-        void loadNetData();
+        void loadLastestNewsData();
+
+        void loadGeyeData();
 
     }
 

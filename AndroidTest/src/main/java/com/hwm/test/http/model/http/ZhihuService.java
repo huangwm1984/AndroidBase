@@ -1,7 +1,7 @@
-package com.hwm.test.test.http.model.http;
+package com.hwm.test.http.model.http;
 
-import com.hwm.test.test.http.model.entity.NewsEntity;
-import com.hwm.test.test.http.model.entity.StoryDetailsEntity;
+import com.hwm.test.http.model.entity.NewsEntity;
+import com.hwm.test.http.model.entity.StoryDetailsEntity;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

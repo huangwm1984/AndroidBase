@@ -1,15 +1,14 @@
-package com.hwm.test.test.http;
+package com.hwm.test.http;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.android.base.basic.BaseActivity;
 import com.apkfuns.logutils.LogUtils;
 import com.hwm.test.R;
-import com.hwm.test.test.http.model.RetrofitModel;
-import com.hwm.test.test.http.presenter.RetrofitPresenter;
-import com.hwm.test.test.http.view.RetrofitFragment;
+import com.hwm.test.http.model.RetrofitModel;
+import com.hwm.test.http.presenter.RetrofitPresenter;
+import com.hwm.test.http.view.RetrofitFragment;
 
 /**
  * Created by Administrator on 2016/4/27.
@@ -45,19 +44,19 @@ public class RetrofitActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtils.e(TAG,"onResume");
+        //LogUtils.e(TAG,"onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtils.e(TAG,"onPause");
+        //LogUtils.e(TAG,"onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        LogUtils.e(TAG,"onStop");
+        //LogUtils.e(TAG,"onStop");
     }
 
     @Override

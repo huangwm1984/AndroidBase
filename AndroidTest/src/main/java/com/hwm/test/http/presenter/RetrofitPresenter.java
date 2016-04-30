@@ -1,10 +1,11 @@
-package com.hwm.test.test.http.presenter;
+package com.hwm.test.http.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.hwm.test.test.http.model.RetrofitDataSource;
-import com.hwm.test.test.http.model.RetrofitModel;
-import com.hwm.test.test.http.model.entity.NewsEntity;
+import com.hwm.test.http.model.RetrofitDataSource;
+import com.hwm.test.http.model.RetrofitModel;
+import com.hwm.test.http.model.entity.GeyeEntity;
+import com.hwm.test.http.model.entity.NewsEntity;
 
 /**
  * Created by Administrator on 2016/4/27.
@@ -22,18 +23,22 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
 
     @Override
     public void start() {
-        loadNetData();
+        loadLastestNewsData();
     }
 
     @Override
-    public void loadNetData() {
+    public void loadLastestNewsData() {
         mView.startLoading();
         mRetrofitModel.loadLastestNewsData(new RetrofitDataSource.LoadNetDataCallback() {
             @Override
             public void onDataLoaded(Object o) {
+
                 NewsEntity newsEntity = (NewsEntity) o;
                 if(mView.isActive())
                     mView.showSuccessMessage(newsEntity);
+
+                loadGeyeData();
+
             }
 
             @Override
@@ -45,5 +50,25 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
         });
     }
 
+    @Override
+    public void loadGeyeData() {
+        mRetrofitModel.loadGeyeData(new RetrofitDataSource.LoadNetDataCallback() {
+            @Override
+            public void onDataLoaded(Object o) {
 
+                GeyeEntity geyeEntity = (GeyeEntity) o;
+                if(mView.isActive())
+                    mView.showSuccessMessage(geyeEntity);
+
+            }
+
+            @Override
+            public void onDataNotAvailable(Object o) {
+                String errorMsg = (String) o;
+                if(mView.isActive())
+                    mView.showErrorMessage(errorMsg);
+
+            }
+        });
+    }
 }

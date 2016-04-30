@@ -9,7 +9,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.base.basic.BaseActivity;
-import com.hwm.test.test.http.RetrofitActivity;
+import com.hwm.test.http.RetrofitActivity;
 
 
 /**

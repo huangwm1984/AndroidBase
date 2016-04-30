@@ -1,4 +1,4 @@
-package com.hwm.test.test.http.model.entity;
+package com.hwm.test.http.model.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;

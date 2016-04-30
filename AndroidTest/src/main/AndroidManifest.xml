@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name="com.hwm.test.test.http.RetrofitActivity"
+            android:name="com.hwm.test.http.RetrofitActivity"
             android:screenOrientation="portrait" >
         </activity>
 

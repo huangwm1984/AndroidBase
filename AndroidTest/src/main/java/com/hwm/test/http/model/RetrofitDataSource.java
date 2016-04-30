@@ -1,4 +1,4 @@
-package com.hwm.test.test.http.model;
+package com.hwm.test.http.model;
 
 
 import android.support.annotation.NonNull;
@@ -17,9 +17,7 @@ public interface RetrofitDataSource {
 
     void loadLastestNewsData(@NonNull LoadNetDataCallback callback);
 
-    void loadBeforeNewsData(@NonNull LoadNetDataCallback callback);
-
-    void loadNewsDetailsData(@NonNull LoadNetDataCallback callback);
+    void loadGeyeData(@NonNull LoadNetDataCallback callback);
 
 
 }
