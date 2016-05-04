@@ -2,12 +2,15 @@ package com.hwm.test.http.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.android.base.basic.BaseFragment;
-import com.android.base.widget.ProgressLayout;
+import com.android.base.widget.LoadProgressLayout;
 import com.hwm.test.R;
 import com.hwm.test.http.model.entity.GeyeEntity;
 import com.hwm.test.http.model.entity.NewsEntity;
@@ -19,9 +22,10 @@ import com.hwm.test.http.presenter.RetrofitContract;
 public class RetrofitFragment extends BaseFragment implements RetrofitContract.View {
 
     private RetrofitContract.Presenter mPresenter;
-    private ProgressLayout mProgressLayout;
+    private LoadProgressLayout mProgressLayout;
     private TextView mTvLastestNews;
     private TextView mTvGeyeData;
+    private Button mBtnTryAgain;
 
     public static RetrofitFragment newInstance() {
         return new RetrofitFragment();
@@ -49,6 +53,9 @@ public class RetrofitFragment extends BaseFragment implements RetrofitContract.V
         mTvLastestNews = bindView(R.id.tv1);
         mTvGeyeData = bindView(R.id.tv2);
         mProgressLayout = bindView(R.id.progress_layout);
+        mBtnTryAgain = bindView(R.id.btnTryAgain);
+        mBtnTryAgain.setOnClickListener(retryListener);
+
     }
 
     @Override
@@ -56,42 +63,54 @@ public class RetrofitFragment extends BaseFragment implements RetrofitContract.V
         this.mPresenter = presenter;
     }
 
-    /**
-     * 加载中
-     */
     @Override
-    public void startLoading() {
-        mProgressLayout.showProgress();
+    public void showLoadingView() {
+        mProgressLayout.showLoadingView();
     }
 
-    /**
-     * 加载失败
-     */
     @Override
-    public void showErrorMessage(Object o) {
-        mProgressLayout.showErrorText((String) o);
+    public void showEmptyView() {
+        mProgressLayout.showEmptyView();
     }
 
-    /**
-     * 请求成功
-     */
     @Override
-    public void showSuccessMessage(Object o) {
+    public void showErrorView() {
+        mProgressLayout.showErrorView();
+    }
+
+    @Override
+    public void showContentView() {
+        mProgressLayout.showContentView();
+    }
+
+    @Override
+    public void loadErrorMessage(Object o) {
+        showErrorView();
+    }
+
+    @Override
+    public void loadSuccessMessage(Object o) {
         if(o instanceof NewsEntity){
             NewsEntity newsEntity = (NewsEntity) o;
             mTvLastestNews.setText(newsEntity.toString());
         }else if(o instanceof GeyeEntity){
             GeyeEntity geyeEntity = (GeyeEntity) o;
             mTvGeyeData.setText(JSON.toJSONString(geyeEntity));
-            mProgressLayout.showContent();
+            showContentView();
         }
     }
-
 
     @Override
     public boolean isActive() {
         return isAdded();
     }
 
+    private View.OnClickListener retryListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(mPresenter!=null)
+                mPresenter.start();
+        }
+    };
 
 }

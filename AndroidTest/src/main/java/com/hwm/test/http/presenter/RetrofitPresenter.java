@@ -38,7 +38,6 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
             mView.setPresenter(this);
             mRetrofitFragment = (RetrofitFragment) mView;
         }
-        mCompositeSubscription = RxUtil.getNewCompositeSubIfUnsubscribed(mCompositeSubscription);
     }
 
     @Override
@@ -48,7 +47,8 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
 
     @Override
     public void loadLastestNewsData() {
-        mView.startLoading();
+        mView.showLoadingView();
+        mCompositeSubscription = RxUtil.getNewCompositeSubIfUnsubscribed(mCompositeSubscription);
 
         if(mView.isActive()){
             Subscription subscription = Observable.interval(1, TimeUnit.SECONDS)
@@ -77,7 +77,7 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
 
                 GeyeEntity geyeEntity = (GeyeEntity) o;
                 if(mView.isActive())
-                    mView.showSuccessMessage(geyeEntity);
+                    mView.loadSuccessMessage(geyeEntity);
 
                 RxUtil.unsubscribeIfNotNull(mCompositeSubscription);//取消订阅
             }
@@ -86,7 +86,7 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
             public void onDataNotAvailable(Object o) {
                 String errorMsg = (String) o;
                 if(mView.isActive())
-                    mView.showErrorMessage(errorMsg);
+                    mView.loadErrorMessage(errorMsg);
 
             }
         });
@@ -100,7 +100,7 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
                 NewsEntity newsEntity = (NewsEntity) o;
 
                 if(mView.isActive())
-                    mView.showSuccessMessage(newsEntity);
+                    mView.loadSuccessMessage(newsEntity);
 
                 loadGeyeData();
 
@@ -110,7 +110,7 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
             public void onDataNotAvailable(Object o) {
                 String errorMsg = (String) o;
                 if(mView.isActive())
-                    mView.showErrorMessage(errorMsg);
+                    mView.loadErrorMessage(errorMsg);
             }
         });
     }

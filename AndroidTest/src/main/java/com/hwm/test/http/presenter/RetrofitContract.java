@@ -10,11 +10,17 @@ public interface RetrofitContract {
 
     interface View extends BaseView<Presenter> {
 
-        void startLoading();
+        void showLoadingView();
 
-        void showErrorMessage(Object o);
+        void showEmptyView();
 
-        void showSuccessMessage(Object o);
+        void showErrorView();
+
+        void showContentView();
+
+        void loadErrorMessage(Object o);
+
+        void loadSuccessMessage(Object o);
 
         boolean isActive();
 
