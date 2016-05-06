@@ -9,24 +9,24 @@ import java.util.List;
 /**
  * Created by diff on 2016/2/3.
  */
-public class NewsEntity implements Parcelable {
+public class News implements Parcelable {
 
     private String date;
 
-    private ArrayList<StoriesEntity> stories;
+    private ArrayList<Stories> stories;
 
-    private List<TopStoriesEntity> top_stories;
+    private List<TopStories> top_stories;
 
 
     public void setDate(String date) {
         this.date = date;
     }
 
-    public void setStories(ArrayList<StoriesEntity> stories) {
+    public void setStories(ArrayList<Stories> stories) {
         this.stories = stories;
     }
 
-    public void setTop_stories(List<TopStoriesEntity> top_stories) {
+    public void setTop_stories(List<TopStories> top_stories) {
         this.top_stories = top_stories;
     }
 
@@ -34,11 +34,11 @@ public class NewsEntity implements Parcelable {
         return date;
     }
 
-    public ArrayList<StoriesEntity> getStories() {
+    public ArrayList<Stories> getStories() {
         return stories;
     }
 
-    public List<TopStoriesEntity> getTop_stories() {
+    public List<TopStories> getTop_stories() {
         return top_stories;
     }
 
@@ -55,24 +55,24 @@ public class NewsEntity implements Parcelable {
         dest.writeList(this.top_stories);
     }
 
-    public NewsEntity() {
+    public News() {
     }
 
-    protected NewsEntity(Parcel in) {
+    protected News(Parcel in) {
         this.date = in.readString();
-        this.stories = new ArrayList<StoriesEntity>();
+        this.stories = new ArrayList<Stories>();
         in.readList(this.stories, List.class.getClassLoader());
-        this.top_stories = new ArrayList<TopStoriesEntity>();
+        this.top_stories = new ArrayList<TopStories>();
         in.readList(this.top_stories, List.class.getClassLoader());
     }
 
-    public static final Creator<NewsEntity> CREATOR = new Creator<NewsEntity>() {
-        public NewsEntity createFromParcel(Parcel source) {
-            return new NewsEntity(source);
+    public static final Creator<News> CREATOR = new Creator<News>() {
+        public News createFromParcel(Parcel source) {
+            return new News(source);
         }
 
-        public NewsEntity[] newArray(int size) {
-            return new NewsEntity[size];
+        public News[] newArray(int size) {
+            return new News[size];
         }
     };
 

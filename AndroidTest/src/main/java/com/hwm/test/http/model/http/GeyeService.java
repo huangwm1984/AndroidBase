@@ -1,10 +1,9 @@
 package com.hwm.test.http.model.http;
 
-import com.hwm.test.http.model.entity.GeyeEntity;
+import com.hwm.test.http.model.entity.Geye;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -15,5 +14,5 @@ public interface GeyeService {
 
     @FormUrlEncoded
     @POST("geye/getRtsp")
-    Observable<GeyeEntity> getGeyeData(@Field("geyeId") String geyeId, @Field("isNeedff") String isNeedff);
+    Observable<Geye> getGeyeData(@Field("geyeId") String geyeId, @Field("isNeedff") String isNeedff);
 }

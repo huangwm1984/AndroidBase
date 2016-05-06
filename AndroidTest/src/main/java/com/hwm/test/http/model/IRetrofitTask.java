@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 /**
  * Created by Administrator on 2016/4/27.
  */
-public interface RetrofitDataSource {
+public interface IRetrofitTask {
 
     interface LoadNetDataCallback {
 

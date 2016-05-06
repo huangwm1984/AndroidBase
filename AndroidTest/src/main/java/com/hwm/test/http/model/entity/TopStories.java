@@ -3,7 +3,7 @@ package com.hwm.test.http.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TopStoriesEntity implements Parcelable {
+public class TopStories implements Parcelable {
     private String image;
     private int type;
     private int id;
@@ -75,10 +75,10 @@ public class TopStoriesEntity implements Parcelable {
         dest.writeString(this.title);
     }
 
-    public TopStoriesEntity() {
+    public TopStories() {
     }
 
-    protected TopStoriesEntity(Parcel in) {
+    protected TopStories(Parcel in) {
         this.image = in.readString();
         this.type = in.readInt();
         this.id = in.readInt();
@@ -86,13 +86,13 @@ public class TopStoriesEntity implements Parcelable {
         this.title = in.readString();
     }
 
-    public static final Creator<TopStoriesEntity> CREATOR = new Creator<TopStoriesEntity>() {
-        public TopStoriesEntity createFromParcel(Parcel source) {
-            return new TopStoriesEntity(source);
+    public static final Creator<TopStories> CREATOR = new Creator<TopStories>() {
+        public TopStories createFromParcel(Parcel source) {
+            return new TopStories(source);
         }
 
-        public TopStoriesEntity[] newArray(int size) {
-            return new TopStoriesEntity[size];
+        public TopStories[] newArray(int size) {
+            return new TopStories[size];
         }
     };
 }

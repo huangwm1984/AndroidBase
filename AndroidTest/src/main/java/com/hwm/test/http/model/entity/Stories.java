@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public class StoriesEntity implements Parcelable {
+public class Stories implements Parcelable {
     private int type;
     private int id;
     private String ga_prefix;
@@ -73,7 +73,7 @@ public class StoriesEntity implements Parcelable {
                 '}';
     }
 
-    public StoriesEntity() {
+    public Stories() {
     }
 
     @Override
@@ -91,7 +91,7 @@ public class StoriesEntity implements Parcelable {
         dest.writeByte(isRead ? (byte) 1 : (byte) 0);
     }
 
-    protected StoriesEntity(Parcel in) {
+    protected Stories(Parcel in) {
         this.type = in.readInt();
         this.id = in.readInt();
         this.ga_prefix = in.readString();
@@ -100,13 +100,13 @@ public class StoriesEntity implements Parcelable {
         this.isRead = in.readByte() != 0;
     }
 
-    public static final Creator<StoriesEntity> CREATOR = new Creator<StoriesEntity>() {
-        public StoriesEntity createFromParcel(Parcel source) {
-            return new StoriesEntity(source);
+    public static final Creator<Stories> CREATOR = new Creator<Stories>() {
+        public Stories createFromParcel(Parcel source) {
+            return new Stories(source);
         }
 
-        public StoriesEntity[] newArray(int size) {
-            return new StoriesEntity[size];
+        public Stories[] newArray(int size) {
+            return new Stories[size];
         }
     };
 }

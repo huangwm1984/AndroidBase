@@ -2,18 +2,16 @@ package com.hwm.test.http.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.android.base.basic.BaseFragment;
 import com.android.base.widget.LoadProgressLayout;
 import com.hwm.test.R;
-import com.hwm.test.http.model.entity.GeyeEntity;
-import com.hwm.test.http.model.entity.NewsEntity;
+import com.hwm.test.http.model.entity.Geye;
+import com.hwm.test.http.model.entity.News;
 import com.hwm.test.http.presenter.RetrofitContract;
 
 /**
@@ -90,11 +88,11 @@ public class RetrofitFragment extends BaseFragment implements RetrofitContract.V
 
     @Override
     public void loadSuccessMessage(Object o) {
-        if(o instanceof NewsEntity){
-            NewsEntity newsEntity = (NewsEntity) o;
+        if(o instanceof News){
+            News newsEntity = (News) o;
             mTvLastestNews.setText(newsEntity.toString());
-        }else if(o instanceof GeyeEntity){
-            GeyeEntity geyeEntity = (GeyeEntity) o;
+        }else if(o instanceof Geye){
+            Geye geyeEntity = (Geye) o;
             mTvGeyeData.setText(JSON.toJSONString(geyeEntity));
             showContentView();
         }

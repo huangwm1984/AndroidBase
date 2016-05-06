@@ -31,31 +31,31 @@ import rx.subjects.BehaviorSubject;
 public abstract class BaseActivity extends SupportActivity implements IBaseActivity, ActivityLifecycleProvider, EasyPermissions.PermissionCallbacks {
 
     private Toast mToast;
-    public Activity mActivity;
-    public Context mApplicationContext;
-    public ActivityHandler mActivityHandler = new ActivityHandler(this);
+    public Activity activity;
+    public Context applicationContext;
+    public ActivityHandler activityHandler = new ActivityHandler(this);
 
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+    private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
 
     @Override
     @NonNull
     @CheckResult
     public final Observable<ActivityEvent> lifecycle() {
-        return lifecycleSubject.asObservable();
+        return mLifecycleSubject.asObservable();
     }
 
     @Override
     @NonNull
     @CheckResult
     public final <T> Observable.Transformer<T, T> bindUntilEvent(@NonNull ActivityEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
+        return RxLifecycle.bindUntilEvent(mLifecycleSubject, event);
     }
 
     @Override
     @NonNull
     @CheckResult
     public final <T> Observable.Transformer<T, T> bindToLifecycle() {
-        return RxLifecycle.bindActivity(lifecycleSubject);
+        return RxLifecycle.bindActivity(mLifecycleSubject);
     }
 
     @Override
@@ -63,8 +63,8 @@ public abstract class BaseActivity extends SupportActivity implements IBaseActiv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mActivity = this;
-        mApplicationContext = getApplicationContext();
+        activity = this;
+        applicationContext = getApplicationContext();
 
         ActivityStack.create().addActivity(this);
 
@@ -73,45 +73,45 @@ public abstract class BaseActivity extends SupportActivity implements IBaseActiv
 
         onActivityCreated(savedInstanceState);
 
-        lifecycleSubject.onNext(ActivityEvent.CREATE);
+        mLifecycleSubject.onNext(ActivityEvent.CREATE);
     }
 
     @Override
     @CallSuper
     protected void onStart() {
         super.onStart();
-        lifecycleSubject.onNext(ActivityEvent.START);
+        mLifecycleSubject.onNext(ActivityEvent.START);
     }
 
     @Override
     @CallSuper
     protected void onResume() {
         super.onResume();
-        lifecycleSubject.onNext(ActivityEvent.RESUME);
+        mLifecycleSubject.onNext(ActivityEvent.RESUME);
     }
 
     @Override
     @CallSuper
     protected void onPause() {
-        lifecycleSubject.onNext(ActivityEvent.PAUSE);
+        mLifecycleSubject.onNext(ActivityEvent.PAUSE);
         super.onPause();
     }
 
     @Override
     @CallSuper
     protected void onStop() {
-        lifecycleSubject.onNext(ActivityEvent.STOP);
+        mLifecycleSubject.onNext(ActivityEvent.STOP);
         super.onStop();
     }
 
     @Override
     @CallSuper
     protected void onDestroy() {
-        lifecycleSubject.onNext(ActivityEvent.DESTROY);
+        mLifecycleSubject.onNext(ActivityEvent.DESTROY);
         super.onDestroy();
         ActivityStack.create().finishActivity(this);
-        mActivityHandler = null;
-        mActivity = null;
+        activityHandler = null;
+        activity = null;
     }
 
     @Override

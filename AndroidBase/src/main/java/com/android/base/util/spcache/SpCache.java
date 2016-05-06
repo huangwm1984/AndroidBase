@@ -18,7 +18,7 @@ public class SpCache {
     private static final String TAG = SpCache.class.getSimpleName();
     private static SpCache INSTANCE;
     private ConcurrentMap<String, SoftReference<Object>> mCache;
-    private String mPrefFileName = "com.zhy.spcache";
+    private String mPrefFileName = "spcache";
     private Context mContext;
 
     private SpCache(Context context, String prefFileName) {

@@ -28,11 +28,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.android.support:recyclerview-v7:23.3.0'
-    compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
-    compile 'com.jakewharton:disklrucache:2.0.2'
-    compile 'com.j256.ormlite:ormlite-android:4.48'
-    compile 'jp.wasabeef:glide-transformations:1.3.0'
-    compile 'com.nineoldandroids:library:2.4.0'
 
     //Rxjava
     compile 'io.reactivex:rxandroid:1.1.0'
@@ -43,6 +38,7 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.9'
     //图片加载、缓存库
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
     //6.0权限处理库
     compile 'pub.devrel:easypermissions:0.1.5'
     //Retrofit网络请求
@@ -53,4 +49,10 @@ dependencies {
     compile 'me.yokeyword:fragmentation:0.4.3'
     //Log工具类
     compile 'com.apkfuns.logutils:library:1.3.0'
+    //db数据库
+    compile 'com.j256.ormlite:ormlite-core:4.48'
+    compile 'com.j256.ormlite:ormlite-android:4.48'
+    //Recyclerview分割线
+    compile 'com.yqritc:recyclerview-flexibledivider:1.2.9'
+    compile 'com.nineoldandroids:library:2.4.0'
 }

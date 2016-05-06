@@ -1,9 +1,8 @@
 package com.hwm.test.http.model.http;
 
-import com.hwm.test.http.model.entity.NewsEntity;
+import com.hwm.test.http.model.entity.News;
 
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -12,6 +11,6 @@ import rx.Observable;
 public interface ZhihuService {
 
     @GET("api/4/news/latest")
-    Observable<NewsEntity> getLastestNews();
+    Observable<News> getLastestNews();
 
 }

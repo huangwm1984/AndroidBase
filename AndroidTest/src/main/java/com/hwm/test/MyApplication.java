@@ -9,12 +9,12 @@ import com.apkfuns.logutils.LogUtils;
  */
 public class MyApplication extends BaseApplication {
 
-    private static MyApplication mInstance;
+    private static MyApplication sInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance = this;
+        sInstance = this;
         initLogUtils();
     }
 
@@ -27,6 +27,6 @@ public class MyApplication extends BaseApplication {
     }
 
     public static MyApplication getInstance() {
-        return mInstance;
+        return sInstance;
     }
 }

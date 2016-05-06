@@ -29,41 +29,41 @@ import rx.subjects.BehaviorSubject;
  */
 public abstract class BaseFragment extends SupportFragment implements FragmentLifecycleProvider, EasyPermissions.PermissionCallbacks {
 
-    private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
+    private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     protected View mRootView = null;
-    public FragmentHandler mFragmentHandler = new FragmentHandler(this);
+    public FragmentHandler fragmentHandler = new FragmentHandler(this);
 
     @Override
     @NonNull
     @CheckResult
     public final Observable<FragmentEvent> lifecycle() {
-        return lifecycleSubject.asObservable();
+        return mLifecycleSubject.asObservable();
     }
 
     @Override
     @NonNull
     @CheckResult
     public final <T> Observable.Transformer<T, T> bindUntilEvent(@NonNull FragmentEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
+        return RxLifecycle.bindUntilEvent(mLifecycleSubject, event);
     }
 
     @Override
     @NonNull
     @CheckResult
     public final <T> Observable.Transformer<T, T> bindToLifecycle() {
-        return RxLifecycle.bindFragment(lifecycleSubject);
+        return RxLifecycle.bindFragment(mLifecycleSubject);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        lifecycleSubject.onNext(FragmentEvent.ATTACH);
+        mLifecycleSubject.onNext(FragmentEvent.ATTACH);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lifecycleSubject.onNext(FragmentEvent.CREATE);
+        mLifecycleSubject.onNext(FragmentEvent.CREATE);
     }
 
     @Nullable
@@ -80,7 +80,7 @@ public abstract class BaseFragment extends SupportFragment implements FragmentLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         onFragmentViewCreated(view, savedInstanceState);
-        lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
+        mLifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
     }
 
     @Override
@@ -92,43 +92,43 @@ public abstract class BaseFragment extends SupportFragment implements FragmentLi
     @Override
     public void onStart() {
         super.onStart();
-        lifecycleSubject.onNext(FragmentEvent.START);
+        mLifecycleSubject.onNext(FragmentEvent.START);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        lifecycleSubject.onNext(FragmentEvent.RESUME);
+        mLifecycleSubject.onNext(FragmentEvent.RESUME);
     }
 
     @Override
     public void onPause() {
-        lifecycleSubject.onNext(FragmentEvent.PAUSE);
+        mLifecycleSubject.onNext(FragmentEvent.PAUSE);
         super.onPause();
     }
 
     @Override
     public void onStop() {
-        lifecycleSubject.onNext(FragmentEvent.STOP);
+        mLifecycleSubject.onNext(FragmentEvent.STOP);
         super.onStop();
     }
 
     @Override
     public void onDestroyView() {
-        lifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW);
+        mLifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW);
         super.onDestroyView();
     }
 
     @Override
     public void onDestroy() {
-        lifecycleSubject.onNext(FragmentEvent.DESTROY);
+        mLifecycleSubject.onNext(FragmentEvent.DESTROY);
         super.onDestroy();
-        mFragmentHandler = null;
+        fragmentHandler = null;
     }
 
     @Override
     public void onDetach() {
-        lifecycleSubject.onNext(FragmentEvent.DETACH);
+        mLifecycleSubject.onNext(FragmentEvent.DETACH);
         super.onDetach();
     }
 
@@ -152,11 +152,11 @@ public abstract class BaseFragment extends SupportFragment implements FragmentLi
 
     //////////////////////////////////////////////////////////////////////////////////
 
-    private static class FragmentHandler extends Handler {
+    public static class FragmentHandler extends Handler {
 
         WeakReference<BaseFragment> mReference = null;
 
-        FragmentHandler(BaseFragment outer) {
+        public FragmentHandler(BaseFragment outer) {
             this.mReference = new WeakReference<>(outer);
         }
 

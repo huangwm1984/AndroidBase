@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.android.base.basic.BaseActivity;
-import com.apkfuns.logutils.LogUtils;
 import com.hwm.test.R;
-import com.hwm.test.http.model.RetrofitModel;
+import com.hwm.test.http.model.RetrofitTask;
 import com.hwm.test.http.presenter.RetrofitPresenter;
 import com.hwm.test.http.view.RetrofitFragment;
 
@@ -15,8 +14,6 @@ import com.hwm.test.http.view.RetrofitFragment;
  */
 public class RetrofitActivity extends BaseActivity {
 
-    private static final String TAG = RetrofitActivity.class.getSimpleName();
-    private RetrofitPresenter mRetrofitPresenter;
     //private Toolbar mToolbar;
 
     @Override
@@ -35,28 +32,28 @@ public class RetrofitActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
-            RetrofitFragment mRetrofitFragment = RetrofitFragment.newInstance();
-            start(mRetrofitFragment);
-            mRetrofitPresenter = new RetrofitPresenter(RetrofitModel.getInstance(), mRetrofitFragment);
+            RetrofitFragment retrofitFragment = RetrofitFragment.newInstance();
+            start(retrofitFragment);
+            new RetrofitPresenter(RetrofitTask.getInstance(), retrofitFragment);
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //LogUtils.e(TAG,"onResume");
+        //LogUtils.e("onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //LogUtils.e(TAG,"onPause");
+        //LogUtils.e("onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        //LogUtils.e(TAG,"onStop");
+        //LogUtils.e("onStop");
     }
 
     @Override

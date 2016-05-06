@@ -11,13 +11,13 @@ import java.util.Stack;
 public class ActivityStack {
 
     private static Stack<IBaseActivity> mActivityStack;
-    private static final ActivityStack mInstance = new ActivityStack();
+    private static final ActivityStack sInstance = new ActivityStack();
 
     private ActivityStack() {
     }
 
     public static ActivityStack create() {
-        return mInstance;
+        return sInstance;
     }
 
     /**

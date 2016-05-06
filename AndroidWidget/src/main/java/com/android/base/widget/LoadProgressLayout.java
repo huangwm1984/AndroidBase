@@ -215,7 +215,6 @@ public class LoadProgressLayout extends RelativeLayout {
     }
 
     private void setContentVisibility(boolean visible) {
-        Log.e("35hwm","contentViews size="+contentViews.size());
         for (View contentView : contentViews) {
             contentView.setVisibility(visible ? View.VISIBLE : View.GONE);
         }

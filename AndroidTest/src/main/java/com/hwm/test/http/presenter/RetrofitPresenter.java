@@ -1,14 +1,13 @@
 package com.hwm.test.http.presenter;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.android.base.util.RxUtil;
 import com.apkfuns.logutils.LogUtils;
-import com.hwm.test.http.model.RetrofitDataSource;
-import com.hwm.test.http.model.RetrofitModel;
-import com.hwm.test.http.model.entity.GeyeEntity;
-import com.hwm.test.http.model.entity.NewsEntity;
+import com.hwm.test.http.model.IRetrofitTask;
+import com.hwm.test.http.model.RetrofitTask;
+import com.hwm.test.http.model.entity.Geye;
+import com.hwm.test.http.model.entity.News;
 import com.hwm.test.http.view.RetrofitFragment;
 import com.trello.rxlifecycle.FragmentEvent;
 
@@ -27,13 +26,13 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
 
     private final String TAG = RetrofitPresenter.class.getSimpleName();
     private final RetrofitContract.View mView;
-    private final RetrofitModel mRetrofitModel;
+    private final RetrofitTask mRetrofitTaskModel;
     private RetrofitFragment mRetrofitFragment;
     private CompositeSubscription mCompositeSubscription;
 
-    public RetrofitPresenter(@NonNull RetrofitModel retrofitModel, @NonNull RetrofitContract.View view){
+    public RetrofitPresenter(@NonNull RetrofitTask retrofitTaskModel, @NonNull RetrofitContract.View view){
         this.mView = view;
-        this.mRetrofitModel = retrofitModel;
+        this.mRetrofitTaskModel = retrofitTaskModel;
         if(mView!=null){
             mView.setPresenter(this);
             mRetrofitFragment = (RetrofitFragment) mView;
@@ -51,6 +50,11 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
         mCompositeSubscription = RxUtil.getNewCompositeSubIfUnsubscribed(mCompositeSubscription);
 
         if(mView.isActive()){
+
+            if(mRetrofitFragment == null){
+                mRetrofitFragment = (RetrofitFragment) mView;
+            }
+
             Subscription subscription = Observable.interval(1, TimeUnit.SECONDS)
                     .doOnUnsubscribe(new Action0() {
                         @Override
@@ -71,11 +75,11 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
 
     @Override
     public void loadGeyeData() {
-        mRetrofitModel.loadGeyeData(new RetrofitDataSource.LoadNetDataCallback() {
+        mRetrofitTaskModel.loadGeyeData(new IRetrofitTask.LoadNetDataCallback() {
             @Override
             public void onDataLoaded(Object o) {
 
-                GeyeEntity geyeEntity = (GeyeEntity) o;
+                Geye geyeEntity = (Geye) o;
                 if(mView.isActive())
                     mView.loadSuccessMessage(geyeEntity);
 
@@ -93,11 +97,11 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
     }
 
     public void loadNewsData(){
-        mRetrofitModel.loadLastestNewsData(new RetrofitDataSource.LoadNetDataCallback() {
+        mRetrofitTaskModel.loadLastestNewsData(new IRetrofitTask.LoadNetDataCallback() {
             @Override
             public void onDataLoaded(Object o) {
 
-                NewsEntity newsEntity = (NewsEntity) o;
+                News newsEntity = (News) o;
 
                 if(mView.isActive())
                     mView.loadSuccessMessage(newsEntity);

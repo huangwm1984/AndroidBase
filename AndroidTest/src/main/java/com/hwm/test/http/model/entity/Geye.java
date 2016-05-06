@@ -3,7 +3,7 @@ package com.hwm.test.http.model.entity;
 /**
  * Created by huangwm on 2016/4/30.
  */
-public class GeyeEntity {
+public class Geye {
 
     /**
      * returnCode : 1

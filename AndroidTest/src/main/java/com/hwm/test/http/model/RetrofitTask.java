@@ -2,12 +2,9 @@ package com.hwm.test.http.model;
 
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.apkfuns.logutils.LogUtils;
-import com.hwm.test.http.model.entity.GeyeEntity;
-import com.hwm.test.http.model.entity.NewsEntity;
-import com.hwm.test.http.model.http.ApiConstant;
+import com.hwm.test.http.model.entity.Geye;
+import com.hwm.test.http.model.entity.News;
 import com.hwm.test.http.model.http.GeyeService;
 import com.hwm.test.http.model.http.RetrofitServiceFactory;
 import com.hwm.test.http.model.http.ZhihuService;
@@ -19,17 +16,17 @@ import rx.schedulers.Schedulers;
 /**
  * Created by Administrator on 2016/4/27.
  */
-public class RetrofitModel implements RetrofitDataSource {
+public class RetrofitTask implements IRetrofitTask {
 
-    private static RetrofitModel mInstance;
+    private static RetrofitTask mInstance;
     private ZhihuService mZhihuService;
     private GeyeService mGeyeService;
 
-    public static RetrofitModel getInstance() {
+    public static RetrofitTask getInstance() {
         if (mInstance == null) {
-            synchronized (RetrofitModel.class) {
+            synchronized (RetrofitTask.class) {
                 if (mInstance == null) {
-                    mInstance = new RetrofitModel();
+                    mInstance = new RetrofitTask();
                 }
             }
         }
@@ -44,7 +41,7 @@ public class RetrofitModel implements RetrofitDataSource {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<NewsEntity>() {
+                .subscribe(new Subscriber<News>() {
                     @Override
                     public void onCompleted() {
 
@@ -56,7 +53,7 @@ public class RetrofitModel implements RetrofitDataSource {
                     }
 
                     @Override
-                    public void onNext(NewsEntity newsEntity) {
+                    public void onNext(News newsEntity) {
                         callback.onDataLoaded(newsEntity);
                     }
                 });
@@ -70,7 +67,7 @@ public class RetrofitModel implements RetrofitDataSource {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<GeyeEntity>() {
+                .subscribe(new Subscriber<Geye>() {
                     @Override
                     public void onCompleted() {
 
@@ -82,7 +79,7 @@ public class RetrofitModel implements RetrofitDataSource {
                     }
 
                     @Override
-                    public void onNext(GeyeEntity geyeEntity) {
+                    public void onNext(Geye geyeEntity) {
                         callback.onDataLoaded(geyeEntity);
                     }
                 });
