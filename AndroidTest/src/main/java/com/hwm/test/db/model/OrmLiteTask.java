@@ -3,6 +3,8 @@ package com.hwm.test.db.model;
 
 import android.content.Context;
 
+import com.android.base.db.BaseRxDao;
+import com.android.base.db.impl.DbCallBack;
 import com.hwm.test.db.model.dao.CityDao;
 import com.hwm.test.db.model.dao.DeptDao;
 import com.hwm.test.db.model.dao.UserDao;
@@ -48,6 +50,14 @@ public class OrmLiteTask implements IOrmLiteTask {
         city1.setProvinceName("福建省");
         city1.setCityNo("110");
         city1.setIndex(1100);
+
+        mCityDao.subscribe();
+        /*mCityDao.insertAsync(city1, new DbCallBack() {
+            @Override
+            public void onComplete(Object data) {
+
+            }
+        });*/
 
 
 

@@ -18,6 +18,6 @@ public class DeptDao extends BaseRxDao<Dept, Integer> {
 
     @Override
     public Dao<Dept, Integer> getOrmLiteDao(Context context) {
-        return DatabaseHelper.getInstance(context).getDao(getClass());
+        return DatabaseHelper.getInstance(context).getDao(Dept.class);
     }
 }

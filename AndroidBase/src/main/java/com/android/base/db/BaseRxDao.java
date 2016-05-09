@@ -75,7 +75,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
     /**
      * 增加一条记录
      */
-    public Observable insertAsync(final T t, final DbCallBack listener) {
+    /*public Observable rxInsert(final T t, final DbCallBack listener) {
         Observable observable = subscribe(new Callable<Boolean>() {
             @Override
             public Boolean call() {
@@ -88,6 +88,33 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
             }
         });
         return observable;
+    }*/
+
+    /**
+     * 增加一条记录
+     */
+    public void rxInsert(final T t, final DbCallBack listener) {
+        RxUtil.subscribe(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return insert(t);
+            }
+        }, new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onError(e);
+            }
+
+            @Override
+            public void onNext(Boolean result) {
+                listener.onComplete(result);
+            }
+        }, mSubscriptions);
     }
 
     /**
@@ -104,7 +131,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
     /**
      * 批量插入
      */
-    public Observable insertForBatchAsync(final List<T> list, final DbCallBack listener) {
+    public Observable rxInsertForBatch(final List<T> list, final DbCallBack listener) {
         Observable observable = subscribe(new Callable<Boolean>() {
             @Override
             public Boolean call() {
@@ -133,7 +160,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
     /**
      * 清空数据
      */
-    public Observable clearTableDataAsync(final DbCallBack listener) {
+    public Observable rxClearTableData(final DbCallBack listener) {
         Observable observable = subscribe(new Callable<Boolean>() {
             @Override
             public Boolean call() {
@@ -162,7 +189,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
     /**
      * 根据id删除记录
      */
-    public Observable deleteByIdAsync(final Integer id, final DbCallBack listener) {
+    public Observable rxDeleteById(final Integer id, final DbCallBack listener) {
         Observable observable = subscribe(new Callable<Boolean>() {
             @Override
             public Boolean call() {
@@ -201,7 +228,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
         });
     }
 
-    public Observable queryForAllAsync(final DbCallBack listener) {
+    public Observable rxQueryForAllAsync(final DbCallBack listener) {
         Observable observable = subscribe(new Callable<List<T>>() {
             @Override
             public List<T> call() {

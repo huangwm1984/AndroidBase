@@ -18,6 +18,6 @@ public class CityDao extends BaseRxDao<City, Integer> {
 
     @Override
     public Dao<City, Integer> getOrmLiteDao(Context context) {
-        return DatabaseHelper.getInstance(context).getDao(getClass());
+        return DatabaseHelper.getInstance(context).getDao(City.class);
     }
 }

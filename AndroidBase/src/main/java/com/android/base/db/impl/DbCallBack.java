@@ -6,4 +6,6 @@ package com.android.base.db.impl;
 public interface DbCallBack {
 
     void onComplete(Object data);
+
+    void onError(Object errorMsg);
 }

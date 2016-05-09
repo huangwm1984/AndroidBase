@@ -11,9 +11,11 @@ import com.hwm.test.http.model.entity.News;
 import com.hwm.test.http.view.RetrofitFragment;
 import com.trello.rxlifecycle.FragmentEvent;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -28,7 +30,6 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
     private final RetrofitContract.View mView;
     private final RetrofitTask mRetrofitTaskModel;
     private RetrofitFragment mRetrofitFragment;
-    private CompositeSubscription mCompositeSubscription;
 
     public RetrofitPresenter(@NonNull RetrofitTask retrofitTaskModel, @NonNull RetrofitContract.View view){
         this.mView = view;
@@ -47,7 +48,6 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
     @Override
     public void loadLastestNewsData() {
         mView.showLoadingView();
-        mCompositeSubscription = RxUtil.getNewCompositeSubIfUnsubscribed(mCompositeSubscription);
 
         if(mView.isActive()){
 
@@ -55,7 +55,7 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
                 mRetrofitFragment = (RetrofitFragment) mView;
             }
 
-            Subscription subscription = Observable.interval(1, TimeUnit.SECONDS)
+           mRetrofitTaskModel.getCompositeSubscription().add(Observable.interval(1, TimeUnit.SECONDS)
                     .doOnUnsubscribe(new Action0() {
                         @Override
                         public void call() {
@@ -68,8 +68,7 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
                         public void call(Long aLong) {
                             loadNewsData();
                         }
-                    });
-            mCompositeSubscription.add(subscription);
+                    }));
         }
     }
 
@@ -80,10 +79,12 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
             public void onDataLoaded(Object o) {
 
                 Geye geyeEntity = (Geye) o;
+
                 if(mView.isActive())
                     mView.loadSuccessMessage(geyeEntity);
 
-                RxUtil.unsubscribeIfNotNull(mCompositeSubscription);//取消订阅
+                mRetrofitTaskModel.unsubscribe();
+
             }
 
             @Override
@@ -91,7 +92,6 @@ public class RetrofitPresenter implements RetrofitContract.Presenter {
                 String errorMsg = (String) o;
                 if(mView.isActive())
                     mView.loadErrorMessage(errorMsg);
-
             }
         });
     }
