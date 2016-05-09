@@ -1,5 +1,6 @@
 package com.hwm.test;
 
+import com.android.base.basic.Base;
 import com.android.base.basic.BaseApplication;
 import com.apkfuns.logutils.LogLevel;
 import com.apkfuns.logutils.LogUtils;
@@ -9,12 +10,9 @@ import com.apkfuns.logutils.LogUtils;
  */
 public class MyApplication extends BaseApplication {
 
-    private static MyApplication sInstance;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        sInstance = this;
         initLogUtils();
     }
 
@@ -24,9 +22,5 @@ public class MyApplication extends BaseApplication {
                 .configTagPrefix("AndroidTest")          //日志log的前缀
                 .configShowBorders(true)                 //是否显示边界
                 .configLevel(LogLevel.TYPE_VERBOSE);     //日志显示等级
-    }
-
-    public static MyApplication getInstance() {
-        return sInstance;
     }
 }

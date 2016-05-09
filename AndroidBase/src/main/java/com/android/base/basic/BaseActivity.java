@@ -32,7 +32,6 @@ public abstract class BaseActivity extends SupportActivity implements IBaseActiv
 
     private Toast mToast;
     public Activity activity;
-    public Context applicationContext;
     public ActivityHandler activityHandler = new ActivityHandler(this);
 
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
@@ -64,8 +63,6 @@ public abstract class BaseActivity extends SupportActivity implements IBaseActiv
         super.onCreate(savedInstanceState);
 
         activity = this;
-        applicationContext = getApplicationContext();
-
         ActivityStack.create().addActivity(this);
 
         if(setContentViewId()!=0)

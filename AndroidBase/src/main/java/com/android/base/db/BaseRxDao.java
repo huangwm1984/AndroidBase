@@ -130,7 +130,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
 
     /**
      * 批量插入
-     */
+     *//*
     public Observable rxInsertForBatch(final List<T> list, final DbCallBack listener) {
         Observable observable = subscribe(new Callable<Boolean>() {
             @Override
@@ -144,6 +144,33 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
             }
         });
         return observable;
+    }*/
+
+    /**
+     * 批量插入
+     */
+    public void rxInsertForBatch(final List<T> list, final DbCallBack listener) {
+        RxUtil.subscribe(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return insertForBatch(list);
+            }
+        }, new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onError(e);
+            }
+
+            @Override
+            public void onNext(Boolean result) {
+                listener.onComplete(result);
+            }
+        }, mSubscriptions);
     }
 
     /**
@@ -159,7 +186,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
 
     /**
      * 清空数据
-     */
+     *//*
     public Observable rxClearTableData(final DbCallBack listener) {
         Observable observable = subscribe(new Callable<Boolean>() {
             @Override
@@ -173,6 +200,33 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
             }
         });
         return observable;
+    }*/
+
+    /**
+     * 清空数据
+     */
+    public void rxClearTableData(final DbCallBack listener) {
+        RxUtil.subscribe(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return clearTableData();
+            }
+        }, new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onError(e);
+            }
+
+            @Override
+            public void onNext(Boolean result) {
+                listener.onComplete(result);
+            }
+        }, mSubscriptions);
     }
 
     /**
@@ -188,7 +242,7 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
 
     /**
      * 根据id删除记录
-     */
+     *//*
     public Observable rxDeleteById(final Integer id, final DbCallBack listener) {
         Observable observable = subscribe(new Callable<Boolean>() {
             @Override
@@ -202,6 +256,33 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
             }
         });
         return observable;
+    }*/
+
+    /**
+     * 根据id删除记录
+     */
+    public void rxDeleteById(final Integer id, final DbCallBack listener) {
+        RxUtil.subscribe(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return deleteById(id);
+            }
+        }, new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onError(e);
+            }
+
+            @Override
+            public void onNext(Boolean result) {
+                listener.onComplete(result);
+            }
+        }, mSubscriptions);
     }
 
     public List<T> queryForAll() {
@@ -219,16 +300,16 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
         return result;
     }
 
-    public Observable queryForAllObservable() {
+    /*public Observable queryForAllObservable() {
         return getDbObservable(new Callable() {
             @Override
             public Object call() throws Exception {
                 return queryForAll();
             }
         });
-    }
+    }*/
 
-    public Observable rxQueryForAllAsync(final DbCallBack listener) {
+    /*public Observable rxQueryForAll(final DbCallBack listener) {
         Observable observable = subscribe(new Callable<List<T>>() {
             @Override
             public List<T> call() {
@@ -242,9 +323,38 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
         });
 
         return observable;
+    }*/
+
+    /**
+     * 查询全部
+     * @param listener
+     * @return
+     */
+    public void rxQueryForAll(final DbCallBack listener) {
+        RxUtil.subscribe(new Callable<List<T>>() {
+            @Override
+            public List<T> call() throws Exception {
+                return queryForAll();
+            }
+        }, new Subscriber<List<T>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onError(e);
+            }
+
+            @Override
+            public void onNext(List<T> result) {
+                listener.onComplete(result);
+            }
+        }, mSubscriptions);
     }
 
-    public <T> Observable<T> subscribe(Callable<T> callable, Action1<T> action) {
+    /*public <T> Observable<T> subscribe(Callable<T> callable, Action1<T> action) {
         Observable<T> observable = getDbObservable(callable);
         Subscription subscription = observable
                 .subscribeOn(Schedulers.io())
@@ -270,9 +380,33 @@ public abstract class BaseRxDao<T, Integer> extends BaseOrmLiteDao<T, Integer> {
                         }
                     }
                 });
-    }
+    }*/
 
-    private Class<T> getClazz(){
-        return mClazz;
+
+    /**
+     * 增加一条记录
+     */
+    public void rxUpdate(final T t, final DbCallBack listener) {
+        RxUtil.subscribe(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return update(t);
+            }
+        }, new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onError(e);
+            }
+
+            @Override
+            public void onNext(Boolean result) {
+                listener.onComplete(result);
+            }
+        }, mSubscriptions);
     }
 }

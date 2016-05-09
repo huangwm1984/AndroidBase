@@ -3,6 +3,7 @@ package com.hwm.test.db;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.android.base.basic.Base;
 import com.android.base.basic.BaseActivity;
 import com.hwm.test.R;
 import com.hwm.test.db.model.OrmLiteTask;
@@ -28,7 +29,7 @@ public class OrmLiteActivity extends BaseActivity {
         if (savedInstanceState == null) {
             OrmLiteFragment ormLiteFragment = OrmLiteFragment.newInstance();
             start(ormLiteFragment);
-            new OrmLitePresenter(OrmLiteTask.getInstance(applicationContext), ormLiteFragment);
+            new OrmLitePresenter(OrmLiteTask.getInstance(Base.getContext()), ormLiteFragment);
         }
 
     }
