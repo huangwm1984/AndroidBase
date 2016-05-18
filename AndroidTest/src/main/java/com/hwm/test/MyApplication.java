@@ -1,18 +1,20 @@
 package com.hwm.test;
 
-import com.android.base.basic.Base;
-import com.android.base.basic.BaseApplication;
+import android.app.Application;
+
+import com.android.base.frame.Base;
 import com.apkfuns.logutils.LogLevel;
 import com.apkfuns.logutils.LogUtils;
 
 /**
  * Created by Administrator on 2016/4/27.
  */
-public class MyApplication extends BaseApplication {
+public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
+        Base.initialize(this);
         initLogUtils();
     }
 

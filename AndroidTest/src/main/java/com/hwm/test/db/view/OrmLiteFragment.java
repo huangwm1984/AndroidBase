@@ -1,3 +1,4 @@
+/*
 package com.hwm.test.db.view;
 
 import android.os.Bundle;
@@ -6,9 +7,11 @@ import android.view.View;
 import com.android.base.basic.BaseFragment;
 import com.hwm.test.db.presenter.OrmLiteContract;
 
+*/
 /**
  * Created by Administrator on 2016/5/5.
- */
+ *//*
+
 public class OrmLiteFragment extends BaseFragment implements OrmLiteContract.View {
 
     public static OrmLiteFragment newInstance() {
@@ -50,3 +53,4 @@ public class OrmLiteFragment extends BaseFragment implements OrmLiteContract.Vie
 
     }
 }
+*/

@@ -1,4 +1,4 @@
-package com.android.base.basic;
+package com.android.base.frame;
 
 import android.content.Context;
 import android.content.res.AssetManager;

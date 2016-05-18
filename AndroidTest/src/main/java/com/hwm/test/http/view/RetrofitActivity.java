@@ -1,64 +1,65 @@
 package com.hwm.test.http.view;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.android.base.basic.BaseFragment;
+import com.android.base.frame.activity.BaseMvpActivity;
 import com.android.base.widget.LoadProgressLayout;
 import com.hwm.test.R;
+import com.hwm.test.http.model.RetrofitModel;
 import com.hwm.test.http.model.entity.Geye;
 import com.hwm.test.http.model.entity.News;
 import com.hwm.test.http.presenter.RetrofitContract;
+import com.hwm.test.http.presenter.RetrofitPresenter;
 
 /**
  * Created by Administrator on 2016/4/27.
  */
-public class RetrofitFragment extends BaseFragment implements RetrofitContract.View {
+public class RetrofitActivity extends BaseMvpActivity<RetrofitPresenter, RetrofitModel> implements RetrofitContract.View{
 
-    private RetrofitContract.Presenter mPresenter;
     private LoadProgressLayout mProgressLayout;
     private TextView mTvLastestNews;
     private TextView mTvGeyeData;
     private Button mBtnTryAgain;
 
-    public static RetrofitFragment newInstance() {
-        return new RetrofitFragment();
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_test_retrofit;
     }
 
     @Override
-    protected int setContentViewId() {
-        return R.layout.fragment_test_retrofit;
-    }
+    protected void initView() {
+        getSupportActionBar().setTitle("Retrofit测试");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-    @Override
-    protected void onFragmentViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
-        initView();
-    }
-
-
-    @Override
-    protected void onFragmentActivityCreated(@Nullable Bundle savedInstanceState) {
-        if(mPresenter!=null)
-            mPresenter.start();
-    }
-
-    private void initView() {
         mTvLastestNews = bindView(R.id.tv1);
         mTvGeyeData = bindView(R.id.tv2);
         mProgressLayout = bindView(R.id.progress_layout);
         mBtnTryAgain = bindView(R.id.btnTryAgain);
         mBtnTryAgain.setOnClickListener(retryListener);
-
     }
 
     @Override
-    public void setPresenter(@Nullable RetrofitContract.Presenter presenter) {
-        this.mPresenter = presenter;
+    protected void initPresenter() {
+        presenter.setVM(this, model);
+    }
+
+    @Override
+    protected Class<RetrofitPresenter> getPresenterClass() {
+        return RetrofitPresenter.class;
+    }
+
+    @Override
+    protected Class<RetrofitModel> getModelClass() {
+        return RetrofitModel.class;
+    }
+
+    @Override
+    protected int setContainerId() {
+        return -1;
     }
 
     @Override
@@ -82,11 +83,6 @@ public class RetrofitFragment extends BaseFragment implements RetrofitContract.V
     }
 
     @Override
-    public void loadErrorMessage(Object o) {
-        showErrorView();
-    }
-
-    @Override
     public void loadSuccessMessage(Object o) {
         if(o instanceof News){
             News newsEntity = (News) o;
@@ -94,20 +90,23 @@ public class RetrofitFragment extends BaseFragment implements RetrofitContract.V
         }else if(o instanceof Geye){
             Geye geyeEntity = (Geye) o;
             mTvGeyeData.setText(JSON.toJSONString(geyeEntity));
-            showContentView();
         }
     }
 
     @Override
-    public boolean isActive() {
-        return isAdded();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private View.OnClickListener retryListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(mPresenter!=null)
-                mPresenter.start();
+            if(presenter!=null)
+                presenter.start();
         }
     };
 

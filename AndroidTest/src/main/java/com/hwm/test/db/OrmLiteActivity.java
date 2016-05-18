@@ -1,3 +1,4 @@
+/*
 package com.hwm.test.db;
 
 import android.os.Bundle;
@@ -10,9 +11,11 @@ import com.hwm.test.db.model.OrmLiteTask;
 import com.hwm.test.db.presenter.OrmLitePresenter;
 import com.hwm.test.db.view.OrmLiteFragment;
 
+*/
 /**
  * Created by Administrator on 2016/5/5.
- */
+ *//*
+
 public class OrmLiteActivity extends BaseActivity {
 
     @Override
@@ -48,3 +51,4 @@ public class OrmLiteActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.hwm.test.db.presenter;
 
 import android.support.annotation.NonNull;
@@ -5,9 +6,11 @@ import android.support.annotation.NonNull;
 import com.hwm.test.db.model.OrmLiteTask;
 import com.hwm.test.db.view.OrmLiteFragment;
 
+*/
 /**
  * Created by Administrator on 2016/5/5.
- */
+ *//*
+
 public class OrmLitePresenter implements OrmLiteContract.Presenter {
 
     private final OrmLiteTask mOrmLiteTaskModel;
@@ -103,3 +106,4 @@ public class OrmLitePresenter implements OrmLiteContract.Presenter {
 
     }
 }
+*/

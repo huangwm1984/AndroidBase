@@ -1,15 +1,14 @@
 package com.hwm.test;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.android.base.basic.BaseActivity;
-import com.hwm.test.http.RetrofitActivity;
+import com.android.base.frame.activity.BaseActivity;
+import com.hwm.test.http.view.RetrofitActivity;
 
 
 /**
@@ -23,24 +22,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private LinearLayout mContainer;
 
     @Override
-    public int setContentViewId() {
+    public int getContentViewId() {
         return R.layout.activity_main;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        initView();
-        initData();
-    }
-
-
     public void initView() {
         mTitle = bindView(R.id.title);
         mContainer = bindView(R.id.container);
         mScrollView = (ScrollView) mContainer.getParent();
     }
 
-
+    @Override
     public void initData() {
         mTitle.setText("huangwm test");
         String[] bttxt = getResources().getStringArray(R.array.test_list);
@@ -65,8 +58,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         return 0;
     }
 
-
-
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
@@ -78,7 +69,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 //gotoActivity(FragmentTabHostActivity.class, false);
                 break;
             default:
-                showShortToast("还在开发中...");
+                //showShortToast("还在开发中...");
                 break;
         }
 

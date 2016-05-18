@@ -1,3 +1,4 @@
+/*
 package com.hwm.test.db.model;
 
 
@@ -12,9 +13,11 @@ import com.hwm.test.db.model.entity.City;
 import com.hwm.test.db.model.entity.Dept;
 import com.hwm.test.db.model.entity.User;
 
+*/
 /**
  * Created by Administrator on 2016/5/5.
- */
+ *//*
+
 public class OrmLiteTask implements IOrmLiteTask {
 
     private static OrmLiteTask mInstance;
@@ -52,12 +55,14 @@ public class OrmLiteTask implements IOrmLiteTask {
         city1.setIndex(1100);
 
         mCityDao.subscribe();
-        /*mCityDao.insertAsync(city1, new DbCallBack() {
+        */
+/*mCityDao.insertAsync(city1, new DbCallBack() {
             @Override
             public void onComplete(Object data) {
 
             }
-        });*/
+        });*//*
+
 
 
 
@@ -134,3 +139,4 @@ public class OrmLiteTask implements IOrmLiteTask {
     }
 }
 
+*/

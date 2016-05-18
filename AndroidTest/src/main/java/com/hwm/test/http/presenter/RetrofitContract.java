@@ -1,14 +1,24 @@
 package com.hwm.test.http.presenter;
 
-import com.android.base.basic.BasePresenter;
-import com.android.base.basic.BaseView;
+import com.android.base.frame.BaseModelImpl;
+import com.android.base.frame.BaseViewImpl;
+import com.android.base.frame.activity.ActivityPresenter;
+import com.hwm.test.http.model.entity.Geye;
+import com.hwm.test.http.model.entity.News;
+
+import rx.Observable;
 
 /**
  * Created by Administrator on 2016/4/27.
  */
 public interface RetrofitContract {
 
-    interface View extends BaseView<Presenter> {
+    interface Model extends BaseModelImpl {
+        Observable<News> loadLastestNewsData();
+        Observable<Geye> loadGeyeData(String geyeId, String isNeedff);
+    }
+
+    interface View extends BaseViewImpl {
 
         void showLoadingView();
 
@@ -18,20 +28,15 @@ public interface RetrofitContract {
 
         void showContentView();
 
-        void loadErrorMessage(Object o);
-
         void loadSuccessMessage(Object o);
-
-        boolean isActive();
 
     }
 
-    interface Presenter extends BasePresenter {
+    abstract class Presenter extends ActivityPresenter<View, Model> {
 
-        void loadLastestNewsData();
+        public abstract void loadLastestNewsData();
 
-        void loadGeyeData();
-
+        public abstract void loadGeyeData(String geyeId, String isNeedff);
     }
 
 }

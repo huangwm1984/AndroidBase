@@ -1,3 +1,4 @@
+/*
 package com.hwm.test.db.model.dao;
 
 import android.content.Context;
@@ -7,9 +8,11 @@ import com.hwm.test.db.model.DatabaseHelper;
 import com.hwm.test.db.model.entity.City;
 import com.j256.ormlite.dao.Dao;
 
+*/
 /**
  * Created by Administrator on 2016/5/5.
- */
+ *//*
+
 public class CityDao extends BaseRxDao<City, Integer> {
 
     public CityDao(Context context, Class<City> cls) {
@@ -21,3 +24,4 @@ public class CityDao extends BaseRxDao<City, Integer> {
         return DatabaseHelper.getInstance(context).getDao(City.class);
     }
 }
+*/

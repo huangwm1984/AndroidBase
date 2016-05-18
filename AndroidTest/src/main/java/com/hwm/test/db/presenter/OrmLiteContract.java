@@ -1,11 +1,14 @@
+/*
 package com.hwm.test.db.presenter;
 
-import com.android.base.basic.BasePresenter;
+import com.android.base.basic.IBasePresenter;
 import com.android.base.basic.BaseView;
 
+*/
 /**
  * Created by Administrator on 2016/5/5.
- */
+ *//*
+
 public interface OrmLiteContract {
 
     interface View extends BaseView<Presenter> {
@@ -18,7 +21,7 @@ public interface OrmLiteContract {
 
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends IBasePresenter {
 
         void Save();
 
@@ -51,3 +54,4 @@ public interface OrmLiteContract {
         void LargeScaleUseSystem();
     }
 }
+*/
