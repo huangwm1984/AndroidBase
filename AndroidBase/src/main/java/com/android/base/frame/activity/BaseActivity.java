@@ -8,6 +8,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.view.View;
 
+import com.android.base.frame.AppManager;
 import com.android.base.frame.activity.impl.BaseActivityImpl;
 import com.trello.rxlifecycle.ActivityEvent;
 import com.trello.rxlifecycle.ActivityLifecycleProvider;
@@ -50,6 +51,7 @@ public abstract class BaseActivity extends SupportActivity implements BaseActivi
     @CallSuper
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.create().addActivity(this);
         setContentView(getContentViewId());
         initView();
         initData();
@@ -89,6 +91,7 @@ public abstract class BaseActivity extends SupportActivity implements BaseActivi
     protected void onDestroy() {
         lifecycleSubject.onNext(ActivityEvent.DESTROY);
         super.onDestroy();
+        AppManager.create().finishActivity(this);
     }
 
     @SuppressWarnings("unchecked")
