@@ -18,17 +18,17 @@ import rx.subjects.Subject;
 /**
  * 用RxJava实现的EventBus
  */
-public class RxBus {
-    private static RxBus sInstance;
+public class RxEventBus {
+    private static RxEventBus sInstance;
 
-    public static synchronized RxBus $() {
+    public static synchronized RxEventBus $() {
         if (null == sInstance) {
-            sInstance = new RxBus();
+            sInstance = new RxEventBus();
         }
         return sInstance;
     }
 
-    private RxBus() {
+    private RxEventBus() {
     }
 
     @SuppressWarnings("rawtypes")
@@ -41,7 +41,7 @@ public class RxBus {
      * @param mAction1
      * @return
      */
-    public RxBus OnEvent(Observable<?> mObservable, Action1<Object> mAction1) {
+    public RxEventBus OnEvent(Observable<?> mObservable, Action1<Object> mAction1) {
         mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(mAction1);
         return $();
     }
@@ -81,8 +81,8 @@ public class RxBus {
      * @return
      */
     @SuppressWarnings("rawtypes")
-    public RxBus unregister(@NonNull Object tag,
-                            @NonNull Observable<?> observable) {
+    public RxEventBus unregister(@NonNull Object tag,
+                                 @NonNull Observable<?> observable) {
         if (null == observable)
             return $();
         List<Subject> subjects = subjectMapper.get(tag);

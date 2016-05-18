@@ -14,7 +14,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class RxManager {
 
-    public RxBus rxBus = RxBus.$();
+    public RxEventBus rxBus = RxEventBus.$();
     private Map<String, Observable<?>> mObservables = new HashMap<>();// 管理观察者
     private CompositeSubscription mCompositeSubscription = new CompositeSubscription();// 管理订阅者者
 
