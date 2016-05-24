@@ -21,7 +21,7 @@ import rx.subjects.Subject;
 public class RxEventBus {
     private static RxEventBus sInstance;
 
-    public static synchronized RxEventBus $() {
+    public static synchronized RxEventBus getInstance() {
         if (null == sInstance) {
             sInstance = new RxEventBus();
         }
@@ -43,7 +43,7 @@ public class RxEventBus {
      */
     public RxEventBus OnEvent(Observable<?> mObservable, Action1<Object> mAction1) {
         mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(mAction1);
-        return $();
+        return getInstance();
     }
 
     /**
@@ -84,7 +84,7 @@ public class RxEventBus {
     public RxEventBus unregister(@NonNull Object tag,
                                  @NonNull Observable<?> observable) {
         if (null == observable)
-            return $();
+            return getInstance();
         List<Subject> subjects = subjectMapper.get(tag);
         if (null != subjects) {
             subjects.remove((Subject<?, ?>) observable);
@@ -93,7 +93,7 @@ public class RxEventBus {
                 LogUtils.d("unregister" + tag + "  size:" + subjects.size());
             }
         }
-        return $();
+        return getInstance();
     }
 
     public void post(@NonNull Object content) {
