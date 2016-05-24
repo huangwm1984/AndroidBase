@@ -47,6 +47,7 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'org.ligboy.retrofit2:converter-fastjson-android:2.0.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+    compile 'com.github.franmontiel:PersistentCookieJar:v0.9.3'
     //Fragment解决库
     compile 'me.yokeyword:fragmentation:0.6.1'
     //Log工具类

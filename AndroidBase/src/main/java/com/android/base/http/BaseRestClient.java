@@ -3,10 +3,10 @@ package com.android.base.http;
 import android.content.Context;
 
 import com.android.base.http.impl.IRetrofit;
-import com.android.base.http.persistentcookiejar.ClearableCookieJar;
-import com.android.base.http.persistentcookiejar.PersistentCookieJar;
-import com.android.base.http.persistentcookiejar.cache.SetCookieCache;
-import com.android.base.http.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.util.concurrent.TimeUnit;
 
