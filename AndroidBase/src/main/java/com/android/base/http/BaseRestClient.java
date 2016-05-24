@@ -1,7 +1,17 @@
 package com.android.base.http;
 
-import com.android.base.http.impl.IRetrofit;
+import android.content.Context;
 
+import com.android.base.http.impl.IRetrofit;
+import com.android.base.http.persistentcookiejar.ClearableCookieJar;
+import com.android.base.http.persistentcookiejar.PersistentCookieJar;
+import com.android.base.http.persistentcookiejar.cache.SetCookieCache;
+import com.android.base.http.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.fastjson.FastJsonConverterFactory;
@@ -14,11 +24,27 @@ public class BaseRestClient implements IRetrofit {
     private Retrofit mRetrofit;
 
     @Override
-    public void attachBaseUrl(String baseUrl) {
+    public void attachBaseUrl(Context context, String baseUrl) {
+
+        //okhttp3 cookie 持久化
+        ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context));
+
+        //okhttp3 提供的日志系统
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(7676, TimeUnit.MILLISECONDS)
+                .connectTimeout(7676, TimeUnit.MILLISECONDS)
+                .addInterceptor(logging)
+                .cookieJar(cookieJar)
+                .build();
+
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(FastJsonConverterFactory.create())
+                .client(okHttpClient)
                 .build();
     }
 

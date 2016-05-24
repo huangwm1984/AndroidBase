@@ -1,5 +1,6 @@
 package com.hwm.test.http.model.http;
 
+import com.android.base.frame.Base;
 import com.android.base.http.BaseRestClient;
 
 /**
@@ -21,6 +22,6 @@ public class GeyeClient extends BaseRestClient{
     }
 
     public GeyeClient(String baseUrl){
-        attachBaseUrl(baseUrl);
+        attachBaseUrl(Base.getContext(), baseUrl);
     }
 }

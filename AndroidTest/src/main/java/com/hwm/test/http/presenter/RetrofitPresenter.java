@@ -1,7 +1,11 @@
 package com.hwm.test.http.presenter;
 
+import android.util.Log;
+
 import com.hwm.test.http.model.entity.Geye;
 import com.hwm.test.http.model.entity.News;
+
+import rx.Observable;
 import rx.Subscriber;
 
 /**
@@ -49,7 +53,24 @@ public class RetrofitPresenter extends RetrofitContract.Presenter {
     @Override
     public void loadLastestNewsData() {
         view.showLoadingView();
-        rxManager.add(model.loadLastestNewsData().subscribe(new Subscriber<News>() {
+        rxManager.add(Observable.mergeDelayError(model.loadLastestNewsData(), model.loadGeyeData("1590", "1")).subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
+                view.showContentView();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                view.showErrorView();
+            }
+
+            @Override
+            public void onNext(Object o) {
+                view.loadSuccessMessage(o);
+            }
+        }));
+
+        /*rxManager.add(model.loadLastestNewsData().subscribe(new Subscriber<News>() {
             @Override
             public void onCompleted() {
                 loadGeyeData("1590", "1");
@@ -64,13 +85,13 @@ public class RetrofitPresenter extends RetrofitContract.Presenter {
             public void onNext(News news) {
                 view.loadSuccessMessage(news);
             }
-        }));
+        }));*/
 
     }
 
     @Override
     public void loadGeyeData(String geyeId, String isNeedff) {
-        rxManager.add(model.loadGeyeData(geyeId, isNeedff).subscribe(new Subscriber<Geye>() {
+        /*rxManager.add(model.loadGeyeData(geyeId, isNeedff).subscribe(new Subscriber<Geye>() {
             @Override
             public void onCompleted() {
                 view.showContentView();
@@ -85,6 +106,6 @@ public class RetrofitPresenter extends RetrofitContract.Presenter {
             public void onNext(Geye geye) {
                 view.loadSuccessMessage(geye);
             }
-        }));
+        }));*/
     }
 }
