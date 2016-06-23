@@ -58,11 +58,6 @@ public class RetrofitActivity extends BaseMvpActivity<RetrofitPresenter, Retrofi
     }
 
     @Override
-    protected int setContainerId() {
-        return -1;
-    }
-
-    @Override
     public void showLoadingView() {
         mProgressLayout.showLoadingView();
     }

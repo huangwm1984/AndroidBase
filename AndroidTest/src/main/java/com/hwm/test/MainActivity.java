@@ -54,11 +54,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
-    protected int setContainerId() {
-        return 0;
-    }
-
-    @Override
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
