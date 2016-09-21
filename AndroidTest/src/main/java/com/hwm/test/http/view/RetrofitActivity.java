@@ -7,23 +7,26 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.android.base.frame.activity.BaseMvpActivity;
+import com.android.base.frame.presenter.factory.RequiresPresenter;
 import com.android.base.widget.LoadProgressLayout;
 import com.hwm.test.R;
-import com.hwm.test.http.model.RetrofitModel;
 import com.hwm.test.http.model.entity.Geye;
 import com.hwm.test.http.model.entity.News;
 import com.hwm.test.http.presenter.RetrofitContract;
 import com.hwm.test.http.presenter.RetrofitPresenter;
 
+import butterknife.Bind;
+import butterknife.OnClick;
+
 /**
  * Created by Administrator on 2016/4/27.
  */
-public class RetrofitActivity extends BaseMvpActivity<RetrofitPresenter, RetrofitModel> implements RetrofitContract.View{
+@RequiresPresenter(RetrofitPresenter.class)
+public class RetrofitActivity extends BaseMvpActivity<RetrofitPresenter> implements RetrofitContract.View{
 
-    private LoadProgressLayout mProgressLayout;
-    private TextView mTvLastestNews;
-    private TextView mTvGeyeData;
-    private Button mBtnTryAgain;
+    @Bind(R.id.progress_layout) LoadProgressLayout mProgressLayout;
+    @Bind(R.id.tv1) TextView mTvLastestNews;
+    @Bind(R.id.tv2) TextView mTvGeyeData;
 
     @Override
     protected int getContentViewId() {
@@ -31,30 +34,14 @@ public class RetrofitActivity extends BaseMvpActivity<RetrofitPresenter, Retrofi
     }
 
     @Override
-    protected void initView() {
+    protected void initData() {
         getSupportActionBar().setTitle("Retrofit测试");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mTvLastestNews = bindView(R.id.tv1);
-        mTvGeyeData = bindView(R.id.tv2);
-        mProgressLayout = bindView(R.id.progress_layout);
-        mBtnTryAgain = bindView(R.id.btnTryAgain);
-        mBtnTryAgain.setOnClickListener(retryListener);
-    }
-
-    @Override
-    protected void initPresenter() {
-        presenter.setVM(this, model);
-    }
-
-    @Override
-    protected Class<RetrofitPresenter> getPresenterClass() {
-        return RetrofitPresenter.class;
-    }
-
-    @Override
-    protected Class<RetrofitModel> getModelClass() {
-        return RetrofitModel.class;
+        RetrofitPresenter presenter = getPresenter();
+        if(presenter!=null){
+            presenter.start();
+        }
     }
 
     @Override
@@ -97,12 +84,12 @@ public class RetrofitActivity extends BaseMvpActivity<RetrofitPresenter, Retrofi
         return super.onOptionsItemSelected(item);
     }
 
-    private View.OnClickListener retryListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(presenter!=null)
-                presenter.start();
+    @OnClick(R.id.btnTryAgain)
+    public void retryListener() {
+        RetrofitPresenter presenter = getPresenter();
+        if(presenter!=null){
+            presenter.start();
         }
-    };
+    }
 
 }

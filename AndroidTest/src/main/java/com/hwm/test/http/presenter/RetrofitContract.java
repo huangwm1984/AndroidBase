@@ -1,8 +1,6 @@
 package com.hwm.test.http.presenter;
 
-import com.android.base.frame.BaseModelImpl;
-import com.android.base.frame.BaseViewImpl;
-import com.android.base.frame.activity.ActivityPresenter;
+import com.android.base.frame.presenter.XPresenter;
 import com.hwm.test.http.model.entity.Geye;
 import com.hwm.test.http.model.entity.News;
 
@@ -13,12 +11,12 @@ import rx.Observable;
  */
 public interface RetrofitContract {
 
-    interface Model extends BaseModelImpl {
+    interface Model{
         Observable<News> loadLastestNewsData();
         Observable<Geye> loadGeyeData(String geyeId, String isNeedff);
     }
 
-    interface View extends BaseViewImpl {
+    interface View {
 
         void showLoadingView();
 
@@ -32,7 +30,7 @@ public interface RetrofitContract {
 
     }
 
-    abstract class Presenter extends ActivityPresenter<View, Model> {
+    abstract class Presenter extends XPresenter<View> {
 
         public abstract void loadLastestNewsData();
 

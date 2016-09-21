@@ -3,100 +3,31 @@ package com.android.base.frame.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
-import android.view.View;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 import com.android.base.frame.AppManager;
-import com.android.base.frame.activity.impl.BaseActivityImpl;
-import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.ActivityLifecycleProvider;
-import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.RxLifecycle;
 
-import me.yokeyword.fragmentation.SupportActivity;
-import rx.Observable;
-import rx.subjects.BehaviorSubject;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/5/13.
  */
-public abstract class BaseActivity extends SupportActivity implements BaseActivityImpl, ActivityLifecycleProvider {
-
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
-    @NonNull
-    @CheckResult
-    public final Observable<ActivityEvent> lifecycle() {
-        return lifecycleSubject.asObservable();
-    }
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
-    }
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycle.bindActivity(lifecycleSubject);
-    }
-
-    @Override
-    @CallSuper
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppManager.create().addActivity(this);
         setContentView(getContentViewId());
-        initView();
+        ButterKnife.bind(this);
         initData();
-        lifecycleSubject.onNext(ActivityEvent.CREATE);
     }
 
     @Override
-    @CallSuper
-    protected void onStart() {
-        super.onStart();
-        lifecycleSubject.onNext(ActivityEvent.START);
-    }
-
-    @Override
-    @CallSuper
-    protected void onResume() {
-        super.onResume();
-        lifecycleSubject.onNext(ActivityEvent.RESUME);
-    }
-
-    @Override
-    @CallSuper
-    protected void onPause() {
-        lifecycleSubject.onNext(ActivityEvent.PAUSE);
-        super.onPause();
-    }
-
-    @Override
-    @CallSuper
-    protected void onStop() {
-        lifecycleSubject.onNext(ActivityEvent.STOP);
-        super.onStop();
-    }
-
-    @Override
-    @CallSuper
     protected void onDestroy() {
-        lifecycleSubject.onNext(ActivityEvent.DESTROY);
         super.onDestroy();
         AppManager.create().finishActivity(this);
-    }
-
-    @SuppressWarnings("unchecked")
-    protected <T extends View> T bindView(int id) {
-        return (T) findViewById(id);
     }
 
     public void gotoActivity(Class<? extends Activity> clazz, boolean finish) {
@@ -107,7 +38,6 @@ public abstract class BaseActivity extends SupportActivity implements BaseActivi
         }
     }
 
-
     public void gotoActivity(Class<? extends Activity> clazz, Bundle bundle, boolean finish) {
         Intent intent = new Intent(this, clazz);
         if (bundle != null) intent.putExtras(bundle);
@@ -116,7 +46,6 @@ public abstract class BaseActivity extends SupportActivity implements BaseActivi
             finish();
         }
     }
-
 
     public void gotoActivity(Class<? extends Activity> clazz, Bundle bundle, int flags, boolean finish) {
         Intent intent = new Intent(this, clazz);
@@ -128,9 +57,8 @@ public abstract class BaseActivity extends SupportActivity implements BaseActivi
         }
     }
 
-    public abstract int getContentViewId();
+    protected abstract int getContentViewId();
 
-    public abstract void initView();
+    protected abstract void initData();
 
-    public abstract void initData();
 }

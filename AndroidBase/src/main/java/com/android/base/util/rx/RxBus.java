@@ -18,17 +18,17 @@ import rx.subjects.Subject;
 /**
  * 用RxJava实现的EventBus
  */
-public class RxEventBus {
-    private static RxEventBus sInstance;
+public class RxBus {
+    private static RxBus instance;
 
-    public static synchronized RxEventBus getInstance() {
-        if (null == sInstance) {
-            sInstance = new RxEventBus();
+    public static synchronized RxBus $() {
+        if (null == instance) {
+            instance = new RxBus();
         }
-        return sInstance;
+        return instance;
     }
 
-    private RxEventBus() {
+    private RxBus() {
     }
 
     @SuppressWarnings("rawtypes")
@@ -41,9 +41,14 @@ public class RxEventBus {
      * @param mAction1
      * @return
      */
-    public RxEventBus OnEvent(Observable<?> mObservable, Action1<Object> mAction1) {
-        mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(mAction1);
-        return getInstance();
+    public RxBus OnEvent(Observable<?> mObservable, Action1<Object> mAction1) {
+        mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(mAction1, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+        return $();
     }
 
     /**
@@ -61,7 +66,7 @@ public class RxEventBus {
         }
         Subject<T, T> subject;
         subjectList.add(subject = PublishSubject.create());
-        LogUtils.d("register" + tag + "  size:" + subjectList.size());
+        LogUtils.d("register", tag + "  size:" + subjectList.size());
         return subject;
     }
 
@@ -81,19 +86,19 @@ public class RxEventBus {
      * @return
      */
     @SuppressWarnings("rawtypes")
-    public RxEventBus unregister(@NonNull Object tag,
-                                 @NonNull Observable<?> observable) {
+    public RxBus unregister(@NonNull Object tag,
+                            @NonNull Observable<?> observable) {
         if (null == observable)
-            return getInstance();
+            return $();
         List<Subject> subjects = subjectMapper.get(tag);
         if (null != subjects) {
             subjects.remove((Subject<?, ?>) observable);
             if (isEmpty(subjects)) {
                 subjectMapper.remove(tag);
-                LogUtils.d("unregister" + tag + "  size:" + subjects.size());
+                LogUtils.d("unregister", tag + "  size:" + subjects.size());
             }
         }
-        return getInstance();
+        return $();
     }
 
     public void post(@NonNull Object content) {
@@ -107,12 +112,12 @@ public class RxEventBus {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void post(@NonNull Object tag, @NonNull Object content) {
-        LogUtils.d("post eventName: " + tag);
+        LogUtils.d("post", "eventName: " + tag);
         List<Subject> subjectList = subjectMapper.get(tag);
         if (!isEmpty(subjectList)) {
             for (Subject subject : subjectList) {
                 subject.onNext(content);
-                LogUtils.d("onEvent eventName: " + tag);
+                LogUtils.d("onEvent", "eventName: " + tag);
             }
         }
     }

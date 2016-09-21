@@ -5,14 +5,12 @@ import java.util.Stack;
 import android.app.Activity;
 import android.content.Context;
 
-import com.android.base.frame.activity.impl.BaseActivityImpl;
-
 /**
  * Created by Administrator on 2016/5/13.
  */
 public class AppManager {
 
-    private static Stack<BaseActivityImpl> activityStack;
+    private static Stack<Activity> activityStack;
     private static final AppManager sInstance = new AppManager();
 
     private AppManager() {
@@ -32,7 +30,7 @@ public class AppManager {
     /**
      * 添加Activity到栈
      */
-    public void addActivity(BaseActivityImpl activity) {
+    public void addActivity(Activity activity) {
         if (activityStack == null) {
             activityStack = new Stack<>();
         }
@@ -50,30 +48,30 @@ public class AppManager {
         if (activityStack.isEmpty()) {
             return null;
         }
-        BaseActivityImpl activity = activityStack.lastElement();
-        return (Activity) activity;
+        Activity activity = activityStack.lastElement();
+        return activity;
     }
 
     /**
      * 获取当前Activity（栈顶Activity） 没有找到则返回null
      */
     public Activity findActivity(Class<?> cls) {
-        BaseActivityImpl activity = null;
-        for (BaseActivityImpl aty : activityStack) {
+        Activity activity = null;
+        for (Activity aty : activityStack) {
             if (aty.getClass().equals(cls)) {
                 activity = aty;
                 break;
             }
         }
-        return (Activity) activity;
+        return activity;
     }
 
     /**
      * 结束当前Activity（栈顶Activity）
      */
     public void finishActivity() {
-        BaseActivityImpl activity = activityStack.lastElement();
-        finishActivity((Activity) activity);
+        Activity activity = activityStack.lastElement();
+        finishActivity(activity);
     }
 
     /**
@@ -91,9 +89,9 @@ public class AppManager {
      * 结束指定的Activity(重载)
      */
     public void finishActivity(Class<?> cls) {
-        for (BaseActivityImpl activity : activityStack) {
+        for (Activity activity : activityStack) {
             if (activity.getClass().equals(cls)) {
-                finishActivity((Activity) activity);
+                finishActivity(activity);
             }
         }
     }
@@ -104,9 +102,9 @@ public class AppManager {
      * @param cls
      */
     public void finishOthersActivity(Class<?> cls) {
-        for (BaseActivityImpl activity : activityStack) {
+        for (Activity activity : activityStack) {
             if (!(activity.getClass().equals(cls))) {
-                finishActivity((Activity) activity);
+                finishActivity(activity);
             }
         }
     }
@@ -117,7 +115,7 @@ public class AppManager {
     public void finishAllActivity() {
         for (int i = 0, size = activityStack.size(); i < size; i++) {
             if (null != activityStack.get(i)) {
-                ((Activity) activityStack.get(i)).finish();
+                (activityStack.get(i)).finish();
             }
         }
         activityStack.clear();

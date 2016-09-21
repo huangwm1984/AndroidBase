@@ -2,6 +2,7 @@ package com.hwm.test.http.presenter;
 
 import android.util.Log;
 
+import com.hwm.test.http.model.RetrofitModel;
 import com.hwm.test.http.model.entity.Geye;
 import com.hwm.test.http.model.entity.News;
 
@@ -14,46 +15,21 @@ import rx.Subscriber;
 public class RetrofitPresenter extends RetrofitContract.Presenter {
 
     private final String TAG = RetrofitPresenter.class.getSimpleName();
-
-    @Override
-    public void onCreate() {
-
-    }
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onStop() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
+    private RetrofitModel model;
 
     @Override
     public void start() {
+        super.start();
+        if(model == null){
+            model = new RetrofitModel();
+        }
         loadLastestNewsData();
     }
 
     @Override
     public void loadLastestNewsData() {
         view.showLoadingView();
-        rxManager.add(Observable.mergeDelayError(model.loadLastestNewsData(), model.loadGeyeData("1590", "1")).subscribe(new Subscriber<Object>() {
+        compositeSubscription.add(Observable.mergeDelayError(model.loadLastestNewsData(), model.loadGeyeData("1590", "1")).subscribe(new Subscriber<Object>() {
             @Override
             public void onCompleted() {
                 view.showContentView();

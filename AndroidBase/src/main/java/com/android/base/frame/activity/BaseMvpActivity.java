@@ -3,143 +3,91 @@ package com.android.base.frame.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
-import android.view.View;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 import com.android.base.frame.AppManager;
-import com.android.base.frame.BaseModelImpl;
-import com.android.base.frame.activity.impl.BaseActivityImpl;
-import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.ActivityLifecycleProvider;
-import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.RxLifecycle;
+import com.android.base.frame.ViewWithPresenter;
+import com.android.base.frame.presenter.XPresenter;
+import com.android.base.frame.presenter.PresenterLifecycleManager;
+import com.android.base.frame.presenter.factory.PresenterFactory;
+import com.android.base.frame.presenter.factory.ReflectionPresenterFactory;
 
-import me.yokeyword.fragmentation.SupportActivity;
-import rx.Observable;
-import rx.subjects.BehaviorSubject;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/5/13.
  */
-public abstract class BaseMvpActivity<P extends ActivityPresenter, M extends BaseModelImpl> extends SupportActivity implements BaseActivityImpl, ActivityLifecycleProvider {
+public abstract class BaseMvpActivity<P extends XPresenter> extends AppCompatActivity implements ViewWithPresenter<P> {
 
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
-    public P presenter;
-    public M model;
+    private static final String PRESENTER_STATE_KEY = "presenter_state";
+    private PresenterLifecycleManager<P> presenterManager =
+            new PresenterLifecycleManager<>(ReflectionPresenterFactory.<P>fromViewClass(getClass()));
 
-    @Override
-    @NonNull
-    @CheckResult
-    public final Observable<ActivityEvent> lifecycle() {
-        return lifecycleSubject.asObservable();
-    }
 
     @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
-    }
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycle.bindActivity(lifecycleSubject);
-    }
-
-    @Override
-    @CallSuper
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppManager.create().addActivity(this);
         setContentView(getContentViewId());
-        presenter = getPresenter();
-        model = getModel();
-        initView();
-        initPresenter();
-        lifecycleSubject.onNext(ActivityEvent.CREATE);
-        if(presenter!=null){
-            presenter.onCreate();
+        ButterKnife.bind(this);
+        if (savedInstanceState != null) {
+            presenterManager.onRestoreInstanceState(savedInstanceState.getBundle(PRESENTER_STATE_KEY));
         }
+        presenterManager.onCreated(this);
+        initData();
     }
 
     @Override
-    @CallSuper
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBundle(PRESENTER_STATE_KEY, presenterManager.onSaveInstanceState());
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
-        lifecycleSubject.onNext(ActivityEvent.START);
-        if(presenter!=null){
-            presenter.onStart();
-        }
+        presenterManager.onStart();
     }
 
     @Override
-    @CallSuper
     protected void onResume() {
         super.onResume();
-        lifecycleSubject.onNext(ActivityEvent.RESUME);
-        if(presenter!=null){
-            presenter.onResume();
-        }
+        presenterManager.onResume();
     }
 
     @Override
-    @CallSuper
     protected void onPause() {
-        lifecycleSubject.onNext(ActivityEvent.PAUSE);
-        if(presenter!=null){
-            presenter.onPause();
-        }
+        presenterManager.onPause();
         super.onPause();
     }
 
     @Override
-    @CallSuper
     protected void onStop() {
-        lifecycleSubject.onNext(ActivityEvent.STOP);
-        if(presenter!=null){
-            presenter.onStop();
-        }
+        presenterManager.onStop();
         super.onStop();
     }
 
     @Override
-    @CallSuper
     protected void onDestroy() {
-        lifecycleSubject.onNext(ActivityEvent.DESTROY);
-        if(presenter!=null){
-            presenter.onDestroy();
-        }
+        presenterManager.onDestroy();
         super.onDestroy();
         AppManager.create().finishActivity(this);
     }
 
-    public P getPresenter(){
-        try {
-            return getPresenterClass().newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException("create IDelegate error");
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException("create IDelegate error");
-        }
+    @Override
+    public PresenterFactory<P> getPresenterFactory() {
+        return presenterManager.getPresenterFactory();
     }
 
-    public M getModel(){
-        try {
-            return getModelClass().newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException("create IDelegate error");
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException("create IDelegate error");
-        }
+    @Override
+    public void setPresenterFactory(PresenterFactory<P> presenterFactory) {
+        presenterManager.setPresenterFactory(presenterFactory);
     }
 
-    @SuppressWarnings("unchecked")
-    protected <T extends View> T bindView(int id) {
-        return (T) findViewById(id);
+    @Override
+    public P getPresenter() {
+        return presenterManager.getPresenter();
     }
 
     public void gotoActivity(Class<? extends Activity> clazz, boolean finish) {
@@ -150,7 +98,6 @@ public abstract class BaseMvpActivity<P extends ActivityPresenter, M extends Bas
         }
     }
 
-
     public void gotoActivity(Class<? extends Activity> clazz, Bundle bundle, boolean finish) {
         Intent intent = new Intent(this, clazz);
         if (bundle != null) intent.putExtras(bundle);
@@ -159,7 +106,6 @@ public abstract class BaseMvpActivity<P extends ActivityPresenter, M extends Bas
             finish();
         }
     }
-
 
     public void gotoActivity(Class<? extends Activity> clazz, Bundle bundle, int flags, boolean finish) {
         Intent intent = new Intent(this, clazz);
@@ -173,12 +119,6 @@ public abstract class BaseMvpActivity<P extends ActivityPresenter, M extends Bas
 
     protected abstract int getContentViewId();
 
-    protected abstract void initView();
-
-    protected abstract void initPresenter();
-
-    protected abstract Class<P> getPresenterClass();
-
-    protected abstract Class<M> getModelClass();
+    protected abstract void initData();
 
 }

@@ -31,31 +31,34 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.3.0'
 
     //Rxjava
-    compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'io.reactivex:rxjava:1.1.5'
-    //RxLifecycle
-    compile 'com.trello:rxlifecycle:0.6.1'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
     //Json解析库
-    compile 'com.alibaba:fastjson:1.2.9'
+    compile 'com.alibaba:fastjson:1.1.54.android'
     //图片加载、缓存库
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     //6.0权限处理库
-    compile 'pub.devrel:easypermissions:0.1.5'
+    compile 'pub.devrel:easypermissions:0.2.0'
     //Retrofit网络请求
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'org.ligboy.retrofit2:converter-fastjson-android:2.0.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
-    compile 'com.github.franmontiel:PersistentCookieJar:v0.9.3'
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
     //Fragment解决库
-    compile 'me.yokeyword:fragmentation:0.7.4'
+    compile 'me.yokeyword:fragmentation:0.7.10'
     //Log工具类
-    compile 'com.apkfuns.logutils:library:1.3.0'
+    compile 'com.apkfuns.logutils:library:1.4.2'
     //db数据库
     compile 'com.j256.ormlite:ormlite-core:4.48'
     compile 'com.j256.ormlite:ormlite-android:4.48'
     //Recyclerview分割线
-    compile 'com.yqritc:recyclerview-flexibledivider:1.2.9'
+    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     compile 'com.nineoldandroids:library:2.4.0'
+    //base-adapter
+    compile 'com.zhy:base-rvadapter:3.0.3'//ForRecyclerView
+    compile 'com.zhy:base-adapter:3.0.3'//ForListView
+    //butterknife
+    compile 'com.jakewharton:butterknife:7.0.1'
 }

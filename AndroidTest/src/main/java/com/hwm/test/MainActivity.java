@@ -1,14 +1,14 @@
 package com.hwm.test;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.base.frame.activity.BaseActivity;
 import com.hwm.test.http.view.RetrofitActivity;
+
+import butterknife.Bind;
 
 
 /**
@@ -16,25 +16,17 @@ import com.hwm.test.http.view.RetrofitActivity;
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private ScrollView mScrollView;
-    private TextView mTitle;
-    private LinearLayout mContainer;
+    @Bind(R.id.title) TextView mTitle;
+    @Bind(R.id.container) LinearLayout mContainer;
+
 
     @Override
-    public int getContentViewId() {
+    protected int getContentViewId() {
         return R.layout.activity_main;
     }
 
     @Override
-    public void initView() {
-        mTitle = bindView(R.id.title);
-        mContainer = bindView(R.id.container);
-        mScrollView = (ScrollView) mContainer.getParent();
-    }
-
-    @Override
-    public void initData() {
+    protected void initData() {
         mTitle.setText("huangwm test");
         String[] bttxt = getResources().getStringArray(R.array.test_list);
         if (bttxt != null) {
@@ -55,7 +47,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
         switch (v.getId()) {
             case 0:
                 gotoActivity(RetrofitActivity.class, false);
