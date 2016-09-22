@@ -1,6 +1,6 @@
 package com.hwm.test.http.model;
 
-import com.android.base.util.rx.RxUtil;
+import com.android.base.util.rxjava.RxUtil;
 import com.hwm.test.http.model.entity.Geye;
 import com.hwm.test.http.model.entity.News;
 import com.hwm.test.http.model.http.GeyeService;

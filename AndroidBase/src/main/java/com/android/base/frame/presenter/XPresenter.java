@@ -1,7 +1,7 @@
 package com.android.base.frame.presenter;
 
-import com.android.base.util.rx.RxManager;
-import com.android.base.util.rx.RxUtil;
+import com.android.base.util.rxjava.RxManager;
+import com.android.base.util.rxjava.RxUtil;
 
 import rx.subscriptions.CompositeSubscription;
 

@@ -12,13 +12,17 @@ import com.android.base.frame.presenter.XPresenter;
 import com.android.base.frame.presenter.PresenterLifecycleManager;
 import com.android.base.frame.presenter.factory.PresenterFactory;
 import com.android.base.frame.presenter.factory.ReflectionPresenterFactory;
+import com.apkfuns.logutils.LogUtils;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Administrator on 2016/5/13.
  */
-public abstract class BaseMvpFragment<P extends XPresenter> extends Fragment implements ViewWithPresenter<P> {
+public abstract class BaseMvpFragment<P extends XPresenter> extends Fragment implements ViewWithPresenter<P>, EasyPermissions.PermissionCallbacks {
 
     private static final String PRESENTER_STATE_KEY = "presenter_state";
     private PresenterLifecycleManager<P> presenterManager =
@@ -104,6 +108,28 @@ public abstract class BaseMvpFragment<P extends XPresenter> extends Fragment imp
             presenterManager.onDestroy();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> list) {
+        // Some permissions have been granted
+        // ...
+        LogUtils.d("onPermissionsGranted:" + requestCode + ":" + list.size());
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> list) {
+        // Some permissions have been denied
+        // ...
+        LogUtils.d("onPermissionsDenied:" + requestCode + ":" + list.size());
     }
 
     @Override

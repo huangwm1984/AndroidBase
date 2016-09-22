@@ -1,4 +1,4 @@
-package com.android.base.util.rx;
+package com.android.base.util.rxjava;
 
 import java.util.HashMap;
 import java.util.Map;

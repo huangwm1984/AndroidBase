@@ -1,4 +1,4 @@
-package com.android.base.util.rx;
+package com.android.base.util.rxjava;
 
 import com.apkfuns.logutils.LogUtils;
 
