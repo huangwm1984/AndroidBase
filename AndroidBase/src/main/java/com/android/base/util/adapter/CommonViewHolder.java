@@ -1,8 +1,11 @@
 package com.android.base.util.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by Administrator on 2016/9/22.
@@ -21,8 +24,14 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
         return holder;
     }
 
+    public static CommonViewHolder createViewHolder(Context context, ViewGroup parent, int layoutId) {
+        View itemView = LayoutInflater.from(context).inflate(layoutId, parent, false);
+        CommonViewHolder holder = new CommonViewHolder(itemView);
+        return holder;
+    }
+
     @SuppressWarnings("unchecked")
-    protected <T extends View> T retrieveView(int viewId) {
+    public <T extends View> T findView(int viewId) {
         View view = views.get(viewId);
         if (view == null) {
             view = itemView.findViewById(viewId);

@@ -4,7 +4,7 @@
 
     <string-array name="test_list">
         <item>Retrofit</item>
-        <item>............</item>
+        <item>RecyclerView</item>
         <item>............</item>
         <item>............</item>
         <item>............</item>
@@ -68,5 +68,8 @@
     <string name="helper_text">Start the async task, <b>rotate the screen</b> and wait for a bit. A
       wild notification appears.
     </string>
+
+    <string name="listview_loading">正在加载...</string>
+    <string name="nomore_loading">没有更多数据了</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.android.base.util.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,21 +26,21 @@ public abstract class CommonRcvAdapter<T> extends RecyclerView.Adapter<CommonVie
     private OnItemClickListener mOnItemClickListener = null;
 
 
-    protected CommonRcvAdapter(Context context, int layoutResId) {
+    public CommonRcvAdapter(Context context, int layoutResId) {
         this(context, layoutResId, null);
     }
 
-    protected CommonRcvAdapter(Context context, int layoutResId, List<T> data) {
+    public CommonRcvAdapter(Context context, int layoutResId, List<T> data) {
         this.data = data == null ? new ArrayList<T>() : data;
         this.context = context;
         this.layoutResId = layoutResId;
     }
 
-    protected CommonRcvAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport) {
+    public CommonRcvAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport) {
         this(context, multiItemTypeSupport, null);
     }
 
-    protected CommonRcvAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport, List<T> data) {
+    public CommonRcvAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport, List<T> data) {
         this.context = context;
         this.data = data == null ? new ArrayList<T>() : new ArrayList<T>(data);
         this.mMultiItemTypeSupport = multiItemTypeSupport;
@@ -74,8 +75,8 @@ public abstract class CommonRcvAdapter<T> extends RecyclerView.Adapter<CommonVie
             view = LayoutInflater.from(parent.getContext()).inflate(layoutResId, parent, false);
         }
         view.setOnClickListener(this);
-        CommonViewHolder commonViewHolder = CommonViewHolder.createViewHolder(view);
-        return commonViewHolder;
+        CommonViewHolder holder = CommonViewHolder.createViewHolder(view);
+        return holder;
     }
 
     @Override

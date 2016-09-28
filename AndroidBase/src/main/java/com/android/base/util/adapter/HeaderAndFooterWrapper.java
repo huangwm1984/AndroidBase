@@ -6,34 +6,82 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zhy.adapter.recyclerview.base.ViewHolder;
-import com.zhy.adapter.recyclerview.utils.WrapperUtils;
 
-
-/**
- * Created by zhy on 16/6/23.
- */
-public class HeaderAndFooterWrapper extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HeaderAndFooterWrapper extends RecyclerView.Adapter<CommonViewHolder> {
     private static final int BASE_ITEM_TYPE_HEADER = 100000;
     private static final int BASE_ITEM_TYPE_FOOTER = 200000;
 
     private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
     private SparseArrayCompat<View> mFootViews = new SparseArrayCompat<>();
 
-    private RecyclerView.Adapter mInnerAdapter;
+    private CommonRcvAdapter mInnerAdapter;
 
-    public HeaderAndFooterWrapper(RecyclerView.Adapter adapter) {
-        mInnerAdapter = adapter;
+    private RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
+
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            super.onItemRangeChanged(positionStart, itemCount);
+            notifyItemRangeChanged(positionStart + getHeaderViewsCount(), itemCount);
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            super.onItemRangeInserted(positionStart, itemCount);
+            notifyItemRangeInserted(positionStart + getHeaderViewsCount(), itemCount);
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            super.onItemRangeRemoved(positionStart, itemCount);
+            notifyItemRangeRemoved(positionStart + getHeaderViewsCount(), itemCount);
+        }
+
+        @Override
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+            super.onItemRangeMoved(fromPosition, toPosition, itemCount);
+            int headerViewsCountCount = getHeaderViewsCount();
+            notifyItemRangeChanged(fromPosition + headerViewsCountCount, toPosition + headerViewsCountCount + itemCount);
+        }
+    };
+
+    public HeaderAndFooterWrapper(CommonRcvAdapter adapter) {
+        setAdapter(adapter);
+    }
+
+    /**
+     * 设置adapter
+     * @param adapter
+     */
+    public void setAdapter(CommonRcvAdapter adapter) {
+        if (adapter != null) {
+            if (!(adapter instanceof RecyclerView.Adapter))
+                throw new RuntimeException("your adapter must be a RecyclerView.Adapter");
+        }
+
+        if (mInnerAdapter != null) {
+            notifyItemRangeRemoved(getHeaderViewsCount(), mInnerAdapter.getItemCount());
+            mInnerAdapter.unregisterAdapterDataObserver(mDataObserver);
+        }
+
+        this.mInnerAdapter = adapter;
+        mInnerAdapter.registerAdapterDataObserver(mDataObserver);
+        notifyItemRangeInserted(getHeaderViewsCount(), mInnerAdapter.getItemCount());
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mHeaderViews.get(viewType) != null) {
-            ViewHolder holder = ViewHolder.createViewHolder(parent.getContext(), mHeaderViews.get(viewType));
+            CommonViewHolder holder = CommonViewHolder.createViewHolder(mHeaderViews.get(viewType));
             return holder;
 
         } else if (mFootViews.get(viewType) != null) {
-            ViewHolder holder = ViewHolder.createViewHolder(parent.getContext(), mFootViews.get(viewType));
+            CommonViewHolder holder = CommonViewHolder.createViewHolder(mFootViews.get(viewType));
             return holder;
         }
         return mInnerAdapter.onCreateViewHolder(parent, viewType);
@@ -49,13 +97,13 @@ public class HeaderAndFooterWrapper extends RecyclerView.Adapter<RecyclerView.Vi
         return mInnerAdapter.getItemViewType(position - getHeadersCount());
     }
 
-    private int getRealItemCount() {
+    public int getRealItemCount() {
         return mInnerAdapter.getItemCount();
     }
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(CommonViewHolder holder, int position) {
         if (isHeaderViewPos(position)) {
             return;
         }
@@ -89,7 +137,7 @@ public class HeaderAndFooterWrapper extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(CommonViewHolder holder) {
         mInnerAdapter.onViewAttachedToWindow(holder);
         int position = holder.getLayoutPosition();
         if (isHeaderViewPos(position) || isFooterViewPos(position)) {
@@ -108,10 +156,16 @@ public class HeaderAndFooterWrapper extends RecyclerView.Adapter<RecyclerView.Vi
 
     public void addHeaderView(View view) {
         mHeaderViews.put(mHeaderViews.size() + BASE_ITEM_TYPE_HEADER, view);
+        notifyDataSetChanged();
     }
 
     public void addFootView(View view) {
         mFootViews.put(mFootViews.size() + BASE_ITEM_TYPE_FOOTER, view);
+        notifyDataSetChanged();
+    }
+
+    public int getHeaderViewsCount() {
+        return mHeaderViews.size();
     }
 
     public int getHeadersCount() {

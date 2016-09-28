@@ -33,10 +33,11 @@
 
         <activity
             android:name="com.hwm.test.http.view.RetrofitActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
 
-
+        <activity
+            android:name="com.hwm.test.recyclerview.RecyclerViewActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

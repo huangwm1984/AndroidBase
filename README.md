@@ -2,7 +2,7 @@
 
 1.网络请求框架：Retrofit
 
-2.生命周期管理：Rxlifecycle
+2.View依赖注入框架：ButterKnife
 
 3.数据库框架：Ormlite
 

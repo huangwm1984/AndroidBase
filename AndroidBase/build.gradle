@@ -56,9 +56,6 @@ dependencies {
     //Recyclerview分割线
     compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     compile 'com.nineoldandroids:library:2.4.0'
-    //base-adapter
-    compile 'com.zhy:base-rvadapter:3.0.3'//ForRecyclerView
-    compile 'com.zhy:base-adapter:3.0.3'//ForListView
     //butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
 }

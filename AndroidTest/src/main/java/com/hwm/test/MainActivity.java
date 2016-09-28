@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.android.base.frame.activity.BaseActivity;
 import com.hwm.test.http.view.RetrofitActivity;
+import com.hwm.test.recyclerview.RecyclerViewActivity;
 
 import butterknife.Bind;
 
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 gotoActivity(RetrofitActivity.class, false);
                 break;
             case 1:
-                //gotoActivity(FragmentTabHostActivity.class, false);
+                gotoActivity(RecyclerViewActivity.class, false);
                 break;
             default:
                 //showShortToast("还在开发中...");
