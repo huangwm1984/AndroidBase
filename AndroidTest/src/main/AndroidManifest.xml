@@ -23,8 +23,7 @@
         <activity
             android:name="com.hwm.test.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,101 +32,12 @@
         </activity>
 
         <activity
-            android:name="com.hwm.test.net.TestHttpActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-
-        <activity
-            android:name="com.hwm.test.view.tabhost.FragmentTabHostActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Custom.Toolbar2" >
-        </activity>
-
-        <!--<activity
-            android:name=".download.DownLoadActivity"
-            android:screenOrientation="portrait" />
-
-        <service android:name=".download.DLService" />-->
-
-        <activity
-            android:name="com.hwm.test.view.recycler.RecyclerViewTestActivity"
+            android:name="com.hwm.test.http.view.RetrofitActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.hwm.test.view.recycler.normal.NormalActivity"
+            android:name="com.hwm.test.recyclerview.RecyclerViewActivity"
             android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hwm.test.view.recycler.multi.MultiItemActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hwm.test.view.recycler.extra.HeaderOrFooterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/RecyclerViewTheme"/>
-
-        <activity
-            android:name="com.hwm.test.view.recycler.scrollview.RecyclerViewInsideScrollViewActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.permission.TestPermissionActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hwm.test.leakcanary.LeakcanaryActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name="com.hwm.test.view.banner.BannerTestActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.banner.BannerActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.banner.SplashActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.pulltorefresh.PullToRefreshTestActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.pulltorefresh.recycler.PullToRefreshRecyclerActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.pulltorefresh.recycler.LoadMoreRecyclerActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.autolayout.AutoLayoutTestActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.autolayout.AutoLayoutActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.autolayout.AutoLayoutViewPagerActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.autolayout.AutoLayoutCategoryActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.view.other.SideLayoutActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.hwm.test.download.test.GameListActivity"
-            android:screenOrientation="portrait" />
-
-        <meta-data android:name="design_width" android:value="1080"></meta-data>
-        <meta-data android:name="design_height" android:value="1920"></meta-data>
 
     </application>
 

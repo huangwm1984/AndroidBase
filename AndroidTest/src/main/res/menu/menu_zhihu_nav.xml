@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- single 组中只有一个菜单项可以checked (radio 按钮)
+         all    组中所有菜单项可checked (checkboxes)
+         none   组中所有菜单项都不可checked -->
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@android:drawable/ic_menu_send"
+            android:title="登录"/>
+        <item
+            android:id="@+id/nav_switch_account"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="切换"/>
+
+    </group>
+
+    <item android:title="Test">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@android:drawable/ic_menu_manage"
+                android:title="设置"/>
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="分享"/>
+
+        </menu>
+    </item>
+
+    <item android:title="Test">
+        <menu>
+            <item
+                android:id="@+id/nav_camera"
+                android:icon="@android:drawable/ic_menu_camera"
+                android:title="相机"/>
+
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@android:drawable/ic_menu_gallery"
+                android:title="图库"/>
+
+        </menu>
+    </item>
+
+
+</menu>

@@ -1,21 +1,21 @@
 <resources>
-    <string name="app_name">AndroidHwmTest</string>
+    <string name="app_name">AndroidTest</string>
     <string name="action_settings">Settings</string>
 
     <string-array name="test_list">
-        <item>OkHttp</item>
-        <item>FragmentTabHost</item>
-        <item>MultiThreadDownload</item>
+        <item>Retrofit</item>
         <item>RecyclerView</item>
-        <item>Android 6.0 Permissions</item>
-        <item>Leakcanary</item>
-        <item>Banner</item>
-        <item>PullToRefresh</item>
-        <item>AutoLayout</item>
-        <item>主流布局10</item>
-        <item>主流布局11</item>
-        <item>主流布局12</item>
-        <item>未完待续...</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
+        <item>............</item>
     </string-array>
 
     <string-array name="recyclerview_list">
@@ -68,5 +68,8 @@
     <string name="helper_text">Start the async task, <b>rotate the screen</b> and wait for a bit. A
       wild notification appears.
     </string>
+
+    <string name="listview_loading">正在加载...</string>
+    <string name="nomore_loading">没有更多数据了</string>
 
 </resources>

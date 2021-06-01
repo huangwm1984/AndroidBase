@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidWidget</string>
+    <string name="unknown_error">Unknown error</string>
 </resources>
